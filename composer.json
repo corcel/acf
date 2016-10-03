@@ -1,0 +1,6 @@
+{
+  "name": "corcel/acf",
+  "require": {
+    "corcel/corcel": "~1.2.0"
+  }
+}

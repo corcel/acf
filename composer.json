@@ -1,6 +1,6 @@
 {
   "name": "corcel/acf",
-  "description": "A Advanced Custom Field (ACF) plugin for Corcel",
+  "description": "Advanced Custom Field (ACF) plugin for Corcel",
   "homepage": "http://github.com/corcel/acf",
   "license": "MIT",
   "authors": [
@@ -11,10 +11,10 @@
     }
   ],
   "require": {
-    "corcel/corcel": "~1.2.0"
+    "jgrossi/corcel": "~1.2.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "~5.5.7"
+    "phpunit/phpunit": "4.2.2"
   },
   "autoload": {
     "psr-4": {

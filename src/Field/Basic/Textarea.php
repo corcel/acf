@@ -1,16 +1,16 @@
 <?php
 
-namespace Corcel\Acf\Field;
+namespace Corcel\Acf\Field\Basic;
 
 use Corcel\Acf\FieldInterface;
 
 /**
- * Class Password
+ * Class Textarea
  *
  * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */
-class Password extends Text implements FieldInterface
+class Textarea extends Text  implements FieldInterface
 {
 
 }

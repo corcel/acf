@@ -1,16 +1,16 @@
 <?php
 
-namespace Corcel\Acf\Field;
+namespace Corcel\Acf\Field\Basic;
 
 use Corcel\Acf\FieldInterface;
 
 /**
- * Class Email
+ * Class Number
  *
  * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */
-class Email extends Text implements FieldInterface
+class Number extends Text implements FieldInterface
 {
 
 }

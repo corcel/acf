@@ -1,5 +1,6 @@
 <?php
 
+use Corcel\Acf\Field\Basic\Number;
 use Corcel\Acf\Field\Basic\Text;
 use Corcel\Acf\Field\Basic\Textarea;
 use Corcel\Post;
@@ -32,7 +33,13 @@ class BasicFieldTest extends PHPUnit_Framework_TestCase
 
     public function testTextareaFieldValue()
     {
-        $text = new Textarea($this->post, 'fake_textarea');
-        $this->assertEquals('Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', $text->get());
+        $textarea = new Textarea($this->post, 'fake_textarea');
+        $this->assertEquals('Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', $textarea->get());
+    }
+
+    public function testNumberFieldValue()
+    {
+        $number = new Number($this->post, 'fake_number');
+        $this->assertEquals('1984', $number->get());
     }
 }

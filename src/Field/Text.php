@@ -13,7 +13,7 @@ use Corcel\Acf\FieldInterface;
 class Text implements FieldInterface
 {
     /**
-     * @return string|int
+     * @return string
      */
     public function get()
     {

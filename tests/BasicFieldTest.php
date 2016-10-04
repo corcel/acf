@@ -1,8 +1,10 @@
 <?php
 
+use Corcel\Acf\Field\Basic\Email;
 use Corcel\Acf\Field\Basic\Number;
 use Corcel\Acf\Field\Basic\Text;
 use Corcel\Acf\Field\Basic\Textarea;
+use Corcel\Acf\Field\Basic\Url;
 use Corcel\Post;
 
 /**
@@ -41,5 +43,18 @@ class BasicFieldTest extends PHPUnit_Framework_TestCase
     {
         $number = new Number($this->post, 'fake_number');
         $this->assertEquals('1984', $number->get());
+    }
+
+    public function testEmailFieldValue()
+    {
+        $email = new Email($this->post, 'fake_email');
+        $this->assertEquals('junior@corcel.org', $email->get());
+    }
+
+    public function testUrlFieldValue()
+    {
+        $url = new Url($this->post, 'fake_url');
+        $this->assertEquals('https://corcel.org', $url->get());
+
     }
 }

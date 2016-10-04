@@ -57,7 +57,9 @@ abstract class BasicField
      */
     protected function fetchFieldKey($fieldName)
     {
-        $postMeta = $this->postMeta->where('post_id', $this->post->id)->where('meta_key', '_'.$fieldName);
+        $postMeta = $this->postMeta->where('post_id', $this->post->ID)
+            ->where('meta_key', '_'.$fieldName)
+            ->first();
 
         return $postMeta->meta_value;
     }

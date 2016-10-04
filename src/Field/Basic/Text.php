@@ -10,7 +10,7 @@ use Corcel\Acf\FieldInterface;
  * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */
-class Text implements FieldInterface
+class Text extends BasicField implements FieldInterface
 {
     /**
      * @return string
@@ -18,7 +18,7 @@ class Text implements FieldInterface
     public function get()
     {
         $meta = $this->postMeta
-            ->where('post_id', $this->post->id)
+            ->where('post_id', $this->post->ID)
             ->where('meta_key', $this->fieldName)
             ->first();
 

@@ -37,3 +37,6 @@ get the field_key for each one post_name in (field_57f3a84247888, field_57f3a848
 get post where post_name  = field_key in()
 get the field type on post_content unserialize
 repeat the process
+
+
+*/

@@ -8,7 +8,7 @@ use Corcel\Post;
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */
-class BasicFieldTest extends PHPUnit_Framework_TestCase 
+class BasicFieldsTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var Post

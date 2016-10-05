@@ -7,6 +7,8 @@ use Corcel\Acf\FieldInterface;
 /**
  * Class Text
  *
+ * Used for the following fields: text, textarea, number, email, url, password, wysiwyg
+ *
  * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */

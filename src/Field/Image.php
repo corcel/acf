@@ -31,6 +31,16 @@ class Image extends BasicField implements FieldInterface
     /**
      * @var string
      */
+    public $description;
+
+    /**
+     * @var string
+     */
+    public $url;
+
+    /**
+     * @var string
+     */
     public $mime_type;
 
     /**
@@ -49,6 +59,8 @@ class Image extends BasicField implements FieldInterface
 
         $attachment = $this->post->find(intval($meta->meta_value));
         $this->mime_type = $attachment->post_mime_type;
+        $this->url = $attachment->guid;
+        $this->description = $attachment->post_excerpt;
 
         $meta = $this->postMeta->where('post_id', intval($meta->meta_value))
             ->where('meta_key', '_wp_attachment_metadata')

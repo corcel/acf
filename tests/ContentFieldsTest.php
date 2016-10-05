@@ -48,5 +48,6 @@ class ContentFieldsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('2016/10/maxresdefault-1.jpg', $field->filename);
         $this->assertEquals('1024', $field->size('large')->width);
         $this->assertEquals('image/jpeg', $field->mime_type);
+        $this->assertEquals('This is a caption', $field->description);
     }
 }

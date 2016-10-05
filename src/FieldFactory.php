@@ -52,6 +52,8 @@ class FieldFactory
                 $field = new Gallery($post, $fieldName);
                 break;
             case 'select':
+            case 'checkbox':
+            case 'radio':
                 $field = new Select($post, $fieldName);
                 break;
         }

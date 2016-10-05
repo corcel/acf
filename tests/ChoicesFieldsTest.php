@@ -32,4 +32,12 @@ class ChoicesFieldsTest extends PHPUnit_Framework_TestCase
         $check->build();
         $this->assertEquals(['blue', 'yellow'], $check->get());
     }
+
+    public function testRadioField()
+    {
+        $post = Post::find(44);
+        $radio = new Select($post, 'fake_radio_button');
+        $radio->build();
+        $this->assertEquals('green', $radio->get());
+    }
 }

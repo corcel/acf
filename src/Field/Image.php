@@ -3,6 +3,7 @@
 namespace Corcel\Acf\Field;
 
 use Corcel\Acf\FieldInterface;
+use Corcel\Post;
 use stdClass;
 
 /**
@@ -49,25 +50,33 @@ class Image extends BasicField implements FieldInterface
     protected $sizes = [];
 
     /**
+     * @var bool
+     */
+    protected $loadFromPost = false;
+
+    /**
+     * @return void
+     */
+    public function loadDataFromCurrentPost()
+    {
+        $this->loadFromPost = true;
+    }
+
+    /**
      * @return void
      */
     public function build()
     {
-        $meta = $this->postMeta->where('post_id', $this->post->ID)
-            ->where('meta_key', $this->fieldName)
-            ->first();
+        if (!$this->loadFromPost) {
+            $meta = $this->postMeta->where('post_id', $this->post->ID)
+                ->where('meta_key', $this->fieldName)
+                ->first();
+            $attachmentId = $meta->meta_value;
+        } else {
+            $attachmentId = $this->post->ID;
+        }
 
-        $attachment = $this->post->find(intval($meta->meta_value));
-        $this->mime_type = $attachment->post_mime_type;
-        $this->url = $attachment->guid;
-        $this->description = $attachment->post_excerpt;
-
-        $meta = $this->postMeta->where('post_id', intval($meta->meta_value))
-            ->where('meta_key', '_wp_attachment_metadata')
-            ->first();
-
-        $imageData = unserialize($meta->meta_value);
-        $this->fillFields($imageData);
+        $this->fillFields($attachmentId); // attachment_id
     }
 
     /**
@@ -81,12 +90,23 @@ class Image extends BasicField implements FieldInterface
     /**
      * @param array $data
      */
-    protected function fillFields(array $data)
+    protected function fillFields($attachmentId)
     {
-        $this->filename = basename($data['file']);
-        $this->width = $data['width'];
-        $this->height = $data['height'];
-        $this->sizes = $data['sizes'];
+        $attachment = $this->post->find(intval($attachmentId));
+        $this->mime_type = $attachment->post_mime_type;
+        $this->url = $attachment->guid;
+        $this->description = $attachment->post_excerpt;
+
+        $meta = $this->postMeta->where('post_id', intval($attachmentId))
+            ->where('meta_key', '_wp_attachment_metadata')
+            ->first();
+
+        $imageData = unserialize($meta->meta_value);
+
+        $this->filename = basename($imageData['file']);
+        $this->width = $imageData['width'];
+        $this->height = $imageData['height'];
+        $this->sizes = $imageData['sizes'];
     }
 
     /**
@@ -113,7 +133,7 @@ class Image extends BasicField implements FieldInterface
      */
     private function getImageMetaData(array $data)
     {
-        $size = new static($this->post, $this->fieldName);
+        $size = new static($this->post);
         $size->filename = $data['file'];
         $size->width = $data['width'];
         $size->height = $data['height'];

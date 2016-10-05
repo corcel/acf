@@ -47,7 +47,10 @@ class Image extends BasicField implements FieldInterface
             ->where('meta_key', $this->fieldName)
             ->first();
 
-        $meta = $this->postMeta->where('post_id', $meta->meta_value)
+        $attachment = $this->post->find(intval($meta->meta_value));
+        $this->mime_type = $attachment->post_mime_type;
+
+        $meta = $this->postMeta->where('post_id', intval($meta->meta_value))
             ->where('meta_key', '_wp_attachment_metadata')
             ->first();
 

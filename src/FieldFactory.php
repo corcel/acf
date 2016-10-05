@@ -2,6 +2,7 @@
 
 namespace Corcel\Acf;
 
+use Corcel\Acf\Field\Boolean;
 use Corcel\Acf\Field\File;
 use Corcel\Acf\Field\Gallery;
 use Corcel\Acf\Field\Image;
@@ -55,6 +56,9 @@ class FieldFactory
             case 'checkbox':
             case 'radio':
                 $field = new Select($post, $fieldName);
+                break;
+            case 'true_false':
+                $field = new Boolean($post, $fieldName);
                 break;
         }
 

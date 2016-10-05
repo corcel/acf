@@ -1,6 +1,6 @@
 <?php
+use Corcel\Acf\Field\Boolean;
 use Corcel\Acf\Field\Select;
-use Corcel\Acf\FieldFactory;
 
 /**
  * Class ChoicesFieldsTest
@@ -39,5 +39,13 @@ class ChoicesFieldsTest extends PHPUnit_Framework_TestCase
         $radio = new Select($post, 'fake_radio_button');
         $radio->build();
         $this->assertEquals('green', $radio->get());
+    }
+
+    public function testTrueFalseField()
+    {
+        $post = Post::find(44);
+        $boolean = new Boolean($post, 'fake_true_false');
+        $boolean->build();
+        $this->assertTrue($boolean->get());
     }
 }

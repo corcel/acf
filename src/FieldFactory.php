@@ -5,6 +5,7 @@ namespace Corcel\Acf;
 use Corcel\Acf\Field\File;
 use Corcel\Acf\Field\Gallery;
 use Corcel\Acf\Field\Image;
+use Corcel\Acf\Field\Select;
 use Corcel\Acf\Field\Text;
 use Corcel\Post;
 use Illuminate\Support\Collection;
@@ -49,6 +50,9 @@ class FieldFactory
                 break;
             case 'gallery':
                 $field = new Gallery($post, $fieldName);
+                break;
+            case 'select':
+                $field = new Select($post, $fieldName);
                 break;
         }
 

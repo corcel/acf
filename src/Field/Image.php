@@ -3,8 +3,6 @@
 namespace Corcel\Acf\Field;
 
 use Corcel\Acf\FieldInterface;
-use Corcel\Post;
-use stdClass;
 
 /**
  * Class Image
@@ -129,7 +127,7 @@ class Image extends BasicField implements FieldInterface
 
     /**
      * @param array $data
-     * @return stdClass
+     * @return Image
      */
     private function getImageMetaData(array $data)
     {

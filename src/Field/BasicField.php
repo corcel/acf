@@ -84,9 +84,15 @@ abstract class BasicField
      */
     protected function getValueByPostAndFieldName()
     {
-        return $this->postMeta->where('post_id', $this->post->ID)
+        $meta = $this->postMeta->where('post_id', $this->post->ID)
             ->where('meta_key', $this->fieldName)
             ->first();
+
+        if ($meta->meta_value) {
+            return $meta->meta_value;
+        }
+
+        return null;
     }
 
     /**

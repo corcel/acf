@@ -16,4 +16,12 @@ class ChoicesFieldsTest extends PHPUnit_Framework_TestCase
         $select->build();
         $this->assertEquals('red', $select->get());
     }
+
+    public function testSelectMultipleField()
+    {
+        $post = Post::find(44);
+        $select = new Select($post, 'fake_select_multiple');
+        $select->build();
+        $this->assertEquals(['yellow', 'green'], $select->get());
+    }
 }

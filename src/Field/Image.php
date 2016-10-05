@@ -29,6 +29,11 @@ class Image extends BasicField implements FieldInterface
     public $filename;
 
     /**
+     * @var string
+     */
+    public $mime_type;
+
+    /**
      * @var array
      */
     protected $sizes = [];
@@ -80,7 +85,7 @@ class Image extends BasicField implements FieldInterface
      */
     private function getImageMetaData(array $data)
     {
-        $size = new stdClass();
+        $size = new static($this->post, $this->fieldName);
         $size->filename = $data['file'];
         $size->width = $data['width'];
         $size->height = $data['height'];

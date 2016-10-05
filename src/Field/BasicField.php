@@ -1,6 +1,6 @@
 <?php
 
-namespace Corcel\Acf\Field\Basic;
+namespace Corcel\Acf\Field;
 
 use Corcel\Post;
 use Corcel\PostMeta;

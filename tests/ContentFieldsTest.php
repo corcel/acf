@@ -1,5 +1,6 @@
 <?php
 
+use Corcel\Acf\Field\File;
 use Corcel\Acf\Field\Image;
 use Corcel\Acf\Field\Text;
 use Corcel\Post;
@@ -37,17 +38,30 @@ class ContentFieldsTest extends PHPUnit_Framework_TestCase
     public function testOembedFieldValue()
     {
         $field = new Text($this->post, 'fake_oembed');
+
         $this->assertEquals('https://www.youtube.com/watch?v=LiyQ8bvLzIE', $field);
     }
 
     public function testImageFieldValue()
     {
-        $field = new Image($this->post, 'fake_image');
-        $this->assertEquals('1920', $field->width);
-        $this->assertEquals('1080', $field->height);
-        $this->assertEquals('2016/10/maxresdefault-1.jpg', $field->filename);
-        $this->assertEquals('1024', $field->size('large')->width);
-        $this->assertEquals('image/jpeg', $field->mime_type);
-        $this->assertEquals('This is a caption', $field->description);
+        $image = new Image($this->post, 'fake_image');
+
+        $this->assertEquals('1920', $image->width);
+        $this->assertEquals('1080', $image->height);
+        $this->assertEquals('2016/10/maxresdefault-1.jpg', $image->filename);
+        $this->assertEquals('1024', $image->size('large')->width);
+        $this->assertEquals('image/jpeg', $image->mime_type);
+        $this->assertEquals('This is a caption', $image->description);
+    }
+
+    public function testFileFieldValue()
+    {
+        $file = new File($this->post, 'fake_file');
+
+        $this->assertEquals('Description here', $file->description);
+        $this->assertEquals('Title here', $file->title);
+        $this->assertEquals('Caption here', $file->caption);
+        $this->assertEquals('application/pdf', $file->mime_type);
+        $this->assertEquals('Consolidado-Manifestacao-do-Conselho-Deliberativo.pdf', $file->filename);
     }
 }

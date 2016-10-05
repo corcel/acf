@@ -4,6 +4,7 @@ namespace Corcel\Acf;
 
 interface FieldInterface
 {
+    public function build();
     public function get();
 }
 

@@ -14,16 +14,21 @@ use Corcel\Acf\FieldInterface;
  */
 class Text extends BasicField implements FieldInterface
 {
+    protected $meta;
+
     /**
      * @return string
      */
     public function get()
     {
-        $meta = $this->postMeta
+        return $this->meta->meta_value;
+    }
+
+    public function build()
+    {
+        $this->meta = $this->postMeta
             ->where('post_id', $this->post->ID)
             ->where('meta_key', $this->fieldName)
             ->first();
-
-        return $meta->meta_value;
     }
 }

@@ -49,6 +49,8 @@ abstract class BasicField
         $this->fieldName = $fieldName;
         $this->fieldKey = $this->fetchFieldKey($fieldName);
         $this->fieldType = $this->fetchFieldType($this->fieldKey);
+
+        $this->build();
     }
 
     /**
@@ -74,5 +76,13 @@ abstract class BasicField
         $fieldData = unserialize($post->post_content);
 
         return isset($fieldData['type']) ? $fieldData['type'] : 'text';
+    }
+
+    /**
+     * @return mixed
+     */
+    function __toString()
+    {
+        return $this->get();
     }
 }

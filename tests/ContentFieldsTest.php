@@ -1,5 +1,6 @@
 <?php
 
+use Corcel\Acf\Field\Image;
 use Corcel\Acf\Field\Text;
 use Corcel\Post;
 
@@ -29,13 +30,22 @@ class ContentFieldsTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             'Nulla <em>porttitor</em> <del>accumsan</del> <strong>tincidunt</strong>. Sed porttitor lectus nibh.',
-            $field->get()
+            $field
         );
     }
 
     public function testOembedFieldValue()
     {
         $field = new Text($this->post, 'fake_oembed');
-        $this->assertEquals('https://www.youtube.com/watch?v=LiyQ8bvLzIE', $field->get());
+        $this->assertEquals('https://www.youtube.com/watch?v=LiyQ8bvLzIE', $field);
+    }
+
+    public function testImageFieldValue()
+    {
+        $field = new Image($this->post, 'fake_image');
+        $this->assertEquals('1920', $field->width);
+        $this->assertEquals('1080', $field->height);
+        $this->assertEquals('2016/10/maxresdefault-1.jpg', $field->filename);
+        $this->assertEquals('1024', $field->size('large')->width);
     }
 }

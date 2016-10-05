@@ -38,6 +38,9 @@ class Image extends BasicField implements FieldInterface
      */
     protected $sizes = [];
 
+    /**
+     * @return void
+     */
     public function build()
     {
         $meta = $this->postMeta->where('post_id', $this->post->ID)
@@ -52,12 +55,18 @@ class Image extends BasicField implements FieldInterface
         $this->fillFields($imageData);
     }
 
+    /**
+     * @return $this
+     */
     public function get()
     {
         return $this;
     }
 
-    protected function fillFields($data)
+    /**
+     * @param array $data
+     */
+    protected function fillFields(array $data)
     {
         $this->filename = $data['file'];
         $this->width = $data['width'];
@@ -65,6 +74,10 @@ class Image extends BasicField implements FieldInterface
         $this->sizes = $data['sizes'];
     }
 
+    /**
+     * @param string $size
+     * @return Image
+     */
     public function size($size)
     {
         if (isset($this->sizes[$size])) {

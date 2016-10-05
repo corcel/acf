@@ -3,6 +3,7 @@
 namespace Corcel\Acf\Field;
 
 use Corcel\Acf\FieldInterface;
+use Corcel\PostMeta;
 
 /**
  * Class Text
@@ -14,6 +15,9 @@ use Corcel\Acf\FieldInterface;
  */
 class Text extends BasicField implements FieldInterface
 {
+    /**
+     * @var PostMeta
+     */
     protected $meta;
 
     /**
@@ -24,6 +28,9 @@ class Text extends BasicField implements FieldInterface
         return $this->meta->meta_value;
     }
 
+    /**
+     * @return void
+     */
     public function build()
     {
         $this->meta = $this->postMeta

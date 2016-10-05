@@ -42,15 +42,16 @@ abstract class BasicField
      * @param Post $post
      * @param string $fieldName
      */
-    public function __construct(Post $post, $fieldName)
+    public function __construct(Post $post, $fieldName = null)
     {
         $this->post = $post;
         $this->postMeta = new PostMeta();
-        $this->fieldName = $fieldName;
-        $this->fieldKey = $this->fetchFieldKey($fieldName);
-        $this->fieldType = $this->fetchFieldType($this->fieldKey);
 
-        $this->build();
+        if ($fieldName) {
+            $this->fieldName = $fieldName;
+            $this->fieldKey = $this->fetchFieldKey($fieldName);
+            $this->fieldType = $this->fetchFieldType($this->fieldKey);
+        }
     }
 
     /**

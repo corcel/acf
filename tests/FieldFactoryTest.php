@@ -4,6 +4,11 @@ use Corcel\Acf\Field\Text;
 use Corcel\Acf\FieldFactory;
 use Corcel\Post;
 
+/**
+ * Class FieldFactoryTest
+ *
+ * @author Junior Grossi <juniorgro@gmail.com>
+ */
 class FieldFactoryTest extends PHPUnit_Framework_TestCase
 {
     public function testTextField()

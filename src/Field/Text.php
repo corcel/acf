@@ -8,8 +8,6 @@ use Corcel\PostMeta;
 /**
  * Class Text
  *
- * Used for the following fields: text, textarea, number, email, url, password, wysiwyg, oembed
- *
  * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */

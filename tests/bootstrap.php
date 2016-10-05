@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @author Junior Grossi <juniorgro@gmail.com>
+ */
+
 require __DIR__ . '/../vendor/autoload.php';
 
 $capsule = \Corcel\Database::connect($params = [

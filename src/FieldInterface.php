@@ -2,9 +2,22 @@
 
 namespace Corcel\Acf;
 
+/**
+ * Interface FieldInterface
+ *
+ * @package Corcel\Acf
+ * @author Junior Grossi <juniorgro@gmail.com>
+ */
 interface FieldInterface
 {
+    /**
+     * @return void
+     */
     public function build();
+
+    /**
+     * @return mixed
+     */
     public function get();
 }
 

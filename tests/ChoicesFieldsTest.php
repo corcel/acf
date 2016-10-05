@@ -24,4 +24,12 @@ class ChoicesFieldsTest extends PHPUnit_Framework_TestCase
         $select->build();
         $this->assertEquals(['yellow', 'green'], $select->get());
     }
+
+    public function testCheckboxField()
+    {
+        $post = Post::find(44);
+        $check = new Select($post, 'fake_checkbox');
+        $check->build();
+        $this->assertEquals(['blue', 'yellow'], $check->get());
+    }
 }

@@ -62,6 +62,13 @@ class FieldFactoryTest extends PHPUnit_Framework_TestCase
         $embed = FieldFactory::make('oembed', $post, 'fake_oembed');
         $this->assertNotFalse(strpos($embed, 'youtube.com'));
     }
-}
 
-//        $fields = ['text', 'textarea', 'number', 'email', 'url', 'password', 'wysiwyg', 'oembed'];
+    public function testImageField()
+    {
+        $post = Post::find(21);
+        $image = FieldFactory::make('image', $post, 'fake_image');
+        $this->assertTrue(is_numeric($image->width));
+        $this->assertTrue(is_numeric($image->height));
+        $this->assertNotFalse(strpos($image->url, 'http'));
+    }
+}

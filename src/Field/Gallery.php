@@ -3,6 +3,7 @@
 namespace Corcel\Acf\Field;
 
 use Corcel\Acf\FieldInterface;
+use Corcel\PostMeta;
 use Illuminate\Support\Collection;
 
 /**
@@ -17,6 +18,11 @@ class Gallery extends BasicField implements FieldInterface
      * @var array
      */
     protected $images = [];
+
+    /**
+     * @var Collection
+     */
+    protected $collection;
 
     /**
      * @return void
@@ -43,6 +49,10 @@ class Gallery extends BasicField implements FieldInterface
      */
     public function get()
     {
-        return new Collection($this->images);
+        if (!$this->collection instanceof Collection) {
+            $this->collection = new Collection($this->images);
+        }
+         
+        return $this->collection;
     }
 }

@@ -83,7 +83,7 @@ class Image extends BasicField implements FieldInterface
      */
     protected function fillFields(array $data)
     {
-        $this->filename = $data['file'];
+        $this->filename = basename($data['file']);
         $this->width = $data['width'];
         $this->height = $data['height'];
         $this->sizes = $data['sizes'];

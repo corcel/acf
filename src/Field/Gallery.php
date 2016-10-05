@@ -52,7 +52,7 @@ class Gallery extends BasicField implements FieldInterface
         if (!$this->collection instanceof Collection) {
             $this->collection = new Collection($this->images);
         }
-         
+
         return $this->collection;
     }
 }

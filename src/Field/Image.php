@@ -80,7 +80,7 @@ class Image extends BasicField implements FieldInterface
     }
 
     /**
-     * @return $this
+     * @return Image
      */
     public function get()
     {

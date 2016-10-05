@@ -63,7 +63,7 @@ class File extends BasicField implements FieldInterface
     }
 
     /**
-     * @return $this
+     * @return File
      */
     public function get()
     {

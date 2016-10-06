@@ -4,6 +4,7 @@ namespace Corcel\Acf\Field;
 
 use Corcel\Acf\FieldInterface;
 use Corcel\Post;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class Image
@@ -60,7 +61,12 @@ class Image extends BasicField implements FieldInterface
     public function process($field, Post $post)
     {
         $attachmentId = $this->fetchValue($field, $post);
-        $this->fillFields($attachmentId, $post); // attachment_id
+
+        $attachment = $post->find(intval($attachmentId));
+        $this->fillFields($attachment);
+
+        $imageData = $this->fetchMetadataValue($attachment);
+        $this->fillMetadataFields($imageData);
     }
 
     /**
@@ -72,16 +78,13 @@ class Image extends BasicField implements FieldInterface
     }
 
     /**
-     * @param int $attachmentId
-     * @param Post $post
+     * @param Post $attachment
      */
-    protected function fillFields($attachmentId, Post $post)
+    protected function fillFields(Post $attachment)
     {
-        $attachment = $post->find(intval($attachmentId));
         $this->mime_type = $attachment->post_mime_type;
         $this->url = $attachment->guid;
         $this->description = $attachment->post_excerpt;
-        $this->fillAttachmentMetadata($attachmentId);
     }
 
     /**
@@ -106,7 +109,7 @@ class Image extends BasicField implements FieldInterface
      * @param array $data
      * @return Image
      */
-    private function getImageMetaData(array $data)
+    protected function getImageMetaData(array $data)
     {
         $size = new static();
         $size->filename = $data['file'];
@@ -118,16 +121,43 @@ class Image extends BasicField implements FieldInterface
     }
 
     /**
-     * @param $attachmentId
+     * @param Post $attachment
+     * @return array
      */
-    protected function fillAttachmentMetadata($attachmentId)
+    protected function fetchMetadataValue(Post $attachment)
     {
-        $meta = $this->postMeta->where('post_id', intval($attachmentId))
+        $meta = $this->postMeta->where('post_id', $attachment->ID)
             ->where('meta_key', '_wp_attachment_metadata')
             ->first();
 
-        $imageData = unserialize($meta->meta_value);
+        return unserialize($meta->meta_value);
+    }
 
+    /**
+     * @param Collection $attachments
+     * @return Collection
+     */
+    protected function fetchMultipleMetadataValues(Collection $attachments)
+    {
+        $ids = $attachments->pluck('ID')->toArray();
+        $metadataValues = [];
+
+        $metaRows = $this->postMeta->whereIn('post_id', $ids)
+            ->where('meta_key', '_wp_attachment_metadata')
+            ->get();
+
+        foreach ($metaRows as $meta) {
+            $metadataValues[$meta->post_id] = unserialize($meta->meta_value);
+        }
+
+        return $metadataValues;
+    }
+
+    /**
+     * @param Post $attachment
+     */
+    protected function fillMetadataFields(array $imageData)
+    {
         $this->filename = basename($imageData['file']);
         $this->width = $imageData['width'];
         $this->height = $imageData['height'];

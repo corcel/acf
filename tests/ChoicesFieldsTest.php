@@ -2,6 +2,8 @@
 
 use Corcel\Acf\Field\Boolean;
 use Corcel\Acf\Field\Select;
+use Corcel\Acf\Field\Text;
+use Corcel\Post;
 
 /**
  * Class ChoicesFieldsTest
@@ -10,43 +12,51 @@ use Corcel\Acf\Field\Select;
  */
 class ChoicesFieldsTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Post
+     */
+    protected $post;
+
+    /**
+     * @return void
+     */
+    public function setUp()
+    {
+        $this->post = Post::find(44);
+    }
+
     public function testSelectField()
     {
-        $post = Post::find(44); // page
-        $select = new Select($post, 'fake_select');
-        $select->build();
+        $select = new Text();
+        $select->process('fake_select', $this->post);
         $this->assertEquals('red', $select->get());
     }
 
     public function testSelectMultipleField()
     {
-        $post = Post::find(44);
-        $select = new Select($post, 'fake_select_multiple');
-        $select->build();
+        $select = new Text();
+        $select->process('fake_select_multiple', $this->post);
         $this->assertEquals(['yellow', 'green'], $select->get());
     }
 
     public function testCheckboxField()
     {
-        $post = Post::find(44);
-        $check = new Select($post, 'fake_checkbox');
-        $check->build();
+        $check = new Text();
+        $check->process('fake_checkbox', $this->post);
         $this->assertEquals(['blue', 'yellow'], $check->get());
     }
 
     public function testRadioField()
     {
-        $post = Post::find(44);
-        $radio = new Select($post, 'fake_radio_button');
-        $radio->build();
+        $radio = new Text();
+        $radio->process('fake_radio_button', $this->post);
         $this->assertEquals('green', $radio->get());
     }
 
     public function testTrueFalseField()
     {
-        $post = Post::find(44);
-        $boolean = new Boolean($post, 'fake_true_false');
-        $boolean->build();
+        $boolean = new Boolean();
+        $boolean->process('fake_true_false', $this->post);
         $this->assertTrue($boolean->get());
     }
 }

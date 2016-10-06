@@ -10,13 +10,13 @@ use Corcel\Acf\FieldInterface;
  * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */
-class Boolean extends Select implements FieldInterface
+class Boolean extends Text implements FieldInterface
 {
     /**
      * @return bool
      */
     public function get()
     {
-        return (bool) $this->values;
+        return (bool) parent::get();
     }
 }

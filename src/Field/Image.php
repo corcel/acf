@@ -94,22 +94,17 @@ class Image extends BasicField implements FieldInterface
     public function size($size)
     {
         if (isset($this->sizes[$size])) {
-            $data = $this->sizes[$size];
-            $size = $this->getImageMetaData($data);
-
-            return $size;
+            return $this->fillThumbnailFields($this->sizes[$size]);
         }
 
-        $data = $this->size('thumbnail');
-
-        return $this->getImageMetaData($data);
+        return $this->fillThumbnailFields($this->sizes['thumbnail']);
     }
 
     /**
      * @param array $data
      * @return Image
      */
-    protected function getImageMetaData(array $data)
+    protected function fillThumbnailFields(array $data)
     {
         $size = new static();
         $size->filename = $data['file'];

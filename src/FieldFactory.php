@@ -32,7 +32,8 @@ class FieldFactory
     public static function make($name, Post $post)
     {
         $fakeText = new Text;
-        $type = $fakeText->fetchFieldKey($name, $post);
+        $key = $fakeText->fetchFieldKey($name, $post);
+        $type = $fakeText->fetchFieldType($key);
 
         switch ($type) {
             case 'text':

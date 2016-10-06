@@ -56,7 +56,6 @@ abstract class BasicField
     public function fetchValue($field, Post $post)
     {
         $key = $this->fetchFieldKey($field, $post);
-//        $type = $this->fetchFieldType($key);
 
         $postMeta = $this->postMeta->where('post_id', $post->ID)
             ->where('meta_key', $field)
@@ -77,7 +76,7 @@ abstract class BasicField
      * @param Post $post
      * @return string
      */
-    protected function fetchFieldKey($fieldName, Post $post)
+    public function fetchFieldKey($fieldName, Post $post)
     {
         $postMeta = $this->postMeta->where('post_id', $post->ID)
             ->where('meta_key', '_'.$fieldName)
@@ -90,7 +89,7 @@ abstract class BasicField
      * @param string $fieldKey
      * @return string
      */
-    protected function fetchFieldType($fieldKey)
+    public function fetchFieldType($fieldKey)
     {
         $post = $this->post->where('post_name', $fieldKey)->first();
         $fieldData = unserialize($post->post_content);

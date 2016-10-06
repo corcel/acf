@@ -98,23 +98,6 @@ abstract class BasicField
     }
 
     /**
-     * Fill the instance with the $post properties
-     *
-     * @param Post $post
-     * @return $this
-     */
-    public function fill(Post $post)
-    {
-        foreach (get_object_vars($post) as $property) {
-            if (property_exists($this, $property)) {
-                $this->{$property} = $post->{$property};
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return mixed
      */
     function __toString()

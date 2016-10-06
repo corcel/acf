@@ -13,12 +13,6 @@ use Corcel\Post;
 interface FieldInterface
 {
     /**
-     * @param Post $post
-     * @return void
-     */
-    public function fill(Post $post);
-
-    /**
      * @param $fieldName
      * @param Post $post
      */

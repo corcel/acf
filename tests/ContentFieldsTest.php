@@ -28,27 +28,27 @@ class ContentFieldsTest extends PHPUnit_Framework_TestCase
 
     public function testEditorFieldValue()
     {
-        $field = new Text($this->post, 'fake_editor');
-        $field->build();
+        $field = new Text();
+        $field->process('fake_editor', $this->post);
 
         $this->assertEquals(
             'Nulla <em>porttitor</em> <del>accumsan</del> <strong>tincidunt</strong>. Sed porttitor lectus nibh.',
-            $field
+            $field->get()
         );
     }
 
     public function testOembedFieldValue()
     {
-        $field = new Text($this->post, 'fake_oembed');
-        $field->build();
+        $field = new Text();
+        $field->process('fake_oembed', $this->post);
 
-        $this->assertEquals('https://www.youtube.com/watch?v=LiyQ8bvLzIE', $field);
+        $this->assertEquals('https://www.youtube.com/watch?v=LiyQ8bvLzIE', $field->get());
     }
 
     public function testImageFieldValue()
     {
-        $image = new Image($this->post, 'fake_image');
-        $image->build();
+        $image = new Image();
+        $image->process('fake_image', $this->post);
 
         $this->assertEquals('1920', $image->width);
         $this->assertEquals('1080', $image->height);
@@ -60,8 +60,8 @@ class ContentFieldsTest extends PHPUnit_Framework_TestCase
 
     public function testFileFieldValue()
     {
-        $file = new File($this->post, 'fake_file');
-        $file->build();
+        $file = new File();
+        $file->process('fake_file', $this->post);
 
         $this->assertEquals('Description here', $file->description);
         $this->assertEquals('Title here', $file->title);
@@ -72,8 +72,8 @@ class ContentFieldsTest extends PHPUnit_Framework_TestCase
 
     public function testGalleryFieldValue()
     {
-        $gallery = new Gallery($this->post, 'fake_gallery');
-        $gallery->build();
+        $gallery = new Gallery();
+        $gallery->process('fake_gallery', $this->post);
 
         $this->assertEquals(7, $gallery->get()->count());
 
@@ -83,5 +83,10 @@ class ContentFieldsTest extends PHPUnit_Framework_TestCase
             $this->assertTrue($image->height > 0);
             $this->assertTrue(strlen($image->url) > 0);
         }
+
+        // Testing the image in the 6th position
+        $image = $gallery->get()->get(6);
+        $this->assertEquals(1920, $image->width);
+        $this->assertEquals(1080, $image->height);
     }
 }

@@ -3,6 +3,7 @@
 namespace Corcel\Acf\Field;
 
 use Corcel\Acf\FieldInterface;
+use Corcel\Post;
 
 /**
  * Class File
@@ -43,23 +44,14 @@ class File extends BasicField implements FieldInterface
     public $mime_type;
 
     /**
-     * @return void
+     * @param string $field
+     * @param Post $post
      */
-    public function build()
+    public function process($field, Post $post)
     {
-        $meta = $this->postMeta
-            ->where('post_id', $this->post->ID)
-            ->where('meta_key', $this->fieldName)
-            ->first();
-
-        $post = $this->post->find($meta->meta_value);
-
-        $this->url = $post->guid;
-        $this->mime_type = $post->post_mime_type;
-        $this->title = $post->post_title;
-        $this->description = $post->post_content;
-        $this->caption = $post->post_excerpt;
-        $this->filename = basename($this->url);
+        $value = $this->fetchValue($field, $post);
+        $file = $post->find($value);
+        $this->fillFields($file);
     }
 
     /**
@@ -68,5 +60,18 @@ class File extends BasicField implements FieldInterface
     public function get()
     {
         return $this;
+    }
+
+    /**
+     * @param Post $file
+     */
+    protected function fillFields(Post $file)
+    {
+        $this->url = $file->guid;
+        $this->mime_type = $file->post_mime_type;
+        $this->title = $file->post_title;
+        $this->description = $file->post_content;
+        $this->caption = $file->post_excerpt;
+        $this->filename = basename($this->url);
     }
 }

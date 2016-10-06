@@ -15,7 +15,7 @@ composer require corcel/acf
 ## Fields
 
 | Field             | Status    | Developer                             |
-|---                |---        |---                                    |
+|-------------------|-----------|---------------------------------------|
 | Text              | ok        | [@jgrossi](http://github.com/jgrossi) |
 | Textarea          | ok        | [@jgrossi](http://github.com/jgrossi) |
 | Number            | ok        | [@jgrossi](http://github.com/jgrossi) |
@@ -31,20 +31,20 @@ composer require corcel/acf
 | Checkbox          | ok        | [@jgrossi](http://github.com/jgrossi) |
 | Radio             | ok        | [@jgrossi](http://github.com/jgrossi) |
 | True/False        | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Post Object       | missing   |  |
-| Page Link         | missing   |  |
-| Relationship      | missing   |  |
-| Taxonomy          | missing   |  |
-| User              | missing   |  |
-| Google Map        | missing   |  |
-| Date Picker       | missing   |  |
-| Date Time Picker  | missing   |  |
-| Time Picker       | missing   |  |
-| Color Picker      | missing   |  |
-| Message           | missing   |  |
-| Tab               | missing   |  |
-| Repeater          | missing   |  |
-| Flexible Content  | missing   |  |
+| Post Object       | missing   |                                       |
+| Page Link         | missing   |                                       |
+| Relationship      | missing   |                                       |
+| Taxonomy          | missing   |                                       |
+| User              | missing   |                                       |
+| Google Map        | missing   |                                       |
+| Date Picker       | missing   |                                       |
+| Date Time Picker  | missing   |                                       |
+| Time Picker       | missing   |                                       |
+| Color Picker      | missing   |                                       |
+| Message           | missing   |                                       |
+| Tab               | missing   |                                       |
+| Repeater          | missing   |                                       |
+| Flexible Content  | missing   |                                       |
 
 # Contributing
 

@@ -3,6 +3,7 @@
 namespace Corcel\Acf\Field;
 
 use Corcel\Acf\FieldInterface;
+use Corcel\Post;
 use Illuminate\Support\Collection;
 
 /**
@@ -11,7 +12,7 @@ use Illuminate\Support\Collection;
  * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */
-class Gallery extends BasicField implements FieldInterface
+class Gallery extends Image implements FieldInterface
 {
     /**
      * @var array
@@ -24,21 +25,19 @@ class Gallery extends BasicField implements FieldInterface
     protected $collection;
 
     /**
-     * @return void
+     * @param $field
+     * @param Post $post
      */
-    public function build()
+    public function process($field, Post $post)
     {
-        $galleryMeta = $this->postMeta->where('post_id', $this->post->ID)
-            ->where('meta_key', $this->fieldName)
-            ->first();
+        $ids = $this->fetchValue($field, $post);
+        $attachments = $post->whereIn('ID', $ids)->get();
+        $metaDataValues = $this->fetchMultipleMetadataValues($attachments);
 
-        $ids = unserialize($galleryMeta->meta_value);
-        $files = $this->post->whereIn('ID', $ids)->get();
-
-        foreach ($files as $post) {
-            $image = new Image($post);
-            $image->loadDataFromCurrentPost();
-            $image->build();
+        foreach ($attachments as $attachment) {
+            $image = new Image();
+            $image->fillFields($attachment);
+            $image->fillMetadataFields($metaDataValues[$attachment->ID]);
             $this->images[] = $image;
         }
     }

@@ -2,6 +2,8 @@
 
 namespace Corcel\Acf;
 
+use Corcel\Post;
+
 /**
  * Interface FieldInterface
  *
@@ -11,9 +13,16 @@ namespace Corcel\Acf;
 interface FieldInterface
 {
     /**
+     * @param Post $post
      * @return void
      */
-    public function build();
+    public function fill(Post $post);
+
+    /**
+     * @param $fieldName
+     * @param Post $post
+     */
+    public function process($fieldName, Post $post);
 
     /**
      * @return mixed

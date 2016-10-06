@@ -26,41 +26,60 @@ abstract class BasicField
     /**
      * @var string
      */
-    protected $fieldName;
+    protected $name;
 
     /**
      * @var string
      */
-    protected $fieldKey;
+    protected $key;
 
     /**
      * @var string
      */
-    protected $fieldType;
+    protected $type;
 
     /**
-     * @param Post $post
-     * @param string $fieldName
+     * Constructor method
      */
-    public function __construct(Post $post, $fieldName = null)
+    public function __construct()
     {
-        $this->post = $post;
         $this->postMeta = new PostMeta();
+    }
 
-        if ($fieldName) {
-            $this->fieldName = $fieldName;
-            $this->fieldKey = $this->fetchFieldKey($fieldName);
-            $this->fieldType = $this->fetchFieldType($this->fieldKey);
+    /**
+     * Get the value of a field according it's post ID
+     *
+     * @param string $field
+     * @param Post $post
+     * @return array|string
+     */
+    public function fetchValue($field, Post $post)
+    {
+        $key = $this->fetchFieldKey($field, $post);
+//        $type = $this->fetchFieldType($key);
+
+        $postMeta = $this->postMeta->where('post_id', $post->ID)
+            ->where('meta_key', $field)
+            ->first();
+
+        if (isset($postMeta->meta_value) and $postMeta->meta_value) {
+            $value = $postMeta->meta_value;
+            if ($array = @unserialize($value) and is_array($array)) {
+                return $array;
+            } else {
+                return $value;
+            }
         }
     }
 
     /**
      * @param string $fieldName
-     * @return string mixed
+     * @param Post $post
+     * @return string
      */
-    protected function fetchFieldKey($fieldName)
+    protected function fetchFieldKey($fieldName, Post $post)
     {
-        $postMeta = $this->postMeta->where('post_id', $this->post->ID)
+        $postMeta = $this->postMeta->where('post_id', $post->ID)
             ->where('meta_key', '_'.$fieldName)
             ->first();
 
@@ -80,19 +99,20 @@ abstract class BasicField
     }
 
     /**
-     * @return mixed
+     * Fill the instance with the $post properties
+     *
+     * @param Post $post
+     * @return $this
      */
-    protected function getValueByPostAndFieldName()
+    public function fill(Post $post)
     {
-        $meta = $this->postMeta->where('post_id', $this->post->ID)
-            ->where('meta_key', $this->fieldName)
-            ->first();
-
-        if ($meta->meta_value) {
-            return $meta->meta_value;
+        foreach (get_object_vars($post) as $property) {
+            if (property_exists($this, $property)) {
+                $this->{$property} = $post->{$property};
+            }
         }
 
-        return null;
+        return $this;
     }
 
     /**

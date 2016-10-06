@@ -39,6 +39,11 @@ abstract class BasicField
     protected $type;
 
     /**
+     * @var mixed
+     */
+    protected $value;
+
+    /**
      * Constructor method
      */
     public function __construct()
@@ -55,8 +60,6 @@ abstract class BasicField
      */
     public function fetchValue($field, Post $post)
     {
-        $key = $this->fetchFieldKey($field, $post);
-
         $postMeta = $this->postMeta->where('post_id', $post->ID)
             ->where('meta_key', $field)
             ->first();
@@ -64,8 +67,12 @@ abstract class BasicField
         if (isset($postMeta->meta_value) and $postMeta->meta_value) {
             $value = $postMeta->meta_value;
             if ($array = @unserialize($value) and is_array($array)) {
+                $this->value = $array;
+
                 return $array;
             } else {
+                $this->value = $value;
+
                 return $value;
             }
         }
@@ -78,11 +85,16 @@ abstract class BasicField
      */
     public function fetchFieldKey($fieldName, Post $post)
     {
+        $this->post = $post;
+        $this->name = $fieldName;
+
         $postMeta = $this->postMeta->where('post_id', $post->ID)
             ->where('meta_key', '_'.$fieldName)
             ->first();
 
-        return $postMeta->meta_value;
+        $this->key = $postMeta->meta_value;
+
+        return $this->key;
     }
 
     /**
@@ -94,7 +106,9 @@ abstract class BasicField
         $post = $this->post->where('post_name', $fieldKey)->first();
         $fieldData = unserialize($post->post_content);
 
-        return isset($fieldData['type']) ? $fieldData['type'] : 'text';
+        $this->type = isset($fieldData['type']) ? $fieldData['type'] : 'text';
+
+        return $this->type;
     }
 
     /**

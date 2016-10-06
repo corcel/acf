@@ -25,14 +25,16 @@ class FieldFactory
     }
 
     /**
-     * @param string $fieldType
+     * @param string $name
      * @param Post $post
-     * @param string $fieldName
      * @return FieldInterface|Collection|string
      */
-    public static function make($fieldType, Post $post, $fieldName)
+    public static function make($name, Post $post)
     {
-        switch ($fieldType) {
+        $fakeText = new Text;
+        $type = $fakeText->fetchFieldKey($name, $post);
+
+        switch ($type) {
             case 'text':
             case 'textarea':
             case 'number':
@@ -41,28 +43,28 @@ class FieldFactory
             case 'password':
             case 'wysiwyg':
             case 'oembed':
-                $field = new Text($post, $fieldName);
+                $field = new Text();
                 break;
             case 'image':
-                $field = new Image($post, $fieldName);
+                $field = new Image();
                 break;
             case 'file':
-                $field = new File($post, $fieldName);
+                $field = new File();
                 break;
             case 'gallery':
-                $field = new Gallery($post, $fieldName);
+                $field = new Gallery();
                 break;
             case 'select':
             case 'checkbox':
             case 'radio':
-                $field = new Select($post, $fieldName);
+                $field = new Select();
                 break;
             case 'true_false':
-                $field = new Boolean($post, $fieldName);
+                $field = new Boolean();
                 break;
         }
 
-        $field->build();
+        $field->process($name, $post);
 
         return $field->get();
     }

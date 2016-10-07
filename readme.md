@@ -32,7 +32,7 @@ composer require corcel/acf
 | Radio             | ok        | [@jgrossi](http://github.com/jgrossi) |
 | True/False        | ok        | [@jgrossi](http://github.com/jgrossi) |
 | Post Object       | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Page Link         | missing   |                                       |
+| Page Link         | ok        | [@jgrossi](http://github.com/jgrossi) |
 | Relationship      | missing   |                                       |
 | Taxonomy          | missing   |                                       |
 | User              | missing   |                                       |

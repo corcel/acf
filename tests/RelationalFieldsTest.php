@@ -1,5 +1,6 @@
 <?php
 use Corcel\Acf\Field\File;
+use Corcel\Acf\Field\PageLink;
 use Corcel\Acf\Field\PostObject;
 use Corcel\Post;
 
@@ -11,7 +12,7 @@ use Corcel\Post;
 class RelationalFieldsTests extends PHPUnit_Framework_TestCase
 {
     /**
-     * @var Postt
+     * @var Post
      */
     protected $post;
 
@@ -25,5 +26,12 @@ class RelationalFieldsTests extends PHPUnit_Framework_TestCase
         $object = new PostObject();
         $object->process('fake_post_object', $this->post);
         $this->assertEquals('ACF Basic Fields', $object->get()->post_title);
+    }
+
+    public function testPageLinkField()
+    {
+        $page = new PageLink();
+        $page->process('fake_page_link', $this->post);
+        $this->assertEquals('http://wordpress.corcel.dev/acf-content-fields/', $page->get());
     }
 }

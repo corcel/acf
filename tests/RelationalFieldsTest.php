@@ -2,7 +2,7 @@
 
 use Corcel\Acf\Field\PageLink;
 use Corcel\Acf\Field\PostObject;
-use Corcel\Acf\Field\Text;
+use Corcel\Acf\Field\Term;
 use Corcel\Post;
 
 /**
@@ -42,5 +42,16 @@ class RelationalFieldsTests extends PHPUnit_Framework_TestCase
         $relation->process('fake_relationship', $this->post);
         $posts = $relation->get();
         $this->assertEquals([44, 56], $posts->pluck('ID')->toArray());
+    }
+
+    public function testTaxonomyField()
+    {
+        $relation = new Term();
+
+        $relation->process('fake_taxonomy', $this->post); // multiple (Collection)
+        $this->assertEquals('uncategorized', $relation->get()->first()->slug);
+
+        $relation->process('fake_taxonomy_single', $this->post); // single (Corcel\Term)
+        $this->assertEquals('uncategorized', $relation->get()->slug);
     }
 }

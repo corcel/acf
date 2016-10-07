@@ -31,7 +31,7 @@ composer require corcel/acf
 | Checkbox          | ok        | [@jgrossi](http://github.com/jgrossi) |
 | Radio             | ok        | [@jgrossi](http://github.com/jgrossi) |
 | True/False        | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Post Object       | missing   |                                       |
+| Post Object       | ok        | [@jgrossi](http://github.com/jgrossi) |
 | Page Link         | missing   |                                       |
 | Relationship      | missing   |                                       |
 | Taxonomy          | missing   |                                       |

@@ -6,8 +6,12 @@ use Corcel\Acf\Field\Boolean;
 use Corcel\Acf\Field\File;
 use Corcel\Acf\Field\Gallery;
 use Corcel\Acf\Field\Image;
+use Corcel\Acf\Field\PageLink;
+use Corcel\Acf\Field\PostObject;
 use Corcel\Acf\Field\Select;
+use Corcel\Acf\Field\Term;
 use Corcel\Acf\Field\Text;
+use Corcel\Acf\Field\User;
 use Corcel\Post;
 use Illuminate\Support\Collection;
 
@@ -43,10 +47,13 @@ class FieldFactory
             case 'url':
             case 'password':
             case 'wysiwyg':
+            case 'editor':
             case 'oembed':
+            case 'embed':
                 $field = new Text();
                 break;
             case 'image':
+            case 'img':
                 $field = new Image();
                 break;
             case 'file':
@@ -61,7 +68,23 @@ class FieldFactory
                 $field = new Select();
                 break;
             case 'true_false':
+            case 'boolean':
                 $field = new Boolean();
+                break;
+            case 'post_object':
+            case 'post':
+            case 'relationship':
+                $field = new PostObject();
+                break;
+            case 'page_link':
+                $field = new PageLink();
+                break;
+            case 'taxonomy':
+            case 'term':
+                $field = new Term();
+                break;
+            case 'user':
+                $field = new User();
                 break;
         }
 

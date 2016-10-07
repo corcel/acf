@@ -76,4 +76,6 @@ class FieldFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_numeric($image->height));
         $this->assertNotFalse(strpos($image->url, 'http'));
     }
+
+    // TODO write tests for all others fields as Factory
 }

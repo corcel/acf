@@ -33,7 +33,7 @@ composer require corcel/acf
 | True/False        | ok        | [@jgrossi](http://github.com/jgrossi) |
 | Post Object       | ok        | [@jgrossi](http://github.com/jgrossi) |
 | Page Link         | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Relationship      | missing   |                                       |
+| Relationship      | ok        | [@jgrossi](http://github.com/jgrossi) |
 | Taxonomy          | missing   |                                       |
 | User              | missing   |                                       |
 | Google Map        | missing   |                                       |

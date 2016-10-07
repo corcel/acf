@@ -3,6 +3,7 @@
 use Corcel\Acf\Field\PageLink;
 use Corcel\Acf\Field\PostObject;
 use Corcel\Acf\Field\Term;
+use Corcel\Acf\Field\User;
 use Corcel\Post;
 
 /**
@@ -53,5 +54,13 @@ class RelationalFieldsTests extends PHPUnit_Framework_TestCase
 
         $relation->process('fake_taxonomy_single', $this->post); // single (Corcel\Term)
         $this->assertEquals('uncategorized', $relation->get()->slug);
+    }
+
+    public function testUserField()
+    {
+        $user = new User();
+        $user->process('fake_user', $this->post);
+        $this->assertEquals('admin', $user->get()->user_login);
+        $this->assertEquals('admin', $user->get()->nickname);
     }
 }

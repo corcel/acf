@@ -13,7 +13,7 @@ use Corcel\Post;
 interface FieldInterface
 {
     /**
-     * @param $fieldName
+     * @param string $fieldName
      * @param Post $post
      */
     public function process($fieldName, Post $post);

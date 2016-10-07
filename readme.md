@@ -35,7 +35,7 @@ composer require corcel/acf
 | Page Link         | ok        | [@jgrossi](http://github.com/jgrossi) |
 | Relationship      | ok        | [@jgrossi](http://github.com/jgrossi) |
 | Taxonomy          | ok        | [@jgrossi](http://github.com/jgrossi) |
-| User              | missing   |                                       |
+| User              | ok        | [@jgrossi](http://github.com/jgrossi) |
 | Google Map        | missing   |                                       |
 | Date Picker       | missing   |                                       |
 | Date Time Picker  | missing   |                                       |

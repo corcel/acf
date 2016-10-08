@@ -14,33 +14,33 @@ composer require corcel/acf
 
 ## Fields
 
-| Field             | Status    | Developer                             |
-|-------------------|-----------|---------------------------------------|
-| Text              | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Textarea          | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Number            | ok        | [@jgrossi](http://github.com/jgrossi) |
-| E-mail            | ok        | [@jgrossi](http://github.com/jgrossi) |
-| URL               | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Password          | ok        | [@jgrossi](http://github.com/jgrossi) |
-| WYSIWYG (Editor)  | ok        | [@jgrossi](http://github.com/jgrossi) |
-| oEmbed            | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Image             | ok        | [@jgrossi](http://github.com/jgrossi) |
-| File              | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Gallery           | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Select            | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Checkbox          | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Radio             | ok        | [@jgrossi](http://github.com/jgrossi) |
-| True/False        | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Post Object       | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Page Link         | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Relationship      | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Taxonomy          | ok        | [@jgrossi](http://github.com/jgrossi) |
-| User              | ok        | [@jgrossi](http://github.com/jgrossi) |
+| Field             | Status    | Developer                             | Returns |
+|-------------------|-----------|---------------------------------------| --------|
+| Text              | ok        | [@jgrossi](http://github.com/jgrossi) | `string`  |
+| Textarea          | ok        | [@jgrossi](http://github.com/jgrossi) | `string`  |
+| Number            | ok        | [@jgrossi](http://github.com/jgrossi) | `number`  /
+| E-mail            | ok        | [@jgrossi](http://github.com/jgrossi) | `string`  |
+| URL               | ok        | [@jgrossi](http://github.com/jgrossi) | `string`  |
+| Password          | ok        | [@jgrossi](http://github.com/jgrossi) | `string`  |
+| WYSIWYG (Editor)  | ok        | [@jgrossi](http://github.com/jgrossi) | `string`  |
+| oEmbed            | ok        | [@jgrossi](http://github.com/jgrossi) | `string`  |
+| Image             | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\Acf\Field\Image` |
+| File              | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\Acf\Field\File` |
+| Gallery           | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\Acf\Field\Gallery` |
+| Select            | ok        | [@jgrossi](http://github.com/jgrossi) | `string` or `array` |
+| Checkbox          | ok        | [@jgrossi](http://github.com/jgrossi) | `string` or `array` |
+| Radio             | ok        | [@jgrossi](http://github.com/jgrossi) | `string` |
+| True/False        | ok        | [@jgrossi](http://github.com/jgrossi) | `boolean` |
+| Post Object       | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\Post` |
+| Page Link         | ok        | [@jgrossi](http://github.com/jgrossi) | `string` |
+| Relationship      | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\Post` or `Collection` of posts |
+| Taxonomy          | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\Acf\Field\Term` |
+| User              | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\User` |
 | Google Map        | missing   |                                       |
-| Date Picker       | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Date Time Picker  | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Time Picker       | ok        | [@jgrossi](http://github.com/jgrossi) |
-| Color Picker      | ok        | [@jgrossi](http://github.com/jgrossi) |
+| Date Picker       | ok        | [@jgrossi](http://github.com/jgrossi) | `Carbon\Carbon` |
+| Date Time Picker  | ok        | [@jgrossi](http://github.com/jgrossi) | `Carbon\Carbon` |
+| Time Picker       | ok        | [@jgrossi](http://github.com/jgrossi) | `Carbon\Carbon` |
+| Color Picker      | ok        | [@jgrossi](http://github.com/jgrossi) | `string` |
 | Message           | missing   |                                       |
 | Tab               | missing   |                                       |
 | Repeater          | missing   |                                       |

@@ -52,6 +52,9 @@ class FieldFactory
             case 'oembed':
             case 'embed':
             case 'color_picker':
+            case 'select':
+            case 'checkbox':
+            case 'radio':
                 $field = new Text();
                 break;
             case 'image':
@@ -63,11 +66,6 @@ class FieldFactory
                 break;
             case 'gallery':
                 $field = new Gallery();
-                break;
-            case 'select':
-            case 'checkbox':
-            case 'radio':
-                $field = new Select();
                 break;
             case 'true_false':
             case 'boolean':

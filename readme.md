@@ -33,8 +33,8 @@ composer require corcel/acf
 | True/False        | ok        | [@jgrossi](http://github.com/jgrossi) | `boolean` |
 | Post Object       | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\Post` |
 | Page Link         | ok        | [@jgrossi](http://github.com/jgrossi) | `string` |
-| Relationship      | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\Post` or `Collection` of posts |
-| Taxonomy          | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\Acf\Field\Term` |
+| Relationship      | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\Post` or `Collection` of `Post` |
+| Taxonomy          | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\Term` or `Collection` of `Term` |
 | User              | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\User` |
 | Google Map        | missing   |                                       |
 | Date Picker       | ok        | [@jgrossi](http://github.com/jgrossi) | `Carbon\Carbon` |

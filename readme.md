@@ -18,7 +18,7 @@ composer require corcel/acf
 |-------------------|-----------|---------------------------------------| --------|
 | Text              | ok        | [@jgrossi](http://github.com/jgrossi) | `string`  |
 | Textarea          | ok        | [@jgrossi](http://github.com/jgrossi) | `string`  |
-| Number            | ok        | [@jgrossi](http://github.com/jgrossi) | `number`  /
+| Number            | ok        | [@jgrossi](http://github.com/jgrossi) | `number`  |
 | E-mail            | ok        | [@jgrossi](http://github.com/jgrossi) | `string`  |
 | URL               | ok        | [@jgrossi](http://github.com/jgrossi) | `string`  |
 | Password          | ok        | [@jgrossi](http://github.com/jgrossi) | `string`  |

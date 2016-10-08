@@ -3,6 +3,7 @@
 namespace Corcel\Acf;
 
 use Corcel\Acf\Field\Boolean;
+use Corcel\Acf\Field\DateTime;
 use Corcel\Acf\Field\File;
 use Corcel\Acf\Field\Gallery;
 use Corcel\Acf\Field\Image;
@@ -50,6 +51,7 @@ class FieldFactory
             case 'editor':
             case 'oembed':
             case 'embed':
+            case 'color_picker':
                 $field = new Text();
                 break;
             case 'image':
@@ -85,6 +87,11 @@ class FieldFactory
                 break;
             case 'user':
                 $field = new User();
+                break;
+            case 'date_picker':
+            case 'date_time_picker':
+            case 'time_picker':
+                $field = new DateTime();
                 break;
         }
 

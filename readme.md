@@ -37,10 +37,10 @@ composer require corcel/acf
 | Taxonomy          | ok        | [@jgrossi](http://github.com/jgrossi) |
 | User              | ok        | [@jgrossi](http://github.com/jgrossi) |
 | Google Map        | missing   |                                       |
-| Date Picker       | missing   |                                       |
-| Date Time Picker  | missing   |                                       |
-| Time Picker       | missing   |                                       |
-| Color Picker      | missing   |                                       |
+| Date Picker       | ok        | [@jgrossi](http://github.com/jgrossi) |
+| Date Time Picker  | ok        | [@jgrossi](http://github.com/jgrossi) |
+| Time Picker       | ok        | [@jgrossi](http://github.com/jgrossi) |
+| Color Picker      | ok        | [@jgrossi](http://github.com/jgrossi) |
 | Message           | missing   |                                       |
 | Tab               | missing   |                                       |
 | Repeater          | missing   |                                       |

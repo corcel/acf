@@ -1,6 +1,7 @@
 <?php
 
 use Corcel\Acf\Field\DateTime;
+use Corcel\Acf\Field\Text;
 use Corcel\Post;
 
 class JqueryFieldsTests extends PHPUnit_Framework_TestCase
@@ -39,5 +40,12 @@ class JqueryFieldsTests extends PHPUnit_Framework_TestCase
         $time = new DateTime();
         $time->process('fake_time_picker', $this->post);
         $this->assertEquals('00/17/30', $time->get()->format('s/H/i')); // 17:30:00
+    }
+
+    public function testColorPickerField()
+    {
+        $color = new Text();
+        $color->process('fake_color_picker', $this->post);
+        $this->assertEquals('#7263a8', $color->get());
     }
 }

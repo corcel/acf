@@ -48,7 +48,7 @@ class DateTime extends BasicField implements FieldInterface
             return 'Ymd';
         } else if (preg_match('/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/', $dateString)) { // 2016-10-19 08:06:05
             return 'Y-m-d H:i:s';
-        } else if (preg_match('/^\d{2}:\d{2}:\d{2}$/')) { // 17:30:00
+        } else if (preg_match('/^\d{2}:\d{2}:\d{2}$/', $dateString)) { // 17:30:00
             return 'H:i:s';
         }
     }

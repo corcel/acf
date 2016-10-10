@@ -69,4 +69,12 @@ This plugin works with a basic logic inside `Corcel\Acf\Field\BasicField` abstra
 
 ## Running Tests
 
+To run the phpunit tests, execute `phpunit` (if you have a global PHPUnit executable) or try the following command:
+
+```
+./vendor/bin/phpunit
+```
+
 ## Licence
+
+[MIT License](http://jgrossi.mit-license.org/) © Junior Grossi

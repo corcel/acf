@@ -17,6 +17,6 @@ class Boolean extends Text implements FieldInterface
      */
     public function get()
     {
-        return (bool) parent::get();
+        return (bool)parent::get();
     }
 }

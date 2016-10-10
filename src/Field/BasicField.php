@@ -114,7 +114,7 @@ abstract class BasicField
     /**
      * @return mixed
      */
-    function __toString()
+    public function __toString()
     {
         return $this->get();
     }

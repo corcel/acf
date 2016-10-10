@@ -149,7 +149,7 @@ class Image extends BasicField implements FieldInterface
     }
 
     /**
-     * @param Post $attachment
+     * @param array $imageData
      */
     protected function fillMetadataFields(array $imageData)
     {
@@ -158,5 +158,4 @@ class Image extends BasicField implements FieldInterface
         $this->height = $imageData['height'];
         $this->sizes = $imageData['sizes'];
     }
-
 }

@@ -61,7 +61,6 @@ class BasicFieldsTest extends PHPUnit_Framework_TestCase
         $url->process('fake_url', $this->post);
 
         $this->assertEquals('https://corcel.org', $url->get());
-
     }
 
     public function testPasswordFieldValue()

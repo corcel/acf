@@ -88,6 +88,8 @@ To run the phpunit tests, execute `phpunit` (if you have a global PHPUnit execut
 ./vendor/bin/phpunit
 ```
 
+You should import the `database.sql` file to a database inside your local environment to make the tests working. Just unzip the `tests/config/database.sql.zip` file and set the database, user and password fields in `tests/config/bootstrap.php`.
+
 ## Licence
 
 [MIT License](http://jgrossi.mit-license.org/) © Junior Grossi

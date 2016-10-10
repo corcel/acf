@@ -1,6 +1,6 @@
 # Corcel ACF Plugin
 
-> This is a plugin that allows you to fetch all Advanced Custom Fields (ACF) fields inside Corcel easily.
+> Fetch all Advanced Custom Fields (ACF) fields inside Corcel easily.
 
 # Installation
 
@@ -10,7 +10,18 @@ To install the ACF plugin for Corcel is easy:
 composer require corcel/acf
 ```
 
+Corcel is required for this plugin, but don't worry, if it's missing it will be installed as well.
+
 # Usage
+
+This is a development version so the usage can change. The desired behavior of this plugin is to allow this:
+
+```php
+$post = Post::find(1);
+echo $post->acf->url; // returns the url custom field created using ACF
+```
+
+## The Idea
 
 ## Fields
 

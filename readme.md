@@ -78,7 +78,7 @@ All contributions are welcome. Before submitting your Pull Request take a look o
 - Make your changes in a new git branch, based on the `develop` branch: `git checkout -b my-fix-branch develop`;
 - Create your patch/feature, including appropriate test cases. Tests are necessary to make sure what you did is working and did not break nothing in the plugin;
 - Run the unit tests, and ensure that all tests are passing. Please, when submitting your PR paste the results of the `phpunit` command to facilitate the approval job;
-- In GitHub, send a pull request to `corcel/acf:develop`, **always**. We encourage you to use `git flow` (https://github.com/petervanderdoes/gitflow-avh) workflow to make your life easier. It' not necessary, but it'll also be good for your development career.
+- In GitHub, send a pull request to `corcel/acf:develop`, **always**. Do not send PR to our `master` branch! We encourage you to use `git flow` (https://github.com/petervanderdoes/gitflow-avh) workflow to make your life easier. It' not necessary, but it'll also be good for your development career.
 
 ## Running Tests
 

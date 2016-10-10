@@ -31,6 +31,12 @@ First ACF fetches the `meta_value` in `wp_postmeta` table, where the `meta_key` 
 
 This plugin works with a basic logic inside `Corcel\Acf\Field\BasicField` abstract class, that has a lot of useful functions to return the `field key`, the `value`, etc. The `Corcel\Acf\FieldFactory` is responsible to return the correct field instance according the field type, so, if the field type is `post_object` it return an instance of `Corcel\Acf\Field\PostObject`, and it will returns in the `get()` method an instance of `Corcel\Post`.
 
+## What's Missing
+
+First we should create the fields classes and the test cases. After we have to setup how Corcel is going to work with the `corcel/acf` plugin, returning the custom field value in the format `$post->meta->field` or maybe `$post->acf->field` having different behavior. This should be done yet!
+ 
+ Some fields are still missing (check table below and contribute).
+
 ## Fields
 
 | Field             | Status    | Developer                             | Returns |
@@ -74,7 +80,7 @@ All contributions are welcome. Before submitting your Pull Request take a look o
 - Run the unit tests, and ensure that all tests are passing. Please, when submitting your PR paste the results of the `phpunit` command to facilitate the approval job;
 - In GitHub, send a pull request to `corcel/acf:develop`, **always**. We encourage you to use `git flow` (https://github.com/petervanderdoes/gitflow-avh) workflow to make your life easier. It' not necessary, but it'll also be good for your development career.
 
-## Running tests
+## Running Tests
 
 To run the phpunit tests, execute `phpunit` (if you have a global PHPUnit executable) or try the following command:
 

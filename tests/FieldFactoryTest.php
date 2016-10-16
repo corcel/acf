@@ -11,6 +11,13 @@ use Corcel\Post;
  */
 class FieldFactoryTest extends PHPUnit_Framework_TestCase
 {
+    public function testInvalidFieldName()
+    {
+        $post = Post::find(11);
+        $invalidField = FieldFactory::make('invalid_field', $post);
+        $this->assertNull($invalidField);
+    }
+
     public function testTextField()
     {
         $post = Post::find(11);

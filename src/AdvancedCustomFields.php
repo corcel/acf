@@ -39,7 +39,7 @@ class AdvancedCustomFields
      * @param string $name
      * @return mixed
      */
-    function __get($name)
+    public function __get($name)
     {
         return $this->get($name);
     }

@@ -92,6 +92,10 @@ abstract class BasicField
             ->where('meta_key', '_'.$fieldName)
             ->first();
 
+        if (!$postMeta) {
+            return null;
+        }
+
         $this->key = $postMeta->meta_value;
 
         return $this->key;

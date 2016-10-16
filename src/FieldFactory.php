@@ -38,6 +38,11 @@ class FieldFactory
     {
         $fakeText = new Text;
         $key = $fakeText->fetchFieldKey($name, $post);
+
+        if ($key === null) { // Field does not exist
+            return null;
+        }
+
         $type = $fakeText->fetchFieldType($key);
 
         switch ($type) {

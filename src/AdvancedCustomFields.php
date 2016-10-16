@@ -13,11 +13,6 @@ use Corcel\Post;
 class AdvancedCustomFields
 {
     /**
-     * @var string
-     */
-    protected $fieldName;
-
-    /**
      * @var Post
      */
     protected $post;
@@ -31,22 +26,21 @@ class AdvancedCustomFields
     }
 
     /**
-     * @param string $name
+     * @return mixed
      */
-    public function field($name)
+    public function get($fieldName)
     {
-        $this->fieldName = $name;
+        $field = FieldFactory::make($fieldName, $this->post);
 
-        return $this;
+        return $field->get();
     }
 
     /**
+     * @param string $name
      * @return mixed
      */
-    public function get()
+    function __get($name)
     {
-        $field = FieldFactory::make($this->fieldName, $this->post);
-
-        return $field->get();
+        return $this->get($name);
     }
 }

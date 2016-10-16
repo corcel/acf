@@ -95,6 +95,6 @@ class FieldFactory
 
         $field->process($name, $post);
 
-        return $field->get();
+        return $field;
     }
 }

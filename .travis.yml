@@ -1,0 +1,23 @@
+language: php
+php:
+  - '5.6'
+  - '7.0'
+dist: trusty
+sudo: required
+addons:
+  apt:
+    packages:
+    - unzip
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
+before_install:
+  - unzip tests/config/database.sql.zip -d tests/config/
+  - mysql -u root -e "create database corcel_acf;"
+  - mysql -u root corcel_acf < tests/config/database.sql
+before_script:
+  - composer self-update
+  - composer install
+script:
+  - mkdir -p build/logs
+  - phpunit

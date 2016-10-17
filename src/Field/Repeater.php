@@ -32,7 +32,7 @@ class Repeater extends BasicField implements FieldInterface
 
         $builder = $this->fetchPostsMeta($fieldName, $post);
         $fields = $this->fetchFields($fieldName, $builder);
-        
+
         $this->fields = new Collection($fields);
     }
 

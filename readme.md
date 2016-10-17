@@ -66,8 +66,8 @@ First we should create the fields classes and the test cases. After we have to s
 | Date Time Picker  | ok        | [@jgrossi](http://github.com/jgrossi) | `Carbon\Carbon` |
 | Time Picker       | ok        | [@jgrossi](http://github.com/jgrossi) | `Carbon\Carbon` |
 | Color Picker      | ok        | [@jgrossi](http://github.com/jgrossi) | `string` |
-| Repeater          | missing   |                                       |
-| Flexible Content  | missing   |                                       |
+| Repeater          | partially | [@jgrossi](http://github.com/jgrossi) | `Collection` of fields |
+| Flexible Content  | missing   |                                       | |
 
 # Contributing
 

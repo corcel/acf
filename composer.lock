@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "19633b7cf994010de5da899f4fcfe683",
-    "content-hash": "c7945607318c313ed72c97ccd4cfb402",
+    "hash": "679c4e92068e60de18dda139213fa741",
+    "content-hash": "31f6a1951db204a78ebc982159a74a12",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -322,16 +322,16 @@
         },
         {
             "name": "jgrossi/corcel",
-            "version": "v1.2.5",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jgrossi/corcel.git",
-                "reference": "3644ee9cd436211faea22a76d1195c6519f84ab4"
+                "reference": "323badcbf625fa0c8192c5a7f7b4e25dc6f41deb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jgrossi/corcel/zipball/3644ee9cd436211faea22a76d1195c6519f84ab4",
-                "reference": "3644ee9cd436211faea22a76d1195c6519f84ab4",
+                "url": "https://api.github.com/repos/jgrossi/corcel/zipball/323badcbf625fa0c8192c5a7f7b4e25dc6f41deb",
+                "reference": "323badcbf625fa0c8192c5a7f7b4e25dc6f41deb",
                 "shasum": ""
             },
             "require": {
@@ -370,7 +370,7 @@
             ],
             "description": "Use WordPress backend with any PHP framework",
             "homepage": "http://github.com/jgrossi/corcel",
-            "time": "2016-10-12 22:10:36"
+            "time": "2016-10-18 00:36:42"
         },
         {
             "name": "nesbot/carbon",

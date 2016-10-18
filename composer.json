@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-    "jgrossi/corcel": "~1.2.5"
+    "jgrossi/corcel": "~1.3.0"
   },
   "require-dev": {
     "phpunit/phpunit": "4.2.2"

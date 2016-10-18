@@ -13,7 +13,7 @@ class LayoutFieldsTest extends PHPUnit_Framework_TestCase
     public function testRepeaterField()
     {
         $page = Post::find(73);
-        $repeater =  new Repeater();
+        $repeater = new Repeater();
         $repeater->process('fake_repeater', $page);
         $fields = $repeater->get()->toArray();
 

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "af700cb3aff9b04aa50ab026dffbe922",
-    "content-hash": "96abd854ea81530eb3e191e185b241ea",
+    "hash": "19633b7cf994010de5da899f4fcfe683",
+    "content-hash": "c7945607318c313ed72c97ccd4cfb402",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -322,16 +322,16 @@
         },
         {
             "name": "jgrossi/corcel",
-            "version": "v1.2.4",
+            "version": "v1.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jgrossi/corcel.git",
-                "reference": "4e60ad6981005707ca324a7db6fe192ae85cd6ac"
+                "reference": "3644ee9cd436211faea22a76d1195c6519f84ab4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jgrossi/corcel/zipball/4e60ad6981005707ca324a7db6fe192ae85cd6ac",
-                "reference": "4e60ad6981005707ca324a7db6fe192ae85cd6ac",
+                "url": "https://api.github.com/repos/jgrossi/corcel/zipball/3644ee9cd436211faea22a76d1195c6519f84ab4",
+                "reference": "3644ee9cd436211faea22a76d1195c6519f84ab4",
                 "shasum": ""
             },
             "require": {
@@ -370,7 +370,7 @@
             ],
             "description": "Use WordPress backend with any PHP framework",
             "homepage": "http://github.com/jgrossi/corcel",
-            "time": "2016-10-07 12:59:01"
+            "time": "2016-10-12 22:10:36"
         },
         {
             "name": "nesbot/carbon",
@@ -421,16 +421,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "v2.0.2",
+            "version": "v2.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf"
+                "reference": "c0125896dbb151380ab47e96c621741e79623beb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/088c04e2f261c33bed6ca5245491cfca69195ccf",
-                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/c0125896dbb151380ab47e96c621741e79623beb",
+                "reference": "c0125896dbb151380ab47e96c621741e79623beb",
                 "shasum": ""
             },
             "require": {
@@ -465,7 +465,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-04-03 06:00:07"
+            "time": "2016-10-17 15:23:22"
         },
         {
             "name": "symfony/polyfill-mbstring",

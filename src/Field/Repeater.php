@@ -51,7 +51,7 @@ class Repeater extends BasicField implements FieldInterface
      */
     protected function retrieveIdFromFieldName($metaKey, $fieldName)
     {
-        return (int) str_replace($fieldName, '', $metaKey);
+        return (int) str_replace("{$fieldName}_", '', $metaKey);
     }
 
     /**
@@ -76,13 +76,7 @@ class Repeater extends BasicField implements FieldInterface
     {
         $count = $this->fetchValue($fieldName, $post);
         $builder = $this->postMeta->where('post_id', $post->ID);
-
-        $builder->where(function ($query) use ($count, $fieldName) {
-            foreach (range(0, $count - 1) as $i) {
-                $pattern = "{$fieldName}_{$i}_%";
-                $query = $query->orWhere('meta_key', 'like', $pattern);
-            }
-        });
+        $builder->where('meta_key', 'like', "{$fieldName}_%");
 
         return $builder;
     }

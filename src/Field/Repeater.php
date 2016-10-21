@@ -46,15 +46,12 @@ class Repeater extends BasicField implements FieldInterface
 
     /**
      * @param string $metaKey
+     * @param string $fieldName
      * @return int
      */
-    protected function retrieveIdFromFieldName($metaKey)
+    protected function retrieveIdFromFieldName($metaKey, $fieldName)
     {
-        $pattern = '/^[a-z_]+_(\d)/';
-        preg_match($pattern, $metaKey, $matches);
-        if (isset($matches[1])) {
-            return $matches[1];
-        }
+        return (int) str_replace("{$fieldName}_", '', $metaKey);
     }
 
     /**
@@ -65,7 +62,7 @@ class Repeater extends BasicField implements FieldInterface
      */
     protected function retrieveFieldName($metaKey, $fieldName, $id)
     {
-        $pattern = "{$fieldName}_${id}_";
+        $pattern = "{$fieldName}_{$id}_";
 
         return str_replace($pattern, '', $metaKey);
     }
@@ -79,13 +76,12 @@ class Repeater extends BasicField implements FieldInterface
     {
         $count = $this->fetchValue($fieldName, $post);
         $builder = $this->postMeta->where('post_id', $post->ID);
-
-        $builder->where(function ($query) use ($count) {
+        $builder->where(function($query) use ($count, $fieldName) {
             foreach (range(0, $count - 1) as $i) {
-                $pattern = "fake_repeater_{$i}_%";
-                $query = $query->orWhere('meta_key', 'like', $pattern);
+                $query->orWhere('meta_key', 'like', "{$fieldName}_{$i}_%");
             }
         });
+
         return $builder;
     }
 
@@ -98,7 +94,7 @@ class Repeater extends BasicField implements FieldInterface
     {
         $fields = [];
         foreach ($builder->get() as $meta) {
-            $id = $this->retrieveIdFromFieldName($meta->meta_key);
+            $id = $this->retrieveIdFromFieldName($meta->meta_key, $fieldName);
             $name = $this->retrieveFieldName($meta->meta_key, $fieldName, $id);
             $field = FieldFactory::make($meta->meta_key, $this->post->find($meta->post_id));
             $fields[$id][$name] = $field->get();

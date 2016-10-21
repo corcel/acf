@@ -89,6 +89,8 @@ To run the phpunit tests, execute `phpunit` (if you have a global PHPUnit execut
 
 You should import the `database.sql` file to a database inside your local environment to make the tests working. Just unzip the `tests/config/database.sql.zip` file and set the database, user and password fields in `tests/config/bootstrap.php`.
 
+> If you want to access the WordPress Admin Panel just use username as `admin` and password `123456`.
+
 ## Licence
 
 [MIT License](http://jgrossi.mit-license.org/) © Junior Grossi

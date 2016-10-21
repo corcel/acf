@@ -74,8 +74,13 @@ class Repeater extends BasicField implements FieldInterface
      */
     protected function fetchPostsMeta($fieldName, Post $post)
     {
+        $count = $this->fetchValue($fieldName, $post);
         $builder = $this->postMeta->where('post_id', $post->ID);
-        $builder->where('meta_key', 'like', "{$fieldName}_%");
+        $builder->where(function($query) use ($count, $fieldName) {
+            foreach (range(0, $count - 1) as $i) {
+                $query->orWhere('meta_key', 'like', "{$fieldName}_{$i}_%");
+            }
+        });
 
         return $builder;
     }

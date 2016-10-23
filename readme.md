@@ -4,7 +4,12 @@
 
 * [Installation](#instalation)
 * [Usage](#usage)
-
+    - [The Idea](#the-idea)
+    - [What is Missing](#what-is-missing)
+    - [Fields](#fields)
+* [Contributing](#contributing)
+    - [Running Tests](#running-tests)
+* [Licence](#licence)
 
 # Installation
 
@@ -99,6 +104,6 @@ You should import the `database.sql` file to a database inside your local enviro
 
 > If you want to access the WordPress Admin Panel just use username as `admin` and password `123456`.
 
-## Licence
+# Licence
 
 [MIT License](http://jgrossi.mit-license.org/) © Junior Grossi

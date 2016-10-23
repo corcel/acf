@@ -2,6 +2,10 @@
 
 > Fetch all Advanced Custom Fields (ACF) fields inside Corcel easily.
 
+This Corcel plugin allows you to fetch WordPress custom fields created by the [ACF](http://advancedcustomfields.com) plugin using the same syntax of Eloquent, from the [Laravel Framework](http://laravel.com). You can use Eloquent models and Collections to improve your development, using the WordPress backend with any PHP application.
+
+For more information about how Corcel works please visit [the repository](http://github.com/jgrossi/corcel).
+
 * [Installation](#installation)
 * [Usage](#usage)
     - [The Idea](#the-idea)

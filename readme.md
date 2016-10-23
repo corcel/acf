@@ -69,6 +69,12 @@ First we should create the fields classes and the test cases. After we have to s
 | Repeater          | partially | [@jgrossi](http://github.com/jgrossi) | `Collection` of fields |
 | Flexible Content  | missing   |                                       | |
 
+## What is missing
+
+- Create more unit tests for `Repeater` field;
+- Implement the `Flexible Content` field with unit tests;
+- Improve performance. Currently the plugin makes one SQL query for each field. This goal is to improve that using `whereIn()` clauses.
+
 # Contributing
 
 All contributions are welcome. Before submitting your Pull Request take a look on the following guidelines:

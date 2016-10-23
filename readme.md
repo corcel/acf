@@ -2,6 +2,10 @@
 
 > Fetch all Advanced Custom Fields (ACF) fields inside Corcel easily.
 
+* [Installation](#instalation)
+* [Usage](#usage)
+
+
 # Installation
 
 To install the ACF plugin for Corcel is easy:
@@ -31,9 +35,13 @@ First ACF fetches the `meta_value` in `wp_postmeta` table, where the `meta_key` 
 
 This plugin works with a basic logic inside `Corcel\Acf\Field\BasicField` abstract class, that has a lot of useful functions to return the `field key`, the `value`, etc. The `Corcel\Acf\FieldFactory` is responsible to return the correct field instance according the field type, so, if the field type is `post_object` it return an instance of `Corcel\Acf\Field\PostObject`, and it will returns in the `get()` method an instance of `Corcel\Post`.
 
-## What's Missing
+## What is Missing
 
-First we should create the fields classes and the test cases. After we have to setup how Corcel is going to work with the `corcel/acf` plugin, returning the custom field value in the format `$post->meta->field` or maybe `$post->acf->field` having different behavior. This should be done yet!
+First we should create the fields classes and the test cases. After we have to setup how Corcel is going to work with the `corcel/acf` plugin, returning the custom field value in the format `$post->meta->field` or maybe `$post->acf->field` having different behavior (done!).
+ 
+ - Create more unit tests for `Repeater` field;
+ - Implement the `Flexible Content` field with unit tests;
+ - Improve performance. Currently the plugin makes one SQL query for each field. This goal is to improve that using `whereIn()` clauses.
  
  Some fields are still missing (check table below and contribute).
 
@@ -68,12 +76,6 @@ First we should create the fields classes and the test cases. After we have to s
 | Color Picker      | ok        | [@jgrossi](http://github.com/jgrossi) | `string` |
 | Repeater          | partially | [@jgrossi](http://github.com/jgrossi) | `Collection` of fields |
 | Flexible Content  | missing   |                                       | |
-
-## What is missing
-
-- Create more unit tests for `Repeater` field;
-- Implement the `Flexible Content` field with unit tests;
-- Improve performance. Currently the plugin makes one SQL query for each field. This goal is to improve that using `whereIn()` clauses.
 
 # Contributing
 

@@ -2,7 +2,7 @@
 
 > Fetch all Advanced Custom Fields (ACF) fields inside Corcel easily.
 
-* [Installation](#instalation)
+* [Installation](#installation)
 * [Usage](#usage)
     - [The Idea](#the-idea)
     - [What is Missing](#what-is-missing)

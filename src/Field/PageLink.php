@@ -5,9 +5,8 @@ namespace Corcel\Acf\Field;
 use Corcel\Acf\FieldInterface;
 
 /**
- * Class PageLink
+ * Class PageLink.
  *
- * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */
 class PageLink extends PostObject implements FieldInterface

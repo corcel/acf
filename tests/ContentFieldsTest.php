@@ -7,7 +7,7 @@ use Corcel\Acf\Field\Text;
 use Corcel\Post;
 
 /**
- * Class ContentFieldsTest
+ * Class ContentFieldsTest.
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */
@@ -19,7 +19,7 @@ class ContentFieldsTest extends PHPUnit_Framework_TestCase
     protected $post;
 
     /**
-     * Setup a base $this->post object to represent the page with the content fields
+     * Setup a base $this->post object to represent the page with the content fields.
      */
     protected function setUp()
     {

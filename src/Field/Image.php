@@ -7,9 +7,8 @@ use Corcel\Post;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * Class Image
+ * Class Image.
  *
- * @package Corcel\Acf\Field
  * @author Junior Grossi
  */
 class Image extends BasicField implements FieldInterface
@@ -56,7 +55,7 @@ class Image extends BasicField implements FieldInterface
 
     /**
      * @param string $field
-     * @param Post $post
+     * @param Post   $post
      */
     public function process($field, Post $post)
     {
@@ -89,6 +88,7 @@ class Image extends BasicField implements FieldInterface
 
     /**
      * @param string $size
+     *
      * @return Image
      */
     public function size($size)
@@ -102,6 +102,7 @@ class Image extends BasicField implements FieldInterface
 
     /**
      * @param array $data
+     *
      * @return Image
      */
     protected function fillThumbnailFields(array $data)
@@ -117,6 +118,7 @@ class Image extends BasicField implements FieldInterface
 
     /**
      * @param Post $attachment
+     *
      * @return array
      */
     protected function fetchMetadataValue(Post $attachment)
@@ -130,6 +132,7 @@ class Image extends BasicField implements FieldInterface
 
     /**
      * @param Collection $attachments
+     *
      * @return Collection
      */
     protected function fetchMultipleMetadataValues(Collection $attachments)

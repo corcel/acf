@@ -6,9 +6,8 @@ use Corcel\Acf\Exception\MissingFieldNameException;
 use Corcel\Post;
 
 /**
- * Class AdvancedCustomFields
+ * Class AdvancedCustomFields.
  *
- * @package Corcel\Acf
  * @author Junior Grossi <juniorgro@gmail.com>
  */
 class AdvancedCustomFields
@@ -47,17 +46,18 @@ class AdvancedCustomFields
     }
 
     /**
-     * Make possible to call $post->acf->fieldType('fieldName')
+     * Make possible to call $post->acf->fieldType('fieldName').
      *
      * @param string$name
      * @param array $arguments
      *
      * @return mixed
+     *
      * @throws MissingFieldNameException
      */
-    function __call($name, $arguments)
+    public function __call($name, $arguments)
     {
-        if (! isset($arguments[0])) {
+        if (!isset($arguments[0])) {
             throw new MissingFieldNameException('The field name is missing');
         }
 

@@ -7,7 +7,7 @@ use Corcel\Acf\Field\User;
 use Corcel\Post;
 
 /**
- * Class RelationalFieldsTests
+ * Class RelationalFieldsTests.
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */

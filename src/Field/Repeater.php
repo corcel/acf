@@ -9,9 +9,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
 /**
- * Class Repeater
+ * Class Repeater.
  *
- * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */
 class Repeater extends BasicField implements FieldInterface
@@ -23,7 +22,7 @@ class Repeater extends BasicField implements FieldInterface
 
     /**
      * @param string $fieldName
-     * @param Post $post
+     * @param Post   $post
      */
     public function process($fieldName, Post $post)
     {
@@ -47,17 +46,19 @@ class Repeater extends BasicField implements FieldInterface
     /**
      * @param string $metaKey
      * @param string $fieldName
+     *
      * @return int
      */
     protected function retrieveIdFromFieldName($metaKey, $fieldName)
     {
-        return (int)str_replace("{$fieldName}_", '', $metaKey);
+        return (int) str_replace("{$fieldName}_", '', $metaKey);
     }
 
     /**
      * @param string $metaKey
      * @param string $fieldName
-     * @param int $id
+     * @param int    $id
+     *
      * @return string
      */
     protected function retrieveFieldName($metaKey, $fieldName, $id)
@@ -70,6 +71,7 @@ class Repeater extends BasicField implements FieldInterface
     /**
      * @param $fieldName
      * @param Post $post
+     *
      * @return mixed
      */
     protected function fetchPostsMeta($fieldName, Post $post)
@@ -88,6 +90,7 @@ class Repeater extends BasicField implements FieldInterface
     /**
      * @param $fieldName
      * @param $builder
+     *
      * @return mixed
      */
     protected function fetchFields($fieldName, Builder $builder)
@@ -99,6 +102,7 @@ class Repeater extends BasicField implements FieldInterface
             $field = FieldFactory::make($meta->meta_key, $this->post->find($meta->post_id));
             $fields[$id][$name] = $field->get();
         }
+
         return $fields;
     }
 }

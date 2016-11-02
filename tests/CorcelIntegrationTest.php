@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class CorcelIntegrationTest
+ * Class CorcelIntegrationTest.
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */

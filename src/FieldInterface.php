@@ -5,16 +5,15 @@ namespace Corcel\Acf;
 use Corcel\Post;
 
 /**
- * Interface FieldInterface
+ * Interface FieldInterface.
  *
- * @package Corcel\Acf
  * @author Junior Grossi <juniorgro@gmail.com>
  */
 interface FieldInterface
 {
     /**
      * @param string $fieldName
-     * @param Post $post
+     * @param Post   $post
      */
     public function process($fieldName, Post $post);
 

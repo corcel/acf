@@ -18,28 +18,27 @@ use Corcel\Post;
 use Illuminate\Support\Collection;
 
 /**
- * Class FieldFactory
+ * Class FieldFactory.
  *
- * @package Corcel\Acf
  * @author Junior Grossi <juniorgro@gmail.com>
  */
 class FieldFactory
 {
     private function __construct()
     {
-        //
     }
 
     /**
-     * @param string $name
-     * @param Post $post
+     * @param string      $name
+     * @param Post        $post
      * @param null|string $type
+     *
      * @return FieldInterface|Collection|string
      */
     public static function make($name, Post $post, $type = null)
     {
         if (null === $type) {
-            $fakeText = new Text;
+            $fakeText = new Text();
             $key = $fakeText->fetchFieldKey($name, $post);
 
             if ($key === null) { // Field does not exist

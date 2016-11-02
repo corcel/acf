@@ -6,9 +6,8 @@ use Corcel\Acf\FieldInterface;
 use Corcel\Post;
 
 /**
- * Class PostObject
+ * Class PostObject.
  *
- * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */
 class PostObject extends BasicField implements FieldInterface
@@ -20,7 +19,7 @@ class PostObject extends BasicField implements FieldInterface
 
     /**
      * @param string $fieldName
-     * @param Post $post
+     * @param Post   $post
      */
     public function process($fieldName, Post $post)
     {

@@ -9,6 +9,7 @@ use Corcel\Acf\Field\Gallery;
 use Corcel\Acf\Field\Image;
 use Corcel\Acf\Field\PageLink;
 use Corcel\Acf\Field\PostObject;
+use Corcel\Acf\Field\Repeater;
 use Corcel\Acf\Field\Select;
 use Corcel\Acf\Field\Term;
 use Corcel\Acf\Field\Text;
@@ -98,6 +99,9 @@ class FieldFactory
             case 'date_time_picker':
             case 'time_picker':
                 $field = new DateTime();
+                break;
+            case 'repeater':
+                $field = new Repeater();
                 break;
         }
 

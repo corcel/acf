@@ -1,12 +1,11 @@
 <?php
 
 use Corcel\Acf\Field\Boolean;
-use Corcel\Acf\Field\Select;
 use Corcel\Acf\Field\Text;
 use Corcel\Post;
 
 /**
- * Class ChoicesFieldsTest
+ * Class ChoicesFieldsTest.
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */
@@ -17,9 +16,6 @@ class ChoicesFieldsTest extends PHPUnit_Framework_TestCase
      */
     protected $post;
 
-    /**
-     * @return void
-     */
     public function setUp()
     {
         $this->post = Post::find(44);

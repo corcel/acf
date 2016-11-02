@@ -6,9 +6,8 @@ use Corcel\Post;
 use Corcel\PostMeta;
 
 /**
- * Class BasicField
+ * Class BasicField.
  *
- * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */
 abstract class BasicField
@@ -44,7 +43,7 @@ abstract class BasicField
     protected $value;
 
     /**
-     * Constructor method
+     * Constructor method.
      */
     public function __construct()
     {
@@ -52,10 +51,11 @@ abstract class BasicField
     }
 
     /**
-     * Get the value of a field according it's post ID
+     * Get the value of a field according it's post ID.
      *
      * @param string $field
-     * @param Post $post
+     * @param Post   $post
+     *
      * @return array|string
      */
     public function fetchValue($field, Post $post)
@@ -80,7 +80,8 @@ abstract class BasicField
 
     /**
      * @param string $fieldName
-     * @param Post $post
+     * @param Post   $post
+     *
      * @return string
      */
     public function fetchFieldKey($fieldName, Post $post)
@@ -103,6 +104,7 @@ abstract class BasicField
 
     /**
      * @param string $fieldKey
+     *
      * @return string
      */
     public function fetchFieldType($fieldKey)

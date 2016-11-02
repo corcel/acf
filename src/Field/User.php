@@ -6,9 +6,8 @@ use Corcel\Acf\FieldInterface;
 use Corcel\Post;
 
 /**
- * Class User
+ * Class User.
  *
- * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */
 class User extends BasicField implements FieldInterface
@@ -23,8 +22,6 @@ class User extends BasicField implements FieldInterface
      */
     protected $value;
 
-    /**
-     */
     public function __construct()
     {
         parent::__construct();
@@ -33,7 +30,7 @@ class User extends BasicField implements FieldInterface
 
     /**
      * @param string $fieldName
-     * @param Post $post
+     * @param Post   $post
      */
     public function process($fieldName, Post $post)
     {

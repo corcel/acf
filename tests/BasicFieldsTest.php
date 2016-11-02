@@ -4,7 +4,7 @@ use Corcel\Acf\Field\Text;
 use Corcel\Post;
 
 /**
- * Class BasicFieldTest
+ * Class BasicFieldTest.
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */
@@ -16,7 +16,7 @@ class BasicFieldsTest extends PHPUnit_Framework_TestCase
     protected $post;
 
     /**
-     * Setup a base $this->post object to represent the page with the basic fields
+     * Setup a base $this->post object to represent the page with the basic fields.
      */
     protected function setUp()
     {

@@ -7,9 +7,8 @@ use Corcel\Post;
 use Illuminate\Support\Collection;
 
 /**
- * Class Term
+ * Class Term.
  *
- * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */
 class Term extends BasicField implements FieldInterface
@@ -24,8 +23,6 @@ class Term extends BasicField implements FieldInterface
      */
     protected $term;
 
-    /**
-     */
     public function __construct()
     {
         parent::__construct();
@@ -34,7 +31,7 @@ class Term extends BasicField implements FieldInterface
 
     /**
      * @param string $fieldName
-     * @param Post $post
+     * @param Post   $post
      */
     public function process($fieldName, Post $post)
     {

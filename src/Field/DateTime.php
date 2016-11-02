@@ -7,9 +7,8 @@ use Corcel\Acf\FieldInterface;
 use Corcel\Post;
 
 /**
- * Class DateTime
+ * Class DateTime.
  *
- * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */
 class DateTime extends BasicField implements FieldInterface
@@ -21,7 +20,7 @@ class DateTime extends BasicField implements FieldInterface
 
     /**
      * @param string $fieldName
-     * @param Post $post
+     * @param Post   $post
      */
     public function process($fieldName, Post $post)
     {
@@ -40,6 +39,7 @@ class DateTime extends BasicField implements FieldInterface
 
     /**
      * @param string $dateString
+     *
      * @return string
      */
     protected function getDateFormatFromString($dateString)

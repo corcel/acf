@@ -7,9 +7,8 @@ use Corcel\Post;
 use Illuminate\Support\Collection;
 
 /**
- * Class Gallery
+ * Class Gallery.
  *
- * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */
 class Gallery extends Image implements FieldInterface

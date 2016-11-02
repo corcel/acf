@@ -6,9 +6,8 @@ use Corcel\Acf\FieldInterface;
 use Corcel\Post;
 
 /**
- * Class Text
+ * Class Text.
  *
- * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */
 class Text extends BasicField implements FieldInterface
@@ -18,9 +17,6 @@ class Text extends BasicField implements FieldInterface
      */
     protected $value;
 
-    /**
-     * @return void
-     */
     public function process($field, Post $post)
     {
         $this->value = $this->fetchValue($field, $post);

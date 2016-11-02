@@ -3,7 +3,7 @@
 use Corcel\Acf\Field\Repeater;
 
 /**
- * Class LayoutFieldsTest
+ * Class LayoutFieldsTest.
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */

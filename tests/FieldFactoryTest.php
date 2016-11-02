@@ -1,11 +1,10 @@
 <?php
 
-use Corcel\Acf\Field\Text;
 use Corcel\Acf\FieldFactory;
 use Corcel\Post;
 
 /**
- * Class FieldFactoryTest
+ * Class FieldFactoryTest.
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */

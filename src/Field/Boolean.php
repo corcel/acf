@@ -5,9 +5,8 @@ namespace Corcel\Acf\Field;
 use Corcel\Acf\FieldInterface;
 
 /**
- * Class Boolean
+ * Class Boolean.
  *
- * @package Corcel\Acf\Field
  * @author Junior Grossi <juniorgro@gmail.com>
  */
 class Boolean extends Text implements FieldInterface
@@ -17,6 +16,6 @@ class Boolean extends Text implements FieldInterface
      */
     public function get()
     {
-        return (bool)parent::get();
+        return (bool) parent::get();
     }
 }

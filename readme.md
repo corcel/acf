@@ -1,6 +1,23 @@
 # Corcel ACF Plugin
 
+[![Travis](https://travis-ci.org/jgrossi/corcel.svg?branch=master)](https://travis-ci.org/corcel/acf?branch=master)
+[![Packagist](https://img.shields.io/packagist/v/corcel/acf.svg)](https://github.com/corcel/acf/releases)
+[![Packagist](https://img.shields.io/packagist/dt/corcel/acf.svg)](https://packagist.org/packages/corcel/acf)
+
 > Fetch all Advanced Custom Fields (ACF) fields inside Corcel easily.
+
+This Corcel plugin allows you to fetch WordPress custom fields created by the [ACF](http://advancedcustomfields.com) plugin using the same syntax of Eloquent, from the [Laravel Framework](http://laravel.com). You can use Eloquent models and Collections to improve your development, using the WordPress backend with any PHP application.
+
+For more information about how Corcel works please visit [the repository](http://github.com/jgrossi/corcel).
+
+* [Installation](#installation)
+* [Usage](#usage)
+    - [The Idea](#the-idea)
+    - [What is Missing](#what-is-missing)
+    - [Fields](#fields)
+* [Contributing](#contributing)
+    - [Running Tests](#running-tests)
+* [Licence](#licence)
 
 # Installation
 
@@ -21,6 +38,20 @@ $post = Post::find(1);
 echo $post->acf->url; // returns the url custom field created using ACF
 ```
 
+## Performance
+
+When using something like `$post->acf->url` the plugin has to make some extra SQL queries to get the field type according ACF approach. So we created another way to get that without making those extra queries. You have only the inform the plugin what is the post type, as a function:
+ 
+ ```php
+ // Extra queries way
+ echo $post->acf->author_username; // it's a User field
+ 
+ // Without extra queries
+ echo $post->acf->user('author_username');
+ ```
+ 
+ > PS: The method names should be written in `camelCase()` format. So, for example, for the field type `date_picker` you should write `$post->acf->datePicker('fieldName')`. The plugin does the conversion from `camelCase` to `snake_case` for you. 
+
 ## The Idea
 
 Using the default `$post->meta->field_name` in Corcel returns the value of the `meta_value` column in the `wp_postmeta` table. It can be a string, an integer or even a serialized array. The problem is, when you're using ACF this value can be more than that. If you have an integer, for example, it can be a `post id`, an `user id` or even an array of `posts ids`.
@@ -31,9 +62,13 @@ First ACF fetches the `meta_value` in `wp_postmeta` table, where the `meta_key` 
 
 This plugin works with a basic logic inside `Corcel\Acf\Field\BasicField` abstract class, that has a lot of useful functions to return the `field key`, the `value`, etc. The `Corcel\Acf\FieldFactory` is responsible to return the correct field instance according the field type, so, if the field type is `post_object` it return an instance of `Corcel\Acf\Field\PostObject`, and it will returns in the `get()` method an instance of `Corcel\Post`.
 
-## What's Missing
+## What is Missing
 
-First we should create the fields classes and the test cases. After we have to setup how Corcel is going to work with the `corcel/acf` plugin, returning the custom field value in the format `$post->meta->field` or maybe `$post->acf->field` having different behavior. This should be done yet!
+First we should create the fields classes and the test cases. After we have to setup how Corcel is going to work with the `corcel/acf` plugin, returning the custom field value in the format `$post->meta->field` or maybe `$post->acf->field` having different behavior (done!).
+ 
+ - Create more unit tests for `Repeater` field;
+ - Implement the `Flexible Content` field with unit tests;
+ - Improve performance. Currently the plugin makes one SQL query for each field. This goal is to improve that using `whereIn()` clauses.
  
  Some fields are still missing (check table below and contribute).
 
@@ -91,6 +126,6 @@ You should import the `database.sql` file to a database inside your local enviro
 
 > If you want to access the WordPress Admin Panel just use username as `admin` and password `123456`.
 
-## Licence
+# Licence
 
 [MIT License](http://jgrossi.mit-license.org/) © Junior Grossi

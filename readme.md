@@ -38,6 +38,20 @@ $post = Post::find(1);
 echo $post->acf->url; // returns the url custom field created using ACF
 ```
 
+## Performance
+
+When using something like `$post->acf->url` the plugin has to make some extra SQL queries to get the field type according ACF approach. So we created another way to get that without making those extra queries. You have only the inform the plugin what is the post type, as a function:
+ 
+ ```php
+ // Extra queries way
+ echo $post->acf->author_username; // it's a User field
+ 
+ // Without extra queries
+ echo $post->acf->user('author_username');
+ ```
+ 
+ > PS: The method names should be written in `camelCase()` format. So, for example, for the field type `date_picker` you should write `$post->acf->datePicker('fieldName')`. The plugin does the conversion from `camelCase` to `snake_case` for you. 
+
 ## The Idea
 
 Using the default `$post->meta->field_name` in Corcel returns the value of the `meta_value` column in the `wp_postmeta` table. It can be a string, an integer or even a serialized array. The problem is, when you're using ACF this value can be more than that. If you have an integer, for example, it can be a `post id`, an `user id` or even an array of `posts ids`.

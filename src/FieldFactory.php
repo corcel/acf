@@ -32,18 +32,21 @@ class FieldFactory
     /**
      * @param string $name
      * @param Post $post
+     * @param null|string $type
      * @return FieldInterface|Collection|string
      */
-    public static function make($name, Post $post)
+    public static function make($name, Post $post, $type = null)
     {
-        $fakeText = new Text;
-        $key = $fakeText->fetchFieldKey($name, $post);
+        if (null === $type) {
+            $fakeText = new Text;
+            $key = $fakeText->fetchFieldKey($name, $post);
 
-        if ($key === null) { // Field does not exist
-            return null;
+            if ($key === null) { // Field does not exist
+                return null;
+            }
+
+            $type = $fakeText->fetchFieldType($key);
         }
-
-        $type = $fakeText->fetchFieldType($key);
 
         switch ($type) {
             case 'text':

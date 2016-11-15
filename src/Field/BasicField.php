@@ -43,6 +43,11 @@ abstract class BasicField
     protected $value;
 
     /**
+     * @var string
+     */
+    protected $connection;
+
+    /**
      * Constructor method.
      */
     public function __construct()
@@ -123,5 +128,22 @@ abstract class BasicField
     public function __toString()
     {
         return $this->get();
+    }
+
+    /**
+     * @return string
+     */
+    public function getConnection()
+    {
+        return $this->connection;
+    }
+
+    /**
+     * @param string $connection
+     */
+    public function setConnection($connection)
+    {
+        $this->connection = $connection;
+        $this->postMeta->setConnection($connection);
     }
 }

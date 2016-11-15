@@ -44,6 +44,11 @@ class FieldFactory
     {
         if (null === $type) {
             $fakeText = new Text();
+
+            if (static::$connection) {
+                $fakeText->setConnection(static::$connection);
+            }
+
             $key = $fakeText->fetchFieldKey($name, $post);
 
             if ($key === null) { // Field does not exist

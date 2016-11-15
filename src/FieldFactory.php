@@ -24,6 +24,11 @@ use Illuminate\Support\Collection;
  */
 class FieldFactory
 {
+    /**
+     * @var null|string
+     */
+    public static $connection = null;
+
     private function __construct()
     {
     }
@@ -102,6 +107,10 @@ class FieldFactory
             case 'repeater':
                 $field = new Repeater();
                 break;
+        }
+
+        if (static::$connection) {
+            $field->setConnection(static::$connection);
         }
 
         $field->process($name, $post);

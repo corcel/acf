@@ -59,7 +59,7 @@ abstract class BasicField
      * Get the value of a field according it's post ID.
      *
      * @param string $field
-     * @param Post   $post
+     * @param Post $post
      *
      * @return array|string
      */
@@ -85,7 +85,7 @@ abstract class BasicField
 
     /**
      * @param string $fieldName
-     * @param Post   $post
+     * @param Post $post
      *
      * @return string
      */
@@ -95,7 +95,7 @@ abstract class BasicField
         $this->name = $fieldName;
 
         $postMeta = $this->postMeta->where('post_id', $post->ID)
-            ->where('meta_key', '_'.$fieldName)
+            ->where('meta_key', '_' . $fieldName)
             ->first();
 
         if (!$postMeta) {
@@ -110,16 +110,20 @@ abstract class BasicField
     /**
      * @param string $fieldKey
      *
-     * @return string
+     * @return string|null
      */
     public function fetchFieldType($fieldKey)
     {
         $post = $this->post->where('post_name', $fieldKey)->first();
-        $fieldData = unserialize($post->post_content);
 
-        $this->type = isset($fieldData['type']) ? $fieldData['type'] : 'text';
+        if ($post) {
+            $fieldData = unserialize($post->post_content);
+            $this->type = isset($fieldData['type']) ? $fieldData['type'] : 'text';
 
-        return $this->type;
+            return $this->type;
+        }
+
+        return null;
     }
 
     /**

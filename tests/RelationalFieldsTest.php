@@ -48,7 +48,7 @@ class RelationalFieldsTests extends PHPUnit_Framework_TestCase
     public function testTaxonomyField()
     {
         $relation = new Term($this->post);
-	    
+
         $relation->process('fake_taxonomy'); // multiple (Collection)
         $this->assertEquals('uncategorized', $relation->get()->first()->slug);
 

@@ -57,8 +57,6 @@ abstract class BasicField
     	$this->post = $post;
         $this->postMeta = new PostMeta();
         $this->postMeta->setConnection($post->getConnectionName());
-        
-        dd($this->post->getConnectionName(), $this->postMeta->getConnectionName());
     }
 
     /**

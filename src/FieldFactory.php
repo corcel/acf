@@ -24,11 +24,6 @@ use Illuminate\Support\Collection;
  */
 class FieldFactory
 {
-    /**
-     * @var null|string
-     */
-    public static $connection = null;
-
     private function __construct()
     {
     }
@@ -43,22 +38,17 @@ class FieldFactory
     public static function make($name, Post $post, $type = null)
     {
         if (null === $type) {
-            $fakeText = new Text();
-
-            if (static::$connection) {
-                $fakeText->setConnection(static::$connection);
-            }
-
-            $key = $fakeText->fetchFieldKey($name, $post);
-
-            if ($key === null) { // Field does not exist
+            $fakeText = new Text($post);
+	        $key = $fakeText->fetchFieldKey($name);
+	
+	        if ($key === null) { // Field does not exist
                 return null;
             }
-
-            $type = $fakeText->fetchFieldType($key);
+	
+	        $type = $fakeText->fetchFieldType($key);
         }
-
-        switch ($type) {
+	
+	    switch ($type) {
             case 'text':
             case 'textarea':
             case 'number':
@@ -73,52 +63,48 @@ class FieldFactory
             case 'select':
             case 'checkbox':
             case 'radio':
-                $field = new Text();
+                $field = new Text($post);
                 break;
             case 'image':
             case 'img':
-                $field = new Image();
+                $field = new Image($post);
                 break;
             case 'file':
-                $field = new File();
+                $field = new File($post);
                 break;
             case 'gallery':
-                $field = new Gallery();
+                $field = new Gallery($post);
                 break;
             case 'true_false':
             case 'boolean':
-                $field = new Boolean();
+                $field = new Boolean($post);
                 break;
             case 'post_object':
             case 'post':
             case 'relationship':
-                $field = new PostObject();
+                $field = new PostObject($post);
                 break;
             case 'page_link':
-                $field = new PageLink();
+                $field = new PageLink($post);
                 break;
             case 'taxonomy':
             case 'term':
-                $field = new Term();
+                $field = new Term($post);
                 break;
             case 'user':
-                $field = new User();
+                $field = new User($post);
                 break;
             case 'date_picker':
             case 'date_time_picker':
             case 'time_picker':
-                $field = new DateTime();
+                $field = new DateTime($post);
                 break;
             case 'repeater':
-                $field = new Repeater();
+                $field = new Repeater($post);
                 break;
         }
 
-        if (static::$connection) {
-            $field->setConnection(static::$connection);
-        }
-
-        $field->process($name, $post);
+        $field->process($name);
 
         return $field;
     }

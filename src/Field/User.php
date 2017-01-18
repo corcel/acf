@@ -21,10 +21,10 @@ class User extends BasicField implements FieldInterface
      * @var \Corcel\User
      */
     protected $value;
-	
-	/**
-	 * @param Post $post
-	 */
+
+    /**
+     * @param Post $post
+     */
     public function __construct(Post $post)
     {
         parent::__construct($post);

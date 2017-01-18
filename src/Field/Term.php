@@ -22,10 +22,10 @@ class Term extends BasicField implements FieldInterface
      * @var \Corcel\Term
      */
     protected $term;
-	
-	/**
-	 * @param Post $post
-	 */
+
+    /**
+     * @param Post $post
+     */
     public function __construct(Post $post)
     {
         parent::__construct($post);

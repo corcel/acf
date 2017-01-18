@@ -16,10 +16,10 @@ class Text extends BasicField implements FieldInterface
      * @var string
      */
     protected $value;
-	
-	/**
-	 * @param string $field
-	 */
+
+    /**
+     * @param string $field
+     */
     public function process($field)
     {
         $this->value = $this->fetchValue($field);

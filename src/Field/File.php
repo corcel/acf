@@ -44,12 +44,11 @@ class File extends BasicField implements FieldInterface
 
     /**
      * @param string $field
-     * @param Post   $post
      */
-    public function process($field, Post $post)
+    public function process($field)
     {
-        $value = $this->fetchValue($field, $post);
-        $file = $post->find($value);
+        $value = $this->fetchValue($field);
+        $file = $this->post->find($value);
         $this->fillFields($file);
     }
 

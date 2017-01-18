@@ -20,11 +20,10 @@ class DateTime extends BasicField implements FieldInterface
 
     /**
      * @param string $fieldName
-     * @param Post   $post
      */
-    public function process($fieldName, Post $post)
+    public function process($fieldName)
     {
-        $dateString = $this->fetchValue($fieldName, $post);
+        $dateString = $this->fetchValue($fieldName);
         $format = $this->getDateFormatFromString($dateString);
         $this->date = Carbon::createFromFormat($format, $dateString);
     }

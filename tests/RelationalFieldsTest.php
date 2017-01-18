@@ -25,41 +25,41 @@ class RelationalFieldsTests extends PHPUnit_Framework_TestCase
 
     public function testPostObjectField()
     {
-        $object = new PostObject();
-        $object->process('fake_post_object', $this->post);
+        $object = new PostObject($this->post);
+        $object->process('fake_post_object');
         $this->assertEquals('ACF Basic Fields', $object->get()->post_title);
     }
 
     public function testPageLinkField()
     {
-        $page = new PageLink();
-        $page->process('fake_page_link', $this->post);
+        $page = new PageLink($this->post);
+        $page->process('fake_page_link');
         $this->assertEquals('http://wordpress.corcel.dev/acf-content-fields/', $page->get());
     }
 
     public function testRelationshipField()
     {
-        $relation = new PostObject();
-        $relation->process('fake_relationship', $this->post);
+        $relation = new PostObject($this->post);
+        $relation->process('fake_relationship');
         $posts = $relation->get();
         $this->assertEquals([44, 56], $posts->pluck('ID')->toArray());
     }
 
     public function testTaxonomyField()
     {
-        $relation = new Term();
-
-        $relation->process('fake_taxonomy', $this->post); // multiple (Collection)
+        $relation = new Term($this->post);
+	    
+        $relation->process('fake_taxonomy'); // multiple (Collection)
         $this->assertEquals('uncategorized', $relation->get()->first()->slug);
 
-        $relation->process('fake_taxonomy_single', $this->post); // single (Corcel\Term)
+        $relation->process('fake_taxonomy_single'); // single (Corcel\Term)
         $this->assertEquals('uncategorized', $relation->get()->slug);
     }
 
     public function testUserField()
     {
-        $user = new User();
-        $user->process('fake_user', $this->post);
+        $user = new User($this->post);
+        $user->process('fake_user');
         $this->assertEquals('admin', $user->get()->user_login);
         $this->assertEquals('admin', $user->get()->nickname);
     }

@@ -23,36 +23,36 @@ class ChoicesFieldsTest extends PHPUnit_Framework_TestCase
 
     public function testSelectField()
     {
-        $select = new Text();
-        $select->process('fake_select', $this->post);
+        $select = new Text($this->post);
+        $select->process('fake_select');
         $this->assertEquals('red', $select->get());
     }
 
     public function testSelectMultipleField()
     {
-        $select = new Text();
-        $select->process('fake_select_multiple', $this->post);
+        $select = new Text($this->post);
+        $select->process('fake_select_multiple');
         $this->assertEquals(['yellow', 'green'], $select->get());
     }
 
     public function testCheckboxField()
     {
-        $check = new Text();
-        $check->process('fake_checkbox', $this->post);
+        $check = new Text($this->post);
+        $check->process('fake_checkbox');
         $this->assertEquals(['blue', 'yellow'], $check->get());
     }
 
     public function testRadioField()
     {
-        $radio = new Text();
-        $radio->process('fake_radio_button', $this->post);
+        $radio = new Text($this->post);
+        $radio->process('fake_radio_button');
         $this->assertEquals('green', $radio->get());
     }
 
     public function testTrueFalseField()
     {
-        $boolean = new Boolean();
-        $boolean->process('fake_true_false', $this->post);
+        $boolean = new Boolean($this->post);
+        $boolean->process('fake_true_false');
         $this->assertTrue($boolean->get());
     }
 }

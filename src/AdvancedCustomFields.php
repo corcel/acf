@@ -26,23 +26,15 @@ class AdvancedCustomFields
     }
 
     /**
-     * @return mixed
-     */
-    public function get($fieldName)
-    {
-        $field = FieldFactory::make($fieldName, $this->post);
-
-        return $field->get();
-    }
-
-    /**
      * @param string $name
      *
      * @return mixed
      */
     public function __get($name)
     {
-        return $this->get($name);
+        $field = FieldFactory::make($name, $this->post);
+
+        return $field->get();
     }
 
     /**

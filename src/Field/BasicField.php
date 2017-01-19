@@ -43,24 +43,32 @@ abstract class BasicField
     protected $value;
 
     /**
-     * Constructor method.
+     * @var string
      */
-    public function __construct()
+    protected $connection;
+
+    /**
+     * Constructor method.
+     *
+     * @param Post $post
+     */
+    public function __construct(Post $post)
     {
+        $this->post = $post;
         $this->postMeta = new PostMeta();
+        $this->postMeta->setConnection($post->getConnectionName());
     }
 
     /**
      * Get the value of a field according it's post ID.
      *
      * @param string $field
-     * @param Post   $post
      *
      * @return array|string
      */
-    public function fetchValue($field, Post $post)
+    public function fetchValue($field)
     {
-        $postMeta = $this->postMeta->where('post_id', $post->ID)
+        $postMeta = $this->postMeta->where('post_id', $this->post->ID)
             ->where('meta_key', $field)
             ->first();
 
@@ -80,17 +88,15 @@ abstract class BasicField
 
     /**
      * @param string $fieldName
-     * @param Post   $post
      *
      * @return string
      */
-    public function fetchFieldKey($fieldName, Post $post)
+    public function fetchFieldKey($fieldName)
     {
-        $this->post = $post;
         $this->name = $fieldName;
 
-        $postMeta = $this->postMeta->where('post_id', $post->ID)
-            ->where('meta_key', '_'.$fieldName)
+        $postMeta = $this->postMeta->where('post_id', $this->post->ID)
+            ->where('meta_key', '_' . $fieldName)
             ->first();
 
         if (!$postMeta) {
@@ -105,16 +111,20 @@ abstract class BasicField
     /**
      * @param string $fieldKey
      *
-     * @return string
+     * @return string|null
      */
     public function fetchFieldType($fieldKey)
     {
         $post = $this->post->where('post_name', $fieldKey)->first();
-        $fieldData = unserialize($post->post_content);
 
-        $this->type = isset($fieldData['type']) ? $fieldData['type'] : 'text';
+        if ($post) {
+            $fieldData = unserialize($post->post_content);
+            $this->type = isset($fieldData['type']) ? $fieldData['type'] : 'text';
 
-        return $this->type;
+            return $this->type;
+        }
+
+        return null;
     }
 
     /**

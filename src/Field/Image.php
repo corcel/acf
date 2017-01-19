@@ -55,13 +55,12 @@ class Image extends BasicField implements FieldInterface
 
     /**
      * @param string $field
-     * @param Post   $post
      */
-    public function process($field, Post $post)
+    public function process($field)
     {
-        $attachmentId = $this->fetchValue($field, $post);
+        $attachmentId = $this->fetchValue($field);
 
-        $attachment = $post->find(intval($attachmentId));
+        $attachment = $this->post->find(intval($attachmentId));
         $this->fillFields($attachment);
 
         $imageData = $this->fetchMetadataValue($attachment);
@@ -107,7 +106,7 @@ class Image extends BasicField implements FieldInterface
      */
     protected function fillThumbnailFields(array $data)
     {
-        $size = new static();
+        $size = new static($this->post);
         $size->filename = $data['file'];
         $size->width = $data['width'];
         $size->height = $data['height'];
@@ -133,7 +132,7 @@ class Image extends BasicField implements FieldInterface
     /**
      * @param Collection $attachments
      *
-     * @return Collection
+     * @return Collection|array
      */
     protected function fetchMultipleMetadataValues(Collection $attachments)
     {

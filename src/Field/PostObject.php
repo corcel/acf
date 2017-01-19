@@ -19,16 +19,15 @@ class PostObject extends BasicField implements FieldInterface
 
     /**
      * @param string $fieldName
-     * @param Post   $post
      */
-    public function process($fieldName, Post $post)
+    public function process($fieldName)
     {
-        $postId = $this->fetchValue($fieldName, $post);
+        $postId = $this->fetchValue($fieldName);
 
         if (is_array($postId)) {
-            $this->object = $post->whereIn('ID', $postId)->get();
+            $this->object = $this->post->whereIn('ID', $postId)->get();
         } else {
-            $this->object = $post->find($postId);
+            $this->object = $this->post->find($postId);
         }
     }
 

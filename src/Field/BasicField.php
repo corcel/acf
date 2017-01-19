@@ -115,7 +115,10 @@ abstract class BasicField
      */
     public function fetchFieldType($fieldKey)
     {
-        $post = $this->post->where('post_name', $fieldKey)->first();
+        $post = $this->post->orWhere(function ($query) use ($fieldKey) {
+            $query->where('post_name', $fieldKey);
+            $query->where('post_type', 'acf-field');
+        })->first();
 
         if ($post) {
             $fieldData = unserialize($post->post_content);

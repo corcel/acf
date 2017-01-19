@@ -23,19 +23,22 @@ class Term extends BasicField implements FieldInterface
      */
     protected $term;
 
-    public function __construct()
+    /**
+     * @param Post $post
+     */
+    public function __construct(Post $post)
     {
-        parent::__construct();
+        parent::__construct($post);
         $this->term = new \Corcel\Term();
+        $this->term->setConnection($post->getConnectionName());
     }
 
     /**
      * @param string $fieldName
-     * @param Post   $post
      */
-    public function process($fieldName, Post $post)
+    public function process($fieldName)
     {
-        $value = $this->fetchValue($fieldName, $post);
+        $value = $this->fetchValue($fieldName);
         if (is_array($value)) {
             $this->items = $this->term->whereIn('term_id', $value)->get(); // ids
         } else {

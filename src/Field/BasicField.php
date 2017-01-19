@@ -49,23 +49,26 @@ abstract class BasicField
 
     /**
      * Constructor method.
+     *
+     * @param Post $post
      */
-    public function __construct()
+    public function __construct(Post $post)
     {
+        $this->post = $post;
         $this->postMeta = new PostMeta();
+        $this->postMeta->setConnection($post->getConnectionName());
     }
 
     /**
      * Get the value of a field according it's post ID.
      *
      * @param string $field
-     * @param Post $post
      *
      * @return array|string
      */
-    public function fetchValue($field, Post $post)
+    public function fetchValue($field)
     {
-        $postMeta = $this->postMeta->where('post_id', $post->ID)
+        $postMeta = $this->postMeta->where('post_id', $this->post->ID)
             ->where('meta_key', $field)
             ->first();
 
@@ -85,16 +88,14 @@ abstract class BasicField
 
     /**
      * @param string $fieldName
-     * @param Post $post
      *
      * @return string
      */
-    public function fetchFieldKey($fieldName, Post $post)
+    public function fetchFieldKey($fieldName)
     {
-        $this->post = $post;
         $this->name = $fieldName;
 
-        $postMeta = $this->postMeta->where('post_id', $post->ID)
+        $postMeta = $this->postMeta->where('post_id', $this->post->ID)
             ->where('meta_key', '_' . $fieldName)
             ->first();
 
@@ -132,22 +133,5 @@ abstract class BasicField
     public function __toString()
     {
         return $this->get();
-    }
-
-    /**
-     * @return string
-     */
-    public function getConnection()
-    {
-        return $this->connection;
-    }
-
-    /**
-     * @param string $connection
-     */
-    public function setConnection($connection)
-    {
-        $this->connection = $connection;
-        $this->postMeta->setConnection($connection);
     }
 }

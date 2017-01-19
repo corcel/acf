@@ -25,16 +25,15 @@ class Gallery extends Image implements FieldInterface
 
     /**
      * @param $field
-     * @param Post $post
      */
-    public function process($field, Post $post)
+    public function process($field)
     {
-        $ids = $this->fetchValue($field, $post);
-        $attachments = $post->whereIn('ID', $ids)->get();
+        $ids = $this->fetchValue($field);
+        $attachments = $this->post->whereIn('ID', $ids)->get();
         $metaDataValues = $this->fetchMultipleMetadataValues($attachments);
 
         foreach ($attachments as $attachment) {
-            $image = new Image();
+            $image = new Image($this->post);
             $image->fillFields($attachment);
             $image->fillMetadataFields($metaDataValues[$attachment->ID]);
             $this->images[] = $image;

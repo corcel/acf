@@ -12,8 +12,8 @@ class LayoutFieldsTest extends PHPUnit_Framework_TestCase
     public function testRepeaterField()
     {
         $page = Post::find(73);
-        $repeater = new Repeater();
-        $repeater->process('fake_repeater', $page);
+        $repeater = new Repeater($page);
+        $repeater->process('fake_repeater');
         $fields = $repeater->get()->toArray();
 
         $this->assertEquals('First text', $fields[0]['repeater_text']);
@@ -25,8 +25,8 @@ class LayoutFieldsTest extends PHPUnit_Framework_TestCase
     public function testComplexRepeaterField()
     {
         $page = Post::find(73);
-        $repeater = new Repeater();
-        $repeater->process('fake_repeater_2', $page);
+        $repeater = new Repeater($page);
+        $repeater->process('fake_repeater_2');
         $fields = $repeater->get()->toArray();
 
         $this->assertEquals('admin', $fields[0]['fake_user']->nickname);

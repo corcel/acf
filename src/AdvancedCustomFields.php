@@ -23,7 +23,6 @@ class AdvancedCustomFields
     public function __construct(Post $post)
     {
         $this->post = $post;
-        FieldFactory::$connection = $post->getConnectionName();
     }
 
     /**

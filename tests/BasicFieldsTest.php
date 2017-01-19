@@ -25,48 +25,48 @@ class BasicFieldsTest extends PHPUnit_Framework_TestCase
 
     public function testTextFieldValue()
     {
-        $text = new Text();
-        $text->process('fake_text', $this->post);
+        $text = new Text($this->post);
+        $text->process('fake_text');
 
         $this->assertEquals('Proin eget tortor risus', $text->get());
     }
 
     public function testTextareaFieldValue()
     {
-        $textarea = new Text();
-        $textarea->process('fake_textarea', $this->post);
+        $textarea = new Text($this->post);
+        $textarea->process('fake_textarea');
 
         $this->assertEquals('Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', $textarea->get());
     }
 
     public function testNumberFieldValue()
     {
-        $number = new Text();
-        $number->process('fake_number', $this->post);
+        $number = new Text($this->post);
+        $number->process('fake_number');
 
         $this->assertEquals('1984', $number->get());
     }
 
     public function testEmailFieldValue()
     {
-        $email = new Text();
-        $email->process('fake_email', $this->post);
+        $email = new Text($this->post);
+        $email->process('fake_email');
 
         $this->assertEquals('junior@corcel.org', $email->get());
     }
 
     public function testUrlFieldValue()
     {
-        $url = new Text();
-        $url->process('fake_url', $this->post);
+        $url = new Text($this->post);
+        $url->process('fake_url');
 
         $this->assertEquals('https://corcel.org', $url->get());
     }
 
     public function testPasswordFieldValue()
     {
-        $password = new Text();
-        $password->process('fake_password', $this->post);
+        $password = new Text($this->post);
+        $password->process('fake_password');
 
         $this->assertEquals('123change', $password->get());
     }

@@ -22,19 +22,22 @@ class User extends BasicField implements FieldInterface
      */
     protected $value;
 
-    public function __construct()
+    /**
+     * @param Post $post
+     */
+    public function __construct(Post $post)
     {
-        parent::__construct();
+        parent::__construct($post);
         $this->user = new \Corcel\User();
+        $this->user->setConnection($post->getConnectionName());
     }
 
     /**
      * @param string $fieldName
-     * @param Post   $post
      */
-    public function process($fieldName, Post $post)
+    public function process($fieldName)
     {
-        $userId = $this->fetchValue($fieldName, $post);
+        $userId = $this->fetchValue($fieldName);
         $this->value = $this->user->find($userId);
     }
 

@@ -22,14 +22,12 @@ class Repeater extends BasicField implements FieldInterface
 
     /**
      * @param string $fieldName
-     * @param Post   $post
      */
-    public function process($fieldName, Post $post)
+    public function process($fieldName)
     {
         $this->name = $fieldName;
-        $this->post = $post;
 
-        $builder = $this->fetchPostsMeta($fieldName, $post);
+        $builder = $this->fetchPostsMeta($fieldName, $this->post);
         $fields = $this->fetchFields($fieldName, $builder);
 
         $this->fields = new Collection($fields);

@@ -60,7 +60,8 @@ class Image extends BasicField implements FieldInterface
     {
         $attachmentId = $this->fetchValue($field);
 
-        $attachment = $this->post->find(intval($attachmentId));
+        $attachment = $this->post->attachment()->find(intval($attachmentId));
+        
         $this->fillFields($attachment);
 
         $imageData = $this->fetchMetadataValue($attachment);

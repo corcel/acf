@@ -69,7 +69,7 @@ abstract class BasicField
             ->where('meta_key', $field)
             ->first();
 
-        if (isset($postMeta->meta_value) and $postMeta->meta_value) {
+        if (isset($postMeta->meta_value) and ! is_null($postMeta->meta_value)) {
             $value = $postMeta->meta_value;
             if ($array = @unserialize($value) and is_array($array)) {
                 $this->value = $array;

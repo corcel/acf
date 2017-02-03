@@ -59,8 +59,10 @@ class Image extends BasicField implements FieldInterface
     public function process($field)
     {
         $attachmentId = $this->fetchValue($field);
-
-        $attachment = Post::find(intval($attachmentId));
+           
+        $connection = $this->post->getConnectionName();
+        
+        $attachment = Post::on($connection)->find(intval($attachmentId));
         
         $this->fillFields($attachment);
 

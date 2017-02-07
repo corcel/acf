@@ -62,13 +62,13 @@ class Image extends BasicField implements FieldInterface
            
         $connection = $this->post->getConnectionName();
         
-        $attachment = Post::on($connection)->find(intval($attachmentId));
-        
-        $this->fillFields($attachment);
+        if ($attachment = Post::on($connection)->find(intval($attachmentId))) {
+            $this->fillFields($attachment);
 
-        $imageData = $this->fetchMetadataValue($attachment);
+            $imageData = $this->fetchMetadataValue($attachment);
         
-        $this->fillMetadataFields($imageData);
+            $this->fillMetadataFields($imageData);
+        }
     }
 
     /**

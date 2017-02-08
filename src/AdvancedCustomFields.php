@@ -34,7 +34,7 @@ class AdvancedCustomFields
     {
         $field = FieldFactory::make($name, $this->post);
 
-        return $field->get();
+        return $field ? $field->get() : null;
     }
 
     /**

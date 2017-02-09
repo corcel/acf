@@ -25,7 +25,7 @@ class PostObject extends BasicField implements FieldInterface
         $postId = $this->fetchValue($fieldName);
 
         if (is_array($postId)) {
-            $this->object = $this->post->whereIn('ID', $postId)->get();
+            $this->object = Post::whereIn('ID', $postId)->get();
         } else {
             $this->object = $this->post->find($postId);
         }

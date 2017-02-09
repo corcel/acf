@@ -10,6 +10,7 @@ use Corcel\Acf\Field\Image;
 use Corcel\Acf\Field\PageLink;
 use Corcel\Acf\Field\PostObject;
 use Corcel\Acf\Field\Repeater;
+use Corcel\Acf\Field\FlexibleContent;
 use Corcel\Acf\Field\Select;
 use Corcel\Acf\Field\Term;
 use Corcel\Acf\Field\Text;
@@ -47,6 +48,7 @@ class FieldFactory
 
             $type = $fakeText->fetchFieldType($key);
         }
+
 
         switch ($type) {
             case 'text':
@@ -102,6 +104,10 @@ class FieldFactory
             case 'repeater':
                 $field = new Repeater($post);
                 break;
+            case 'flexible_content':
+                $field = new FlexibleContent($post);
+                break;
+            default: return null;
         }
 
         $field->process($name);

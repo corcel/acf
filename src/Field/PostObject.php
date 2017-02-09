@@ -23,11 +23,12 @@ class PostObject extends BasicField implements FieldInterface
     public function process($fieldName)
     {
         $postId = $this->fetchValue($fieldName);
-
+        $connection = $this->post->getConnectionName();
+        
         if (is_array($postId)) {
-            $this->object = Post::whereIn('ID', $postId)->get();
+            $this->object = Post::on($connection)->whereIn('ID', $postId)->get();
         } else {
-            $this->object = $this->post->find($postId);
+            $this->object = Post::on($connection)->find($postId);
         }
     }
 

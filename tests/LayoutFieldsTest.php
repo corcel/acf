@@ -48,15 +48,14 @@ class LayoutFieldsTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(3, $layout->count());
 
-		$this->assertEquals('normal_text', $layout[0]->type);
-		$this->assertEquals('Lorem ipsum', $layout[0]->fields->text);
+        $this->assertEquals('normal_text', $layout[0]->type);
+        $this->assertEquals('Lorem ipsum', $layout[0]->fields->text);
 
-		$this->assertEquals('related_post', $layout[1]->type);
-		$this->assertInstanceOf(Post::class, $layout[1]->fields->post);
+        $this->assertEquals('related_post', $layout[1]->type);
+        $this->assertInstanceOf(Post::class, $layout[1]->fields->post);
 
-		$this->assertEquals('multiple_posts', $layout[2]->type);
-		$this->assertEquals(2, $layout[2]->fields->post->count());
-		$this->assertInstanceOf('Corcel\Post', $layout[2]->fields->post->first());
-
+        $this->assertEquals('multiple_posts', $layout[2]->type);
+        $this->assertEquals(2, $layout[2]->fields->post->count());
+        $this->assertInstanceOf('Corcel\Post', $layout[2]->fields->post->first());
     }
 }

@@ -52,7 +52,7 @@ class LayoutFieldsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Lorem ipsum', $layout[0]->fields->text);
 
         $this->assertEquals('related_post', $layout[1]->type);
-        $this->assertInstanceOf(Post::class, $layout[1]->fields->post);
+        $this->assertInstanceOf('Corcel\Post', $layout[1]->fields->post);
 
         $this->assertEquals('multiple_posts', $layout[2]->type);
         $this->assertEquals(2, $layout[2]->fields->post->count());

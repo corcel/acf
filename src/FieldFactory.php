@@ -107,9 +107,9 @@ class FieldFactory
             case 'flexible_content':
                 $field = new FlexibleContent($post);
                 break;
-			default : return null;
+            default: return null;
         }
-		
+
         $field->process($name);
 
         return $field;

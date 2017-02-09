@@ -91,24 +91,23 @@ class FlexibleContent extends BasicField implements FieldInterface
     protected function fetchFields($fieldName, Builder $builder)
     {
         $fields = [];
-		$blocks  = $this->fetchValue($fieldName, $this->post);
+        $blocks  = $this->fetchValue($fieldName, $this->post);
 
         foreach ($builder->get() as $meta) {
-
             $id = $this->retrieveIdFromFieldName($meta->meta_key, $fieldName);
 
             $name = $this->retrieveFieldName($meta->meta_key, $fieldName, $id);
             $field = FieldFactory::make($meta->meta_key, $this->post->find($meta->post_id));
 
-			if (!array_key_exists($id, $blocks)) {
-				continue;
-			}
+            if (!array_key_exists($id, $blocks)) {
+                continue;
+            }
 
-			if (empty($fields[$id])) {
-				$fields[$id] = new \stdClass;
-				$fields[$id]->type = $blocks[$id];
-				$fields[$id]->fields =  new \stdClass;
-			}
+            if (empty($fields[$id])) {
+                $fields[$id] = new \stdClass;
+                $fields[$id]->type = $blocks[$id];
+                $fields[$id]->fields =  new \stdClass;
+            }
 
             $fields[$id]->fields->$name = $field->get();
         }

@@ -28,18 +28,20 @@ class Gallery extends Image implements FieldInterface
      */
     public function process($field)
     {
-        $ids = $this->fetchValue($field);
-        $connection = $this->post->getConnectionName();
-        $attachments = Post::on($connection)->whereIn('ID', $ids)->get();
-        
-        $metaDataValues = $this->fetchMultipleMetadataValues($attachments);
+        if ($ids = $this->fetchValue($field)) {
+            $ids = $this->fetchValue($field);
+            $connection = $this->post->getConnectionName();
+            $attachments = Post::on($connection)->whereIn('ID', $ids)->get();
 
-        foreach ($attachments as $attachment) {
-            $image = new Image($this->post);
-            $image->fillFields($attachment);
-            $image->fillMetadataFields($metaDataValues[$attachment->ID]);
-            $this->images[] = $image;
-        }
+            $metaDataValues = $this->fetchMultipleMetadataValues($attachments);
+
+            foreach ($attachments as $attachment) {
+                $image = new Image($this->post);
+                $image->fillFields($attachment);
+                $image->fillMetadataFields($metaDataValues[$attachment->ID]);
+                $this->images[] = $image;
+            }
+        }   
     }
 
     /**

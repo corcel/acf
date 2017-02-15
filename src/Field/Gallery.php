@@ -40,7 +40,7 @@ class Gallery extends Image implements FieldInterface
                 $image->fillMetadataFields($metaDataValues[$attachment->ID]);
                 $this->images[] = $image;
             }
-        }   
+        }
     }
 
     /**

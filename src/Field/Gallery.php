@@ -29,7 +29,6 @@ class Gallery extends Image implements FieldInterface
     public function process($field)
     {
         if ($ids = $this->fetchValue($field)) {
-            $ids = $this->fetchValue($field);
             $connection = $this->post->getConnectionName();
             $attachments = Post::on($connection)->whereIn('ID', $ids)->get();
 

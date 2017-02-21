@@ -60,7 +60,7 @@ abstract class BasicField
 
         if ($post instanceof Post) {
             $this->postMeta = new PostMeta();
-        } elseif($post instanceof Term) {
+        } elseif ($post instanceof Term) {
             $this->postMeta = new TermMeta();
         }
 
@@ -148,7 +148,7 @@ abstract class BasicField
     {
         if ($this->post instanceof Post) {
             return 'post_id';
-        } elseif($this->post instanceof Term) {
+        } elseif ($this->post instanceof Term) {
             return 'term_id';
         }
     }

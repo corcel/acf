@@ -31,12 +31,12 @@ class FieldFactory
 
     /**
      * @param string $name
-     * @param Post $post
+     * @param mixed $post
      * @param null|string $type
      *
      * @return FieldInterface|Collection|string
      */
-    public static function make($name, Post $post, $type = null)
+    public static function make($name, $post, $type = null)
     {
         if (null === $type) {
             $fakeText = new Text($post);

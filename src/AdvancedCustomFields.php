@@ -13,14 +13,14 @@ use Corcel\Post;
 class AdvancedCustomFields
 {
     /**
-     * @var Post
+     * @var mixed
      */
     protected $post;
 
     /**
-     * @param Post $post
+     * @param mixed $post
      */
-    public function __construct(Post $post)
+    public function __construct($post)
     {
         $this->post = $post;
     }

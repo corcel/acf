@@ -2,8 +2,8 @@
 
 namespace Corcel\Acf\Field;
 
-use Corcel\Acf\FieldInterface;
 use Corcel\Post;
+use Corcel\Acf\FieldInterface;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
@@ -59,13 +59,16 @@ class Image extends BasicField implements FieldInterface
     public function process($field)
     {
         $attachmentId = $this->fetchValue($field);
-
-        $attachment = $this->post->attachment()->find(intval($attachmentId));
+           
+        $connection = $this->post->getConnectionName();
         
-        $this->fillFields($attachment);
+        if ($attachment = Post::on($connection)->find(intval($attachmentId))) {
+            $this->fillFields($attachment);
 
-        $imageData = $this->fetchMetadataValue($attachment);
-        $this->fillMetadataFields($imageData);
+            $imageData = $this->fetchMetadataValue($attachment);
+        
+            $this->fillMetadataFields($imageData);
+        }
     }
 
     /**

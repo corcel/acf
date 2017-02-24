@@ -1,6 +1,6 @@
 # Corcel ACF Plugin
 
-[![Travis](https://travis-ci.org/jgrossi/corcel.svg?branch=master)](https://travis-ci.org/corcel/acf?branch=master)
+[![Travis](https://travis-ci.org/corcel/acf.svg?branch=master)](https://travis-ci.org/corcel/acf?branch=master)
 [![Packagist](https://img.shields.io/packagist/v/corcel/acf.svg)](https://github.com/corcel/acf/releases)
 [![Packagist](https://img.shields.io/packagist/dt/corcel/acf.svg)](https://packagist.org/packages/corcel/acf)
 
@@ -101,8 +101,8 @@ First we should create the fields classes and the test cases. After we have to s
 | Date Time Picker  | ok        | [@jgrossi](http://github.com/jgrossi) | `Carbon\Carbon` |
 | Time Picker       | ok        | [@jgrossi](http://github.com/jgrossi) | `Carbon\Carbon` |
 | Color Picker      | ok        | [@jgrossi](http://github.com/jgrossi) | `string` |
-| Repeater          | partially | [@jgrossi](http://github.com/jgrossi) | `Collection` of fields |
-| Flexible Content  | missing   |                                       | |
+| Repeater          | ok        | [@jgrossi](http://github.com/jgrossi) | `Collection` of fields |
+| Flexible Content  | ok        | [@marcoboom](http://github.com/marcoboom) | `Collection` |
 
 # Contributing
 

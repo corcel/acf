@@ -89,4 +89,27 @@ class ContentFieldsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(1920, $image->width);
         $this->assertEquals(1080, $image->height);
     }
+
+    public function testImageCustomMetadataValues($value='')
+    {
+        $image = new Image($this->post);
+        $image->process('fake_image');
+
+        $this->assertCount(
+            4, 
+            $image->fetchCustomMetadataValues(
+                '_gallery_link_url,
+                _gallery_link_target,
+                _gallery_link_preserve_click,
+                _gallery_link_additional_css_classes')
+        );
+        $this->assertTrue( is_string($image->fetchCustomMetadataValues('_gallery_link_url')) );
+
+        $this->assertEquals('www.example.com', $image->fetchCustomMetadataValues('_gallery_link_url'));
+        $this->assertEquals('_blank', $image->fetchCustomMetadataValues('_gallery_link_target'));
+        $this->assertEquals('remove', $image->fetchCustomMetadataValues('_gallery_link_preserve_click'));
+        $this->assertEquals('underlined', $image->fetchCustomMetadataValues('_gallery_link_additional_css_classes'));
+    }
+
+
 }

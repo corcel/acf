@@ -1,6 +1,6 @@
 # Corcel ACF Plugin
 
-[![Travis](https://travis-ci.org/jgrossi/corcel.svg?branch=master)](https://travis-ci.org/corcel/acf?branch=master)
+[![Travis](https://travis-ci.org/corcel/acf.svg?branch=master)](https://travis-ci.org/corcel/acf?branch=master)
 [![Packagist](https://img.shields.io/packagist/v/corcel/acf.svg)](https://github.com/corcel/acf/releases)
 [![Packagist](https://img.shields.io/packagist/dt/corcel/acf.svg)](https://packagist.org/packages/corcel/acf)
 
@@ -22,7 +22,7 @@ For more information about how Corcel works please visit [the repository](http:/
 # Installation
 
 To install the ACF plugin for Corcel is easy:
- 
+
 ```
 composer require corcel/acf
 ```
@@ -41,16 +41,16 @@ echo $post->acf->url; // returns the url custom field created using ACF
 ## Performance
 
 When using something like `$post->acf->url` the plugin has to make some extra SQL queries to get the field type according ACF approach. So we created another way to get that without making those extra queries. You have only the inform the plugin what is the post type, as a function:
- 
+
  ```php
  // Extra queries way
  echo $post->acf->author_username; // it's a User field
- 
+
  // Without extra queries
  echo $post->acf->user('author_username');
  ```
- 
- > PS: The method names should be written in `camelCase()` format. So, for example, for the field type `date_picker` you should write `$post->acf->datePicker('fieldName')`. The plugin does the conversion from `camelCase` to `snake_case` for you. 
+
+ > PS: The method names should be written in `camelCase()` format. So, for example, for the field type `date_picker` you should write `$post->acf->datePicker('fieldName')`. The plugin does the conversion from `camelCase` to `snake_case` for you.
 
 ## The Idea
 
@@ -65,11 +65,11 @@ This plugin works with a basic logic inside `Corcel\Acf\Field\BasicField` abstra
 ## What is Missing
 
 First we should create the fields classes and the test cases. After we have to setup how Corcel is going to work with the `corcel/acf` plugin, returning the custom field value in the format `$post->meta->field` or maybe `$post->acf->field` having different behavior (done!).
- 
+
  - Create more unit tests for `Repeater` field;
- - Implement the `Flexible Content` field with unit tests;
+ - Implement the `Flexible Content` field with unit tests (done!);
  - Improve performance. Currently the plugin makes one SQL query for each field. This goal is to improve that using `whereIn()` clauses.
- 
+
  Some fields are still missing (check table below and contribute).
 
 ## Fields

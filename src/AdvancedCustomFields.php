@@ -55,6 +55,6 @@ class AdvancedCustomFields
 
         $field = FieldFactory::make($arguments[0], $this->post, snake_case($name));
 
-        return $field->get();
+        return $field ? $field->get() : null;
     }
 }

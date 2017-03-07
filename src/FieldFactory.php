@@ -15,7 +15,7 @@ use Corcel\Acf\Field\Select;
 use Corcel\Acf\Field\Term;
 use Corcel\Acf\Field\Text;
 use Corcel\Acf\Field\User;
-use Corcel\Post;
+use Corcel\Model;
 use Illuminate\Support\Collection;
 
 /**
@@ -36,7 +36,7 @@ class FieldFactory
      *
      * @return FieldInterface|Collection|string
      */
-    public static function make($name, Post $post, $type = null)
+    public static function make($name, Model $post, $type = null)
     {
         if (null === $type) {
             $fakeText = new Text($post);

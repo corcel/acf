@@ -102,7 +102,6 @@ class Image extends BasicField implements FieldInterface
      */
     public function size($size)
     {
-
         if (isset($this->sizes[$size])) {
             return $this->fillThumbnailFields($this->sizes[$size]);
         }
@@ -183,7 +182,7 @@ class Image extends BasicField implements FieldInterface
      */
     public function fetchCustomMetadataValues($metaKeys)
     {
-        if (!is_array ($metaKeys)) {
+        if (!is_array($metaKeys)) {
             $metaKeys = explode(',', $metaKeys);
         }
 
@@ -193,7 +192,7 @@ class Image extends BasicField implements FieldInterface
             $customMetaValues[] = $this->attachment->meta->{trim($metaKey)};
         }
 
-        if (count ($customMetaValues) === 1) {
+        if (count($customMetaValues) === 1) {
             return $customMetaValues[0];
         }
 

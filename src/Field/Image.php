@@ -56,7 +56,7 @@ class Image extends BasicField implements FieldInterface
     /**
      * @var Post
      */
-    protected $attachment;    
+    protected $attachment;
 
     /**
      * @param string $field
@@ -92,7 +92,7 @@ class Image extends BasicField implements FieldInterface
         $this->mime_type = $attachment->post_mime_type;
         $this->url = $attachment->guid;
         $this->description = $attachment->post_excerpt;
-        $this->attachment = $attachment;        
+        $this->attachment = $attachment;
     }
 
     /**
@@ -183,8 +183,9 @@ class Image extends BasicField implements FieldInterface
      */
     public function fetchCustomMetadataValues($metaKeys)
     {
-        if (!is_array ($metaKeys))
+        if (!is_array ($metaKeys)) {
             $metaKeys = explode(',', $metaKeys);
+        }
 
         $customMetaValues = [];
 
@@ -192,8 +193,9 @@ class Image extends BasicField implements FieldInterface
             $customMetaValues[] = $this->attachment->meta->{trim($metaKey)};
         }
 
-        if (count ($customMetaValues) === 1)
+        if (count ($customMetaValues) === 1) {
             return $customMetaValues[0];
+        }
 
         return $customMetaValues;
     }

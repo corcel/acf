@@ -122,10 +122,6 @@ class Image extends BasicField implements FieldInterface
         $size->height = $data['height'];
         $size->mime_type = $data['mime-type'];
 
-        $imgDir = substr($this->url, 0, strrpos($this->url, '/'));
-        $size->url = $imgDir.'/'.$data['file'];
-
-
         return $size;
     }
 

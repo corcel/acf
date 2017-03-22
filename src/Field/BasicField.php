@@ -115,7 +115,7 @@ abstract class BasicField
      */
     public function fetchFieldType($fieldKey)
     {
-        // Check if this a clone field. If it is, return the field type of it's clone.
+        // Check if this a clone field. If it is, return the field type of its clone.
         $fieldKeyIds = explode('_', $fieldKey);
         if (count($fieldKeyIds) == 4) {
             $fieldKey = 'field_' . $fieldKeyIds[3];

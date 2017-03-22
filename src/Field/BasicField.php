@@ -115,6 +115,12 @@ abstract class BasicField
      */
     public function fetchFieldType($fieldKey)
     {
+        // Check if this a clone field. If it is, return the field type of its clone.
+        $fieldKeyIds = explode('_', $fieldKey);
+        if (count($fieldKeyIds) == 4) {
+            $fieldKey = 'field_' . $fieldKeyIds[3];
+        }
+
         $post = $this->post->orWhere(function ($query) use ($fieldKey) {
             $query->where('post_name', $fieldKey);
             $query->where('post_type', 'acf-field');

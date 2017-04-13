@@ -48,8 +48,12 @@ class File extends BasicField implements FieldInterface
     public function process($field)
     {
         $value = $this->fetchValue($field);
-        $file = $this->post->find($value);
-        $this->fillFields($file);
+
+        $connection = $this->post->getConnectionName();
+
+        if ($file = Post::on($connection)->find(intval($value))) {
+            $this->fillFields($file);
+        }
     }
 
     /**

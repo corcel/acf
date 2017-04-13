@@ -3,6 +3,7 @@
 namespace Corcel\Acf\Field;
 
 use Corcel\Post;
+use Corcel\PostMeta;
 use Corcel\Acf\FieldInterface;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -59,14 +60,14 @@ class Image extends BasicField implements FieldInterface
     public function process($field)
     {
         $attachmentId = $this->fetchValue($field);
-           
+
         $connection = $this->post->getConnectionName();
-        
+
         if ($attachment = Post::on($connection)->find(intval($attachmentId))) {
             $this->fillFields($attachment);
 
             $imageData = $this->fetchMetadataValue($attachment);
-        
+
             $this->fillMetadataFields($imageData);
         }
     }
@@ -126,9 +127,9 @@ class Image extends BasicField implements FieldInterface
      */
     protected function fetchMetadataValue(Post $attachment)
     {
-        $meta = $this->postMeta->where('post_id', $attachment->ID)
-            ->where('meta_key', '_wp_attachment_metadata')
-            ->first();
+        $meta = PostMeta::where('post_id', $attachment->ID)
+                        ->where('meta_key', '_wp_attachment_metadata')
+                        ->first();
 
         return unserialize($meta->meta_value);
     }

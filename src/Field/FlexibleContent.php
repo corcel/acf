@@ -112,6 +112,8 @@ class FlexibleContent extends BasicField implements FieldInterface
             $fields[$id]->fields->$name = $field->get();
         }
 
+        ksort($fields);
+
         return $fields;
     }
 }

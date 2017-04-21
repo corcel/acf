@@ -92,16 +92,17 @@ class Image extends BasicField implements FieldInterface
 
     /**
      * @param string $size
+     * @param bool $useOriginalFallback
      *
      * @return Image
      */
-    public function size($size)
+    public function size($size, $useOriginalFallback = false)
     {
         if (isset($this->sizes[$size])) {
             return $this->fillThumbnailFields($this->sizes[$size]);
         }
 
-        return $this->fillThumbnailFields($this->sizes['thumbnail']);
+        return $useOriginalFallback ? $this : $this->fillThumbnailFields($this->sizes['thumbnail']);
     }
 
     /**

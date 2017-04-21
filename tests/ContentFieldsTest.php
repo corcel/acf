@@ -53,7 +53,20 @@ class ContentFieldsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('1920', $image->width);
         $this->assertEquals('1080', $image->height);
         $this->assertEquals('maxresdefault-1.jpg', $image->filename);
+
+        // Test existing image size
         $this->assertEquals('1024', $image->size('large')->width);
+        $this->assertNotEmpty($image->size('large')->url);
+
+        // Test non existing image size with thumbnail as fallback
+        $this->assertEquals('150', $image->size('fake_size')->width);
+        $this->assertNotEmpty($image->size('fake_size')->url);
+
+        // Test non existing image size with original as fallback
+        $this->assertEquals($image->width, $image->size('fake_size', true)->width);
+        $this->assertEquals($image->height, $image->size('fake_size', true)->height);
+        $this->assertNotEmpty($image->size('fake_size', true)->url);
+
         $this->assertEquals('image/jpeg', $image->mime_type);
         $this->assertEquals('This is a caption', $image->description);
     }

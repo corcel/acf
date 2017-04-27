@@ -85,6 +85,8 @@ class Image extends BasicField implements FieldInterface
      */
     protected function fillFields(Post $attachment)
     {
+        $this->attachment = $attachment;
+
         $this->mime_type = $attachment->post_mime_type;
         $this->url = $attachment->guid;
         $this->description = $attachment->post_excerpt;

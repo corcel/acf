@@ -26,7 +26,9 @@ class PostObject extends BasicField implements FieldInterface
         $connection = $this->post->getConnectionName();
         
         if (is_array($postId)) {
-            $this->object = Post::on($connection)->whereIn('ID', $postId)->get();
+            $this->object = Post::on($connection)->whereIn('ID', $postId)->get()->sortBy(function ($item) use ($postId) {
+                return array_search($item->getKey(), $postId);
+            });
         } else {
             $this->object = Post::on($connection)->find($postId);
         }

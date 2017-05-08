@@ -99,7 +99,7 @@ class FlexibleContent extends BasicField implements FieldInterface
             $post = $this->post->ID != $meta->post_id ? $this->post->find($meta->post_id) : $this->post;
             $field = FieldFactory::make($meta->meta_key, $post);
 
-            if (!array_key_exists($id, $blocks)) {
+            if ($field === null || !array_key_exists($id, $blocks)) {
                 continue;
             }
 

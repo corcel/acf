@@ -24,13 +24,17 @@ class PostObject extends BasicField implements FieldInterface
     {
         $postId = $this->fetchValue($fieldName);
         $connection = $this->post->getConnectionName();
-        
+
         if (is_array($postId)) {
-            $this->object = Post::on($connection)->whereIn('ID', $postId)->get()->sortBy(function ($item) use ($postId) {
+            $posts = Post::on($connection)->whereIn('ID', $postId)->get()->sortBy(function ($item) use ($postId) {
                 return array_search($item->getKey(), $postId);
             });
+
+            $this->object = $posts->map(function ($post) {
+                return $this->downcast($post);
+            });
         } else {
-            $this->object = Post::on($connection)->find($postId);
+            $this->object = $this->downcast(Post::on($connection)->find($postId));
         }
     }
 
@@ -40,5 +44,15 @@ class PostObject extends BasicField implements FieldInterface
     public function get()
     {
         return $this->object;
+    }
+
+    private function downcast(Post $post)
+    {
+        $class = Post::$postTypes[$post->post_type] ?? Post::class;
+        if ($class === Post::class) {
+            return $post;
+        }
+
+        return $class::on($this->post->getConnectionName())->find($post->ID);
     }
 }

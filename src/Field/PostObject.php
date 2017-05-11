@@ -46,6 +46,11 @@ class PostObject extends BasicField implements FieldInterface
         return $this->object;
     }
 
+    /**
+     * Downcast a model to its appropriate subclass
+     * @param  Corcel\Post   $post
+     * @return Corcel\Post   an appropriate (sub)class
+     */
     private function downcast(Post $post)
     {
         $class = Post::$postTypes[$post->post_type] ?? Post::class;

@@ -72,10 +72,16 @@ class Repeater extends BasicField implements FieldInterface
      *
      * @return mixed
      */
-    protected function fetchPostsMeta($fieldName, Post $post)
+    protected function fetchPostsMeta($fieldName, $post)
     {
-        $count = (int) $this->fetchValue($fieldName, $post);
-        $builder = $this->postMeta->where('post_id', $post->ID);
+        $count = (int) $this->fetchValue($fieldName);
+        
+        if($this->postMeta instanceof \Corcel\TermMeta){
+            $builder = $this->postMeta->where('term_id', $post->term_id);                   
+        } else {
+            $builder = $this->postMeta->where('post_id', $post->ID);     
+        }
+
         $builder->where(function ($query) use ($count, $fieldName) {
             foreach (range(0, $count - 1) as $i) {
                 $query->orWhere('meta_key', 'like', "{$fieldName}_{$i}_%");

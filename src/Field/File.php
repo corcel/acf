@@ -43,6 +43,11 @@ class File extends BasicField implements FieldInterface
     public $mime_type;
 
     /**
+     * @var Post
+     */
+    public $attachment;
+
+    /**
      * @param string $field
      */
     public function process($field)
@@ -75,5 +80,6 @@ class File extends BasicField implements FieldInterface
         $this->description = $file->post_content;
         $this->caption = $file->post_excerpt;
         $this->filename = basename($this->url);
+        $this->attachment = $file;
     }
 }

@@ -150,10 +150,10 @@ class Image extends BasicField implements FieldInterface
         $ids = $attachments->pluck('ID')->toArray();
         $metadataValues = [];
 
-        $metaRows = $this->postMeta->whereIn('post_id', $ids)
+        $metaRows = PostMeta::whereIn("post_id", $ids)
             ->where('meta_key', '_wp_attachment_metadata')
             ->get();
-
+            
         foreach ($metaRows as $meta) {
             $metadataValues[$meta->post_id] = unserialize($meta->meta_value);
         }

@@ -4,7 +4,7 @@ use Corcel\Acf\Field\PageLink;
 use Corcel\Acf\Field\PostObject;
 use Corcel\Acf\Field\Term;
 use Corcel\Acf\Field\User;
-use Corcel\Post;
+use Corcel\Model\Post;
 
 /**
  * Class RelationalFieldsTests.

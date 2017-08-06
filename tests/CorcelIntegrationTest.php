@@ -1,5 +1,7 @@
 <?php
 
+use Corcel\Model\Post;
+
 /**
  * Class CorcelIntegrationTest.
  *

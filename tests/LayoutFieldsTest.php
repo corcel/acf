@@ -2,6 +2,7 @@
 
 use Corcel\Acf\Field\Repeater;
 use Corcel\Acf\Field\FlexibleContent;
+use Corcel\Model\Post;
 
 /**
  * Class LayoutFieldsTest.
@@ -35,7 +36,7 @@ class LayoutFieldsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('admin', $fields[1]['fake_user']->nickname);
         $this->assertEquals(2, $fields[0]['fake_relationship']->count());
         $this->assertEquals(1, $fields[1]['fake_relationship']->count());
-        $this->assertInstanceOf('Corcel\Post', $fields[0]['fake_relationship']->first());
+        $this->assertInstanceOf(Post::class, $fields[0]['fake_relationship']->first());
     }
 
 
@@ -52,10 +53,10 @@ class LayoutFieldsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Lorem ipsum', $layout[0]->fields->text);
 
         $this->assertEquals('related_post', $layout[1]->type);
-        $this->assertInstanceOf('Corcel\Post', $layout[1]->fields->post);
+        $this->assertInstanceOf(Post::class, $layout[1]->fields->post);
 
         $this->assertEquals('multiple_posts', $layout[2]->type);
         $this->assertEquals(2, $layout[2]->fields->post->count());
-        $this->assertInstanceOf('Corcel\Post', $layout[2]->fields->post->first());
+        $this->assertInstanceOf(Post::class, $layout[2]->fields->post->first());
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 use Corcel\Acf\FieldFactory;
-use Corcel\Post;
+use Corcel\Model\Post;
 
 /**
  * Class FieldFactoryTest.

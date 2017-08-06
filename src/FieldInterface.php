@@ -2,7 +2,7 @@
 
 namespace Corcel\Acf;
 
-use Corcel\Post;
+use Corcel\Model\Post;
 
 /**
  * Interface FieldInterface.

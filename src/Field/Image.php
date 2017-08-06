@@ -2,8 +2,8 @@
 
 namespace Corcel\Acf\Field;
 
-use Corcel\Post;
-use Corcel\PostMeta;
+use Corcel\Model\Post;
+use Corcel\Model\Meta\PostMeta;
 use Corcel\Acf\FieldInterface;
 use Illuminate\Database\Eloquent\Collection;
 

@@ -4,7 +4,7 @@ namespace Corcel\Acf\Field;
 
 use Corcel\Acf\FieldFactory;
 use Corcel\Acf\FieldInterface;
-use Corcel\Post;
+use Corcel\Model\Post;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 

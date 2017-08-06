@@ -2,7 +2,7 @@
 
 use Corcel\Acf\Field\Text;
 use Corcel\Acf\Field\BasicField;
-use Corcel\Post;
+use Corcel\Model\Post;
 
 /**
  * Class BasicFieldTest.

@@ -2,7 +2,7 @@
 
 use Corcel\Acf\Field\Boolean;
 use Corcel\Acf\Field\Text;
-use Corcel\Post;
+use Corcel\Model\Post;
 
 /**
  * Class ChoicesFieldsTest.

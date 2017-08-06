@@ -4,7 +4,7 @@ use Corcel\Acf\Field\File;
 use Corcel\Acf\Field\Gallery;
 use Corcel\Acf\Field\Image;
 use Corcel\Acf\Field\Text;
-use Corcel\Post;
+use Corcel\Model\Post;
 
 /**
  * Class ContentFieldsTest.

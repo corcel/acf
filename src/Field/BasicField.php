@@ -7,6 +7,9 @@ use Corcel\Model;
 use Corcel\Model\Meta\PostMeta;
 use Corcel\Model\Term;
 use Corcel\Model\Meta\TermMeta;
+use Corcel\Model\User;
+use Corcel\Model\Meta\UserMeta;
+
 
 /**
  * Class BasicField.
@@ -63,6 +66,8 @@ abstract class BasicField
             $this->postMeta = new PostMeta();
         } elseif ($post instanceof Term) {
             $this->postMeta = new TermMeta();
+        } elseif ($post instanceof User) {
+            $this->postMeta = new UserMeta();
         }
 
         $this->postMeta->setConnection($post->getConnectionName());
@@ -151,6 +156,8 @@ abstract class BasicField
             return 'post_id';
         } elseif ($this->post instanceof Term) {
             return 'term_id';
+        } elseif ($this->post instanceof User) {
+            return 'user_id';
         }
     }
 

@@ -10,7 +10,6 @@ use Corcel\Model\Meta\TermMeta;
 use Corcel\Model\User;
 use Corcel\Model\Meta\UserMeta;
 
-
 /**
  * Class BasicField.
  *

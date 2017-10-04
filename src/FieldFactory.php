@@ -25,6 +25,41 @@ use Illuminate\Support\Collection;
  */
 class FieldFactory
 {
+    protected static $defaultTypes = [
+        'text'             => Text::class,
+        'textarea'         => Text::class,
+        'number'           => Text::class,
+        'email'            => Text::class,
+        'url'              => Text::class,
+        'password'         => Text::class,
+        'wysiwyg'          => Text::class,
+        'editor'           => Text::class,
+        'oembed'           => Text::class,
+        'embed'            => Text::class,
+        'color_picker'     => Text::class,
+        'select'           => Text::class,
+        'checkbox'         => Text::class,
+        'radio'            => Text::class,
+        'image'            => Image::class,
+        'img'              => Image::class,
+        'file'             => File::class,
+        'gallery'          => Gallery::class,
+        'true_false'       => Boolean::class,
+        'boolean'          => Boolean::class,
+        'post_object'      => PostObject::class,
+        'post'             => PostObject::class,
+        'relationship'     => PostObject::class,
+        'page_link'        => PageLink::class,
+        'taxonomy'         => Term::class,
+        'term'             => Term::class,
+        'user'             => User::class,
+        'date_picker'      => DateTime::class,
+        'date_time_picker' => DateTime::class,
+        'time_picker'      => DateTime::class,
+        'repeater'         => Repeater::class,
+        'flexible_content' => FlexibleContent::class,
+    ];
+
     private function __construct()
     {
     }
@@ -40,7 +75,7 @@ class FieldFactory
     {
         if (null === $type) {
             $fakeText = new Text($post);
-            $key = $fakeText->fetchFieldKey($name);
+            $key      = $fakeText->fetchFieldKey($name);
 
             if ($key === null) { // Field does not exist
                 return null;
@@ -49,69 +84,21 @@ class FieldFactory
             $type = $fakeText->fetchFieldType($key);
         }
 
+        $customTypes = [];
 
-        switch ($type) {
-            case 'text':
-            case 'textarea':
-            case 'number':
-            case 'email':
-            case 'url':
-            case 'password':
-            case 'wysiwyg':
-            case 'editor':
-            case 'oembed':
-            case 'embed':
-            case 'color_picker':
-            case 'select':
-            case 'checkbox':
-            case 'radio':
-                $field = new Text($post);
-                break;
-            case 'image':
-            case 'img':
-                $field = new Image($post);
-                break;
-            case 'file':
-                $field = new File($post);
-                break;
-            case 'gallery':
-                $field = new Gallery($post);
-                break;
-            case 'true_false':
-            case 'boolean':
-                $field = new Boolean($post);
-                break;
-            case 'post_object':
-            case 'post':
-            case 'relationship':
-                $field = new PostObject($post);
-                break;
-            case 'page_link':
-                $field = new PageLink($post);
-                break;
-            case 'taxonomy':
-            case 'term':
-                $field = new Term($post);
-                break;
-            case 'user':
-                $field = new User($post);
-                break;
-            case 'date_picker':
-            case 'date_time_picker':
-            case 'time_picker':
-                $field = new DateTime($post);
-                break;
-            case 'repeater':
-                $field = new Repeater($post);
-                break;
-            case 'flexible_content':
-                $field = new FlexibleContent($post);
-                break;
-            default: return null;
+        if (class_exists('\Config') && \Config::has('corcel.acf')) {
+            $customTypes = \Config::get('corcel.acf')['custom_types'];
         }
 
-        $field->process($name);
+        $types = array_merge(self::$defaultTypes, $customTypes);
 
-        return $field;
+        if (!empty($types[$type])) {
+            $field = new $types[$type]($post);
+            $field->process($name);
+
+            return $field;
+        }
+
+        return null;
     }
 }

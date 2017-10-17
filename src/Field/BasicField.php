@@ -65,8 +65,7 @@ abstract class BasicField
             $this->postMeta = new PostMeta();
         } elseif ($post instanceof Term) {
             $this->postMeta = new TermMeta();
-        }
-        elseif ($post instanceof User) {
+        } elseif ($post instanceof User) {
             $this->postMeta = new UserMeta();
         }
 

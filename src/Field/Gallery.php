@@ -35,10 +35,12 @@ class Gallery extends Image implements FieldInterface
             $metaDataValues = $this->fetchMultipleMetadataValues($attachments);
 
             foreach ($attachments as $attachment) {
-                $image = new Image($this->post);
-                $image->fillFields($attachment);
-                $image->fillMetadataFields($metaDataValues[$attachment->ID]);
-                $this->images[] = $image;
+                if (array_key_exists($attachment->ID, $metaDataValues)) {
+                    $image = new Image($this->post);
+                    $image->fillFields($attachment);
+                    $image->fillMetadataFields($metaDataValues[$attachment->ID]);
+                    $this->images[] = $image;
+                }
             }
         }
     }

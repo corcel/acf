@@ -56,6 +56,7 @@ class FieldFactory
             case 'number':
             case 'email':
             case 'url':
+            case 'link':
             case 'password':
             case 'wysiwyg':
             case 'editor':

@@ -15,6 +15,7 @@ use Corcel\Acf\Field\Select;
 use Corcel\Acf\Field\Term;
 use Corcel\Acf\Field\Text;
 use Corcel\Acf\Field\User;
+use Corcel\Acf\Field\Table;
 use Corcel\Model;
 use Illuminate\Support\Collection;
 

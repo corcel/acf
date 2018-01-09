@@ -49,7 +49,6 @@ class FieldFactory
             $type = $fakeText->fetchFieldType($key);
         }
 
-
         switch ($type) {
             case 'text':
             case 'textarea':
@@ -107,6 +106,9 @@ class FieldFactory
                 break;
             case 'flexible_content':
                 $field = new FlexibleContent($post);
+                break;
+            case 'table':
+                $field = new Table($post);
                 break;
             default: return null;
         }

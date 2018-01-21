@@ -108,6 +108,9 @@ class FieldFactory
             case 'flexible_content':
                 $field = new FlexibleContent($post);
                 break;
+			case 'google_map':
+                $field = new GoogleMap($post);
+                break;
             default: return null;
         }
 

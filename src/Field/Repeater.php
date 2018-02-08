@@ -76,7 +76,7 @@ class Repeater extends BasicField implements FieldInterface
     {
         $count = (int) $this->fetchValue($fieldName);
         
-        if ($this->postMeta instanceof \Corcel\TermMeta) {
+        if ($this->postMeta instanceof \Corcel\Model\Meta\TermMeta) {
             $builder = $this->postMeta->where('term_id', $post->term_id);
         } else {
             $builder = $this->postMeta->where('post_id', $post->ID);

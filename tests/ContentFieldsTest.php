@@ -97,8 +97,8 @@ class ContentFieldsTest extends PHPUnit_Framework_TestCase
             $this->assertTrue(strlen($image->url) > 0);
         }
 
-        // Testing the image in the 6th position
-        $image = $gallery->get()->get(6);
+        // Testing the image in the 0th position
+        $image = $gallery->get()->get(0);
         $this->assertEquals(1920, $image->width);
         $this->assertEquals(1080, $image->height);
     }

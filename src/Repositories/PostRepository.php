@@ -11,6 +11,7 @@ use Corcel\Model\User;
 use Corcel\Model\Meta\UserMeta;
 use Corcel\Acf\FieldFactory;
 use Corcel\Acf\Field\Repeater;
+use Corcel\Acf\Field\FlexibleContent;
 
 class PostRepository extends Repository
 {
@@ -175,6 +176,31 @@ class PostRepository extends Repository
     }
 
     /**
+     * @param string $metaKey
+     * @param string $fieldName
+     *
+     * @return int
+     */
+    public function retrieveIdFromFieldName($metaKey, $fieldName)
+    {
+        return (int) str_replace("{$fieldName}_", '', $metaKey);
+    }
+
+    /**
+     * @param string $metaKey
+     * @param string $fieldName
+     * @param int    $id
+     *
+     * @return string
+     */
+    public function retrieveFieldName($metaKey, $fieldName, $id)
+    {
+        $pattern = "{$fieldName}_{$id}_";
+
+        return str_replace($pattern, '', $metaKey);
+    }
+
+    /**
      * @param $fieldName
      * @param $builder
      *
@@ -201,8 +227,8 @@ class PostRepository extends Repository
 
         $fields = [];
         foreach ($builder->get() as $meta) {
-            $id = $repeater->retrieveIdFromFieldName($meta->meta_key, $fieldName);
-            $name = $repeater->retrieveFieldName($meta->meta_key, $fieldName, $id);
+            $id = $this->retrieveIdFromFieldName($meta->meta_key, $fieldName);
+            $name = $this->retrieveFieldName($meta->meta_key, $fieldName, $id);
 
             $post = $this->post->ID != $meta->post_id ? $this->post->find($meta->post_id) : $this->post;
             $field = FieldFactory::make($meta->meta_key, $post);
@@ -213,6 +239,48 @@ class PostRepository extends Repository
 
             $fields[$id][$name] = $field->get();
         }
+
+        return $fields;
+    }
+
+    /**
+     * @param $fieldName
+     * @param $builder
+     *
+     * @return mixed
+     */
+    public function flexibleContentFetchFields(FlexibleContent $fc)
+    {
+        $fieldName = $fc->name;
+
+        $fields = [];
+        $blocks  = $this->fetchValue($fieldName, $this->post);
+
+        $builder = $this->postMeta->where($this->getKeyName(), $this->post->getKey());
+        $builder->where('meta_key', 'like', "{$fieldName}_%");
+
+        foreach ($builder->get() as $meta) {
+            $id = $this->retrieveIdFromFieldName($meta->meta_key, $fieldName);
+
+            $name = $this->retrieveFieldName($meta->meta_key, $fieldName, $id);
+
+            $post = $this->post->ID != $meta->post_id ? $this->post->find($meta->post_id) : $this->post;
+            $field = FieldFactory::make($meta->meta_key, $post);
+
+            if ($field === null || !array_key_exists($id, $blocks)) {
+                continue;
+            }
+
+            if (empty($fields[$id])) {
+                $fields[$id] = new \stdClass;
+                $fields[$id]->type = $blocks[$id];
+                $fields[$id]->fields =  new \stdClass;
+            }
+
+            $fields[$id]->fields->$name = $field->get();
+        }
+
+        ksort($fields);
 
         return $fields;
     }

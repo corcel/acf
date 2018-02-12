@@ -32,7 +32,7 @@ class OptionPage extends Model
      */
     public function loadOptions()
     {
-        $builder = (new Option())->where('option_name', 'like', $this->prefix . '%');
+        $builder = Option::where('option_name', 'like', $this->prefix . '%');
         $this->options = $builder->get()->keyBy('option_name');
     }
 

@@ -29,7 +29,7 @@ class Gallery extends Image implements FieldInterface
     public function process($field)
     {
         if ($ids = $this->fetchValue($field)) {
-            $connection = $this->post->getConnectionName();
+            $connection = $this->repository->getConnectionName();
             $attachments = Post::on($connection)->whereIn('ID', $ids)->get();
 
             $metaDataValues = $this->fetchMultipleMetadataValues($attachments);

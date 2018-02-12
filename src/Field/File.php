@@ -54,7 +54,7 @@ class File extends BasicField implements FieldInterface
     {
         $value = $this->fetchValue($field);
 
-        $connection = $this->post->getConnectionName();
+        $connection = $this->repository->getConnectionName();
 
         if ($file = Post::on($connection)->find(intval($value))) {
             $this->fillFields($file);

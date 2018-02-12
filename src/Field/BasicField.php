@@ -10,6 +10,7 @@ use Corcel\Model\Meta\TermMeta;
 use Corcel\Model\User;
 use Corcel\Model\Meta\UserMeta;
 use Corcel\Acf\Repositories\Repository;
+use Corcel\Acf\Repositories\PostRepository;
 
 /**
  * Class BasicField.
@@ -28,8 +29,13 @@ abstract class BasicField
      *
      * @param Repository $repository
      */
-    public function __construct(Repository $repository)
+    public function __construct($repository)
     {
+        // FIXME do we need the backwards-compatibility?
+        if ($repository instanceof Model) {
+            // trigger_error('Deprecated: fields should be instantiated with a repository.', E_USER_NOTICE);
+            $repository = new PostRepository($repository);
+        }
         $this->repository = $repository;
     }
 

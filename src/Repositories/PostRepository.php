@@ -68,7 +68,7 @@ class PostRepository extends Repository
             $this->postMeta = new UserMeta();
         }
 
-        $this->postMeta->setConnection($post->getConnectionName());
+        $this->postMeta->setConnection($this->getConnectionName());
     }
 
     /**
@@ -165,5 +165,10 @@ class PostRepository extends Repository
         } elseif ($this->post instanceof User) {
             return 'user_id';
         }
+    }
+
+    public function getConnectionName()
+    {
+        return $this->post->getConnectionName();
     }
 }

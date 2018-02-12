@@ -57,9 +57,9 @@ class OptionPageRepository extends Repository
         });
 
         $types = [];
-        $repeaterId = $this->optionPage->page->children->where('post_excerpt', $fieldName)->first()->ID;
-        
-        $acfFields = AcfField::where('post_parent', $repeaterId)->get();
+        $repeater = $this->optionPage->getAcfField($fieldName);
+
+        $acfFields = AcfField::where('post_parent', $repeater->ID)->get();
         foreach ($acfFields as $acfField) {
             $types[$acfField->post_excerpt] = $acfField->type;
         }
@@ -88,6 +88,48 @@ class OptionPageRepository extends Repository
 
     public function flexibleContentFetchFields(FlexibleContent $fc)
     {
-        trigger_error('not implemented yet'); // FIXME
+        $fieldName = $fc->name;
+        $prefixedField = $this->getPrefixedField($fieldName);
+
+        $fields = [];
+        $blocks  = unserialize($this->fetchValue($fieldName));
+
+        $options = $this->optionPage->options->filter(function($option) use ($prefixedField) {
+            return preg_match("/^${prefixedField}_/", $option->option_name);
+        });
+
+        $types = [];
+        $repeater = $this->optionPage->getAcfField($fieldName);
+
+        $acfFields = AcfField::where('post_parent', $repeater->ID)->get();
+        foreach ($acfFields as $acfField) {
+            $types[$acfField->post_excerpt] = $acfField->type;
+        }
+
+        foreach ($options as $option) {
+
+            $id = $this->retrieveIdFromFieldName($option->option_name, $prefixedField); // 1
+            $name = $this->retrieveFieldName($option->option_name, $prefixedField, $id); // "link"
+            $type = $types[$name]; // "page_link"
+            $full = sprintf('%s_%d_%s', $fieldName, $id, $name); // "quicklinks_1_link"
+
+            $field = FieldFactory::makeOptionField($full, $this->optionPage, $type);
+
+            if ($field === null || !array_key_exists($id, $blocks)) {
+                continue;
+            }
+
+            if (empty($fields[$id])) {
+                $fields[$id] = new \stdClass;
+                $fields[$id]->type = $blocks[$id];
+                $fields[$id]->fields =  new \stdClass;
+            }
+
+            $fields[$id]->fields->$name = $field->get();
+        }
+
+        ksort($fields);
+
+        return $fields;
     }
 }

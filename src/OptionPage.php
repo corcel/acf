@@ -71,4 +71,9 @@ class OptionPage extends Model
 
         return $field ? $field->get() : null;
     }
+
+    public function getAcfField($fieldName)
+    {
+        return $this->page->children->where('post_excerpt', $fieldName)->first();
+    }
 }

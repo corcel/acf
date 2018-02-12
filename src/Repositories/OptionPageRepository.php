@@ -42,7 +42,7 @@ class OptionPageRepository extends Repository
 
     public function getConnectionName()
     {
-        return 'wordpress'; // FIXME
+        return $this->optionPage->page->getConnectionName();
     }
 
     public function repeaterFetchFields(Repeater $repeater)

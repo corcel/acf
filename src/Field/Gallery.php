@@ -36,7 +36,7 @@ class Gallery extends Image implements FieldInterface
 
             foreach ($attachments as $attachment) {
                 if (array_key_exists($attachment->ID, $metaDataValues)) {
-                    $image = new Image($this->post);
+                    $image = new Image($this->repository);
                     $image->fillFields($attachment);
                     $image->fillMetadataFields($metaDataValues[$attachment->ID]);
                     $this->images[] = $image;

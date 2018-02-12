@@ -6,11 +6,18 @@ use Corcel\Acf\Exception\MissingFieldNameException;
 use Corcel\Model;
 use Corcel\Model\Post;
 use Corcel\Model\Option;
+use Corcel\Acf\Models\AcfFieldGroup;
 
 class OptionPage extends Model
 {
+    /**
+     * @var string
+     */
     public $prefix;
 
+    /**
+     * @var AcfFieldGroup
+     */
     public $page;
 
     /**
@@ -18,11 +25,19 @@ class OptionPage extends Model
      */
     public $options;
 
-    public function __construct($prefix = 'options_')
+    /**
+     * TODO would be nice if only one of the arguments would be needed, but i
+     * dont see any connection between the page object in wp_posts and the
+     * prefix used in wp_options
+     *
+     * @param string $groupName acf field group name
+     * @param string $prefix prefix in wp_options
+     */
+    public function __construct($groupName, $prefix = 'options_')
     {
         parent::__construct();
         $this->prefix = $prefix;
-        $this->page = Post::where('post_excerpt', 'optionen')->first(); // FIXME
+        $this->page = AcfFieldGroup::where('post_title', $groupName)->first();
 
         $this->loadOptions();
     }

@@ -26,11 +26,11 @@ class Term extends BasicField implements FieldInterface
     /**
      * @param Post $post
      */
-    public function __construct(Post $post)
+    public function __construct($repository)
     {
-        parent::__construct($post);
+        parent::__construct($repository);
         $this->term = new \Corcel\Model\Term();
-        $this->term->setConnection($post->getConnectionName());
+        $this->term->setConnection($repository->getConnectionName());
     }
 
     /**
@@ -39,6 +39,11 @@ class Term extends BasicField implements FieldInterface
     public function process($fieldName)
     {
         $value = $this->fetchValue($fieldName);
+
+        if ($unserialized = @unserialize($value)) {
+            $value = $unserialized;
+        }
+
         if (is_array($value)) {
             $this->items = $this->term->whereIn('term_id', $value)->get(); // ids
         } else {

@@ -9,6 +9,8 @@ use Corcel\Model\Term;
 use Corcel\Model\Meta\TermMeta;
 use Corcel\Model\User;
 use Corcel\Model\Meta\UserMeta;
+use Corcel\Acf\FieldFactory;
+use Corcel\Acf\Field\Repeater;
 
 class PostRepository extends Repository
 {
@@ -170,5 +172,48 @@ class PostRepository extends Repository
     public function getConnectionName()
     {
         return $this->post->getConnectionName();
+    }
+
+    /**
+     * @param $fieldName
+     * @param $builder
+     *
+     * @return mixed
+     */
+    public function repeaterFetchFields(Repeater $repeater)
+    {
+        $fieldName = $repeater->name;
+
+        $count = (int) $this->fetchValue($fieldName);
+        
+        if ($this->postMeta instanceof \Corcel\TermMeta) {
+            $builder = $this->postMeta->where('term_id', $this->post->term_id);
+        } else {
+            $builder = $this->postMeta->where('post_id', $this->post->ID);
+        }
+
+        $builder->where(function ($query) use ($count, $fieldName) {
+            foreach (range(0, $count - 1) as $i) {
+                $query->orWhere('meta_key', 'like', "{$fieldName}_{$i}_%");
+            }
+        });
+
+
+        $fields = [];
+        foreach ($builder->get() as $meta) {
+            $id = $repeater->retrieveIdFromFieldName($meta->meta_key, $fieldName);
+            $name = $repeater->retrieveFieldName($meta->meta_key, $fieldName, $id);
+
+            $post = $this->post->ID != $meta->post_id ? $this->post->find($meta->post_id) : $this->post;
+            $field = FieldFactory::make($meta->meta_key, $post);
+
+            if ($field == null) {
+                continue;
+            }
+
+            $fields[$id][$name] = $field->get();
+        }
+
+        return $fields;
     }
 }

@@ -27,8 +27,7 @@ class Repeater extends BasicField implements FieldInterface
     {
         $this->name = $fieldName;
 
-        $builder = $this->fetchPostsMeta($fieldName, $this->post);
-        $fields = $this->fetchFields($fieldName, $builder);
+        $fields = $this->repository->repeaterFetchFields($this);
 
         $this->fields = new Collection($fields);
     }
@@ -47,7 +46,7 @@ class Repeater extends BasicField implements FieldInterface
      *
      * @return int
      */
-    protected function retrieveIdFromFieldName($metaKey, $fieldName)
+    public function retrieveIdFromFieldName($metaKey, $fieldName)
     {
         return (int) str_replace("{$fieldName}_", '', $metaKey);
     }
@@ -59,61 +58,10 @@ class Repeater extends BasicField implements FieldInterface
      *
      * @return string
      */
-    protected function retrieveFieldName($metaKey, $fieldName, $id)
+    public function retrieveFieldName($metaKey, $fieldName, $id)
     {
         $pattern = "{$fieldName}_{$id}_";
 
         return str_replace($pattern, '', $metaKey);
-    }
-
-    /**
-     * @param $fieldName
-     * @param Post $post
-     *
-     * @return mixed
-     */
-    protected function fetchPostsMeta($fieldName, $post)
-    {
-        $count = (int) $this->fetchValue($fieldName);
-        
-        if ($this->postMeta instanceof \Corcel\TermMeta) {
-            $builder = $this->postMeta->where('term_id', $post->term_id);
-        } else {
-            $builder = $this->postMeta->where('post_id', $post->ID);
-        }
-
-        $builder->where(function ($query) use ($count, $fieldName) {
-            foreach (range(0, $count - 1) as $i) {
-                $query->orWhere('meta_key', 'like', "{$fieldName}_{$i}_%");
-            }
-        });
-
-        return $builder;
-    }
-
-    /**
-     * @param $fieldName
-     * @param $builder
-     *
-     * @return mixed
-     */
-    protected function fetchFields($fieldName, Builder $builder)
-    {
-        $fields = [];
-        foreach ($builder->get() as $meta) {
-            $id = $this->retrieveIdFromFieldName($meta->meta_key, $fieldName);
-            $name = $this->retrieveFieldName($meta->meta_key, $fieldName, $id);
-
-            $post = $this->post->ID != $meta->post_id ? $this->post->find($meta->post_id) : $this->post;
-            $field = FieldFactory::make($meta->meta_key, $post);
-
-            if ($field == null) {
-                continue;
-            }
-
-            $fields[$id][$name] = $field->get();
-        }
-
-        return $fields;
     }
 }

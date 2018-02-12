@@ -154,31 +154,6 @@ class PostRepository extends Repository
     }
 
     /**
-     * @param string $metaKey
-     * @param string $fieldName
-     *
-     * @return int
-     */
-    public function retrieveIdFromFieldName($metaKey, $fieldName)
-    {
-        return (int) str_replace("{$fieldName}_", '', $metaKey);
-    }
-
-    /**
-     * @param string $metaKey
-     * @param string $fieldName
-     * @param int    $id
-     *
-     * @return string
-     */
-    public function retrieveFieldName($metaKey, $fieldName, $id)
-    {
-        $pattern = "{$fieldName}_{$id}_";
-
-        return str_replace($pattern, '', $metaKey);
-    }
-
-    /**
      * @param $fieldName
      * @param $builder
      *

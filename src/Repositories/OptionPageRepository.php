@@ -69,8 +69,8 @@ class OptionPageRepository extends Repository
 
             // option_name is sth like "options_quicklinks_1_link"
 
-            $id = intval(str_replace("${prefixedField}_", '', $option->option_name)); // 1
-            $name = str_replace("${prefixedField}_${id}_", '', $option->option_name); // "link"
+            $id = $this->retrieveIdFromFieldName($option->option_name, $prefixedField); // 1
+            $name = $this->retrieveFieldName($option->option_name, $prefixedField, $id); // "link"
             $type = $types[$name]; // "page_link"
             $full = sprintf('%s_%d_%s', $fieldName, $id, $name); // "quicklinks_1_link"
 

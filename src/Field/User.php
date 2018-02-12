@@ -25,11 +25,11 @@ class User extends BasicField implements FieldInterface
     /**
      * @param Post $post
      */
-    public function __construct(Post $post)
+    public function __construct($post)
     {
         parent::__construct($post);
         $this->user = new \Corcel\Model\User();
-        $this->user->setConnection($post->getConnectionName());
+        $this->user->setConnection($this->repository->getConnectionName());
     }
 
     /**

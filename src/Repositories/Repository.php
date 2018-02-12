@@ -5,6 +5,7 @@ namespace Corcel\Acf\Repositories;
 use Corcel\Model\Post;
 use Corcel\Acf\Field\Repeater;
 use Corcel\Acf\Field\FlexibleContent;
+use Corcel\Acf\Models\AcfField;
 
 abstract class Repository
 {
@@ -26,19 +27,12 @@ abstract class Repository
      */
     public function fetchFieldType($fieldKey)
     {
-        $post = Post::on($this->getConnectionName())
-                   ->orWhere(function ($query) use ($fieldKey) {
-                       $query->where('post_name', $fieldKey);
-                       $query->where('post_type', 'acf-field');
-                   })->first();
+        $field = AcfField::where('post_name', $fieldKey)->first();
 
-        if ($post) {
-            $fieldData = unserialize($post->post_content);
-            $this->type = isset($fieldData['type']) ? $fieldData['type'] : 'text';
-
-            return $this->type;
+        if (!$field) {
+            return null;
         }
 
-        return null;
+        return $field->type;
     }
 }

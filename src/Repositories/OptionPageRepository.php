@@ -9,6 +9,7 @@ use Corcel\Acf\FieldFactory;
 use Corcel\Acf\Field\Text;
 use Corcel\Model\Post;
 use Corcel\Acf\OptionPage;
+use Corcel\Acf\Models\AcfField;
 
 class OptionPageRepository extends Repository
 {
@@ -57,10 +58,10 @@ class OptionPageRepository extends Repository
 
         $types = [];
         $repeaterId = $this->optionPage->page->children->where('post_excerpt', $fieldName)->first()->ID;
-        // FIXME maybe we can use an own class for acfFields
-        $acfFields = (new Post())->where('post_parent', $repeaterId)->get();
+        
+        $acfFields = AcfField::where('post_parent', $repeaterId)->get();
         foreach ($acfFields as $acfField) {
-            $types[$acfField->post_excerpt] = $this->fetchFieldType($acfField->post_name);
+            $types[$acfField->post_excerpt] = $acfField->type;
         }
 
         $fields = [];

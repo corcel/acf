@@ -17,7 +17,10 @@ use Corcel\Acf\Field\Text;
 use Corcel\Acf\Field\User;
 use Corcel\Model;
 use Illuminate\Support\Collection;
+use Corcel\Acf\Repositories\Repository;
 use Corcel\Acf\Repositories\PostRepository;
+use Corcel\Acf\Repositories\OptionPageRepository;
+use Corcel\Acf\OptionPage;
 
 /**
  * Class FieldFactory.
@@ -31,28 +34,55 @@ class FieldFactory
     }
 
     /**
+     * Instantiate a "regular" field based on a post object
+     * 
      * @param string $name
      * @param Post $post
      * @param null|string $type
      *
      * @return FieldInterface|Collection|string
      */
-    public static function make($name, Model $post, $type = null)
+    public static function make($name, Model $post, string $type = null)
     {
         $repository = new PostRepository($post);
 
         if (null === $type) {
-            $fakeText = new Text($repository);
-            $key = $fakeText->fetchFieldKey($name);
+            $type = $repository->getFieldType($name);
 
-            if ($key === null) { // Field does not exist
+            // if type cannot be guessed, we do not return a field
+            if (null === $type) {
                 return null;
             }
-
-            $type = $fakeText->fetchFieldType($key);
         }
 
+        return self::makeField($name, $repository, $type);
+    }
 
+    /**
+     * Instantiate a field based on an acf option page
+     * 
+     * @param string $name
+     * @param OptionPage $optionPage
+     * @param string $type cannot be null, because we cannot guess the type for fields inside repeater fields, as we would need the parent field name
+     *
+     * @return FieldInterface|Collection|string
+     */
+    public static function makeOptionField($name, OptionPage $optionPage, string $type)
+    {
+        $repository = new OptionPageRepository($optionPage);
+
+        return self::makeField($name, $repository, $type);
+    }
+
+    /**
+     * @param string $name
+     * @param Repository $repository
+     * @param string $type
+     *
+     * @return FieldInterface|Collection|string
+     */
+    public static function makeField($name, Repository $repository, string $type)
+    {
         switch ($type) {
             case 'text':
             case 'textarea':

@@ -12,6 +12,7 @@ use Corcel\Model\Meta\UserMeta;
 use Corcel\Acf\FieldFactory;
 use Corcel\Acf\Field\Repeater;
 use Corcel\Acf\Field\FlexibleContent;
+use Corcel\Acf\Field\Text;
 
 class PostRepository extends Repository
 {
@@ -260,5 +261,17 @@ class PostRepository extends Repository
         ksort($fields);
 
         return $fields;
+    }
+
+    public function getFieldType($name)
+    {
+        $fakeText = new Text($this);
+        $key = $this->fetchFieldKey($name);
+
+        if ($key === null) { // Field does not exist
+            return null;
+        }
+
+        return $this->fetchFieldType($key);
     }
 }

@@ -3,12 +3,21 @@
 namespace Corcel\Acf\Repositories;
 
 use Corcel\Model\Post;
+use Corcel\Acf\Field\Repeater;
+use Corcel\Acf\Field\FlexibleContent;
 
-class Repository
+abstract class Repository
 {
     public function __construct()
     {
     }
+
+    abstract public function fetchValue($field);
+
+    abstract public function getConnectionName();
+
+    abstract public function repeaterFetchFields(Repeater $repeater);
+    abstract public function flexibleContentFetchFields(FlexibleContent $fc);
 
     /**
      * @param string $fieldKey

@@ -48,30 +48,6 @@ abstract class BasicField
     }
 
     /**
-     * @deprecated in favor of $this->repository->fetchValue()
-     */
-    public function fetchFieldKey($fieldName)
-    {
-        return $this->repository->fetchFieldKey($fieldName);
-    }
-
-    /**
-     * @deprecated in favor of $this->repository->fetchValue()
-     */
-    public function fetchFieldType($fieldKey)
-    {
-        return $this->repository->fetchFieldType($fieldKey);
-    }
-
-    /**
-     * @deprecated in favor of $this->repository->fetchValue()
-     */
-    public function getKeyName()
-    {
-        return $this->repository->getKeyName();
-    }
-
-    /**
      * @return mixed
      */
     public function __toString()

@@ -17,6 +17,7 @@ use Corcel\Acf\Field\Text;
 use Corcel\Acf\Field\User;
 use Corcel\Model;
 use Illuminate\Support\Collection;
+use Corcel\Acf\Repositories\PostRepository;
 
 /**
  * Class FieldFactory.
@@ -38,8 +39,10 @@ class FieldFactory
      */
     public static function make($name, Model $post, $type = null)
     {
+        $repository = new PostRepository($post);
+
         if (null === $type) {
-            $fakeText = new Text($post);
+            $fakeText = new Text($repository);
             $key = $fakeText->fetchFieldKey($name);
 
             if ($key === null) { // Field does not exist
@@ -66,47 +69,47 @@ class FieldFactory
             case 'select':
             case 'checkbox':
             case 'radio':
-                $field = new Text($post);
+                $field = new Text($repository);
                 break;
             case 'image':
             case 'img':
-                $field = new Image($post);
+                $field = new Image($repository);
                 break;
             case 'file':
-                $field = new File($post);
+                $field = new File($repository);
                 break;
             case 'gallery':
-                $field = new Gallery($post);
+                $field = new Gallery($repository);
                 break;
             case 'true_false':
             case 'boolean':
-                $field = new Boolean($post);
+                $field = new Boolean($repository);
                 break;
             case 'post_object':
             case 'post':
             case 'relationship':
-                $field = new PostObject($post);
+                $field = new PostObject($repository);
                 break;
             case 'page_link':
-                $field = new PageLink($post);
+                $field = new PageLink($repository);
                 break;
             case 'taxonomy':
             case 'term':
-                $field = new Term($post);
+                $field = new Term($repository);
                 break;
             case 'user':
-                $field = new User($post);
+                $field = new User($repository);
                 break;
             case 'date_picker':
             case 'date_time_picker':
             case 'time_picker':
-                $field = new DateTime($post);
+                $field = new DateTime($repository);
                 break;
             case 'repeater':
-                $field = new Repeater($post);
+                $field = new Repeater($repository);
                 break;
             case 'flexible_content':
-                $field = new FlexibleContent($post);
+                $field = new FlexibleContent($repository);
                 break;
             default: return null;
         }

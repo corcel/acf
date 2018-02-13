@@ -52,7 +52,7 @@ class OptionPageRepository extends Repository
 
         $count = (int) $this->fetchValue($fieldName);
 
-        $options = $this->optionPage->options->filter(function($option) use ($prefixedField) {
+        $options = $this->optionPage->options->filter(function ($option) use ($prefixedField) {
             return preg_match("/^${prefixedField}_\d+_/", $option->option_name);
         });
 
@@ -94,7 +94,7 @@ class OptionPageRepository extends Repository
         $fields = [];
         $blocks  = unserialize($this->fetchValue($fieldName));
 
-        $options = $this->optionPage->options->filter(function($option) use ($prefixedField) {
+        $options = $this->optionPage->options->filter(function ($option) use ($prefixedField) {
             return preg_match("/^${prefixedField}_/", $option->option_name);
         });
 

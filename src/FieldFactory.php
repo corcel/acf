@@ -35,7 +35,7 @@ class FieldFactory
 
     /**
      * Instantiate a "regular" field based on a post object
-     * 
+     *
      * @param string $name
      * @param Post $post
      * @param null|string $type
@@ -60,7 +60,7 @@ class FieldFactory
 
     /**
      * Instantiate a field based on an acf option page
-     * 
+     *
      * @param string $name
      * @param OptionPage $optionPage
      * @param string $type cannot be null, because we cannot guess the type for fields inside repeater fields, as we would need the parent field name

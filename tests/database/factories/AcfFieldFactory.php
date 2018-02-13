@@ -179,3 +179,15 @@ $factory->state(AcfField::class, 'taxonomy_single', function (Faker\Generator $f
         'post_content' => 'a:13:{s:4:"type";s:8:"taxonomy";s:12:"instructions";s:0:"";s:8:"required";i:0;s:17:"conditional_logic";i:0;s:7:"wrapper";a:3:{s:5:"width";s:0:"";s:5:"class";s:0:"";s:2:"id";s:0:"";}s:8:"taxonomy";s:8:"category";s:10:"field_type";s:5:"radio";s:10:"allow_null";i:0;s:8:"add_term";i:1;s:10:"save_terms";i:0;s:10:"load_terms";i:0;s:13:"return_format";s:6:"object";s:8:"multiple";i:0;}',
     ];
 });
+
+$factory->state(AcfField::class, 'repeater', function (Faker\Generator $faker) {
+    return [
+        'post_content' => 'a:10:{s:4:"type";s:8:"repeater";s:12:"instructions";s:0:"";s:8:"required";i:0;s:17:"conditional_logic";i:0;s:7:"wrapper";a:3:{s:5:"width";s:0:"";s:5:"class";s:0:"";s:2:"id";s:0:"";}s:9:"collapsed";s:0:"";s:3:"min";s:0:"";s:3:"max";s:0:"";s:6:"layout";s:5:"table";s:12:"button_label";s:7:"Add Row";}',
+    ];
+});
+
+$factory->state(AcfField::class, 'flexible_content', function (Faker\Generator $faker) {
+    return [
+        'post_content' => 'a:9:{s:4:"type";s:16:"flexible_content";s:12:"instructions";s:0:"";s:8:"required";i:0;s:17:"conditional_logic";i:0;s:7:"wrapper";a:3:{s:5:"width";s:0:"";s:5:"class";s:0:"";s:2:"id";s:0:"";}s:12:"button_label";s:7:"Add Row";s:3:"min";s:0:"";s:3:"max";s:0:"";s:7:"layouts";a:3:{i:0;a:6:{s:3:"key";s:13:"589c18bcf10da";s:5:"label";s:11:"Normal text";s:4:"name";s:11:"normal_text";s:7:"display";s:5:"block";s:3:"min";s:0:"";s:3:"max";s:0:"";}i:1;a:6:{s:3:"key";s:13:"589c18dfc9b28";s:5:"label";s:12:"Related post";s:4:"name";s:12:"related_post";s:7:"display";s:5:"block";s:3:"min";s:0:"";s:3:"max";s:0:"";}i:2;a:6:{s:3:"key";s:13:"589c1ee35ec27";s:5:"label";s:14:"Multiple posts";s:4:"name";s:14:"multiple_posts";s:7:"display";s:5:"block";s:3:"min";s:0:"";s:3:"max";s:0:"";}}}',
+    ];
+});

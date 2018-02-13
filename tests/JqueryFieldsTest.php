@@ -3,22 +3,45 @@
 use Corcel\Acf\Field\DateTime;
 use Corcel\Acf\Field\Text;
 use Corcel\Model\Post;
+use Corcel\Acf\Tests\TestCase;
 
-class JqueryFieldsTests extends PHPUnit_Framework_TestCase
+class JqueryFieldsTests extends TestCase
 {
     /**
      * @var Post
      */
     protected $post;
 
-    public function setUp()
+    /**
+     * Setup a base $this->post object to represent the page with the content fields.
+     */
+    protected function setUp()
     {
-        $this->post = Post::find(65);
+        parent::setUp();
+        $this->post = $this->createAcfPost();
+    }
+
+    /**
+     * Create a sample post with acf fields
+     */
+    protected function createAcfPost()
+    {
+        $post = factory(Post::class)->create();
+
+        $this->createAcfField($post, 'fake_date_picker', '20161013', 'date_picker');
+        $this->createAcfField($post, 'fake_date_time_picker', '2016-10-19 08:06:05', 'date_time_picker');
+        $this->createAcfField($post, 'fake_time_picker', '17:30:00', 'time_picker');
+        $this->createAcfField($post, 'fake_color_picker', '#7263a8', 'color_picker');
+
+        return $post;
     }
 
     public function testGoogleMapField()
     {
         // Google Map field is not working at this moment
+        $this->markTestIncomplete(
+          'This test has not been implemented yet.'
+        );
     }
 
     public function testDatePickerField()

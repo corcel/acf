@@ -107,7 +107,6 @@ class OptionPageRepository extends Repository
         }
 
         foreach ($options as $option) {
-
             $id = $this->retrieveIdFromFieldName($option->option_name, $prefixedField); // 1
             $name = $this->retrieveFieldName($option->option_name, $prefixedField, $id); // "link"
             $type = $types[$name]; // "page_link"

@@ -10,7 +10,7 @@ $factory->define(PostMeta::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->state(PostMeta::class, 'attachment_metadata', function (Faker\Generator $faker){
+$factory->state(PostMeta::class, 'attachment_metadata', function (Faker\Generator $faker) {
     return [
         'meta_key' => '_wp_attachment_metadata',
         'meta_value' => serialize([

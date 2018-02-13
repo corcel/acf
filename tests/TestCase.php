@@ -3,7 +3,6 @@
 namespace Corcel\Acf\Tests;
 
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
-use Corcel\Model\Attachment;
 use Corcel\Model\Post;
 use Corcel\Model\Meta\PostMeta;
 use Corcel\Acf\Models\AcfField;
@@ -60,28 +59,6 @@ class TestCase extends OrchestraTestCase
         ]);
 
         $app['config']->set('database.default', 'wp');
-    }
-
-    /**
-     * Create a sample post with acf fields
-     */
-    protected function createAcfPost()
-    {
-        $post = factory(Post::class)->create();
-        $this->createAcfField($post, 'fake_text', 'Proin eget tortor risus');
-        $this->createAcfField($post, 'fake_textarea', 'Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', 'textarea');
-        $this->createAcfField($post, 'fake_number', '1984', 'number');
-        $this->createAcfField($post, 'fake_email', 'junior@corcel.org', 'email');
-        $this->createAcfField($post, 'fake_url', 'https://corcel.org', 'url');
-        $this->createAcfField($post, 'fake_password', '123change', 'password');
-
-        $this->createAcfField($post, 'fake_select', 'red', 'select');
-        $this->createAcfField($post, 'fake_select_multiple', serialize(['yellow', 'green']), 'select_multiple');
-        $this->createAcfField($post, 'fake_checkbox', serialize(['blue', 'yellow']), 'checkbox');
-        $this->createAcfField($post, 'fake_radio_button', 'green', 'radio_button');
-        $this->createAcfField($post, 'fake_true_false', '1', 'true_false');
-
-        return $post;
     }
 
     /**

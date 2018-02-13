@@ -14,15 +14,31 @@ use Corcel\Acf\Repositories\PostRepository;
 class ChoicesFieldsTest extends TestCase
 {
     /**
-     * @var Post
+     * @var PostRepository
      */
-    protected $post;
+    protected $repo;
 
     public function setUp()
     {
         parent::setUp();
         $post = $this->createAcfPost();
         $this->repo = new PostRepository($post);
+    }
+
+    /**
+     * Create a sample post with acf fields
+     */
+    protected function createAcfPost()
+    {
+        $post = factory(Post::class)->create();
+
+        $this->createAcfField($post, 'fake_select', 'red', 'select');
+        $this->createAcfField($post, 'fake_select_multiple', serialize(['yellow', 'green']), 'select_multiple');
+        $this->createAcfField($post, 'fake_checkbox', serialize(['blue', 'yellow']), 'checkbox');
+        $this->createAcfField($post, 'fake_radio_button', 'green', 'radio_button');
+        $this->createAcfField($post, 'fake_true_false', '1', 'true_false');
+
+        return $post;
     }
 
     public function testSelectField()

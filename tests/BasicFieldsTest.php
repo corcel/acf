@@ -13,9 +13,9 @@ use Corcel\Acf\Repositories\PostRepository;
 class BasicFieldsTest extends TestCase
 {
     /**
-     * @var Post
+     * @var PostRepository
      */
-    protected $post;
+    protected $repo;
 
     /**
      * Setup a base $this->post object to represent the page with the basic fields.
@@ -26,6 +26,22 @@ class BasicFieldsTest extends TestCase
 
         $post = $this->createAcfPost();
         $this->repo = new PostRepository($post);
+    }
+
+    /**
+     * Create a sample post with acf fields
+     */
+    protected function createAcfPost()
+    {
+        $post = factory(Post::class)->create();
+        $this->createAcfField($post, 'fake_text', 'Proin eget tortor risus');
+        $this->createAcfField($post, 'fake_textarea', 'Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.', 'textarea');
+        $this->createAcfField($post, 'fake_number', '1984', 'number');
+        $this->createAcfField($post, 'fake_email', 'junior@corcel.org', 'email');
+        $this->createAcfField($post, 'fake_url', 'https://corcel.org', 'url');
+        $this->createAcfField($post, 'fake_password', '123change', 'password');
+
+        return $post;
     }
 
     public function testTextFieldValue()

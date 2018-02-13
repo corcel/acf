@@ -54,7 +54,7 @@ class ContentFieldsTest extends TestCase
         ]);
         $this->createAcfField($post, 'fake_file', $file->ID, 'file');
 
-        $galleryImages = factory(Attachment::class, 7)->create()->each(function($image) {
+        $galleryImages = factory(Attachment::class, 7)->create()->each(function ($image) {
             $image->meta()->save(factory(PostMeta::class)->states('attachment_metadata')->create());
         });
         $this->createAcfField($post, 'fake_gallery', serialize($galleryImages->pluck('ID')), 'gallery');

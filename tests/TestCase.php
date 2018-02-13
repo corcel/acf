@@ -75,9 +75,11 @@ class TestCase extends OrchestraTestCase
         $this->createAcfField($post, 'fake_url', 'https://corcel.org', 'url');
         $this->createAcfField($post, 'fake_password', '123change', 'password');
 
-        $attachment = factory(Attachment::class)->create();
-        $attachment->meta()->save(factory(PostMeta::class)->states('attachment_metadata')->create());
-        $this->createAcfField($post, 'test-image', $attachment->ID, 'image');
+        $this->createAcfField($post, 'fake_select', 'red', 'select');
+        $this->createAcfField($post, 'fake_select_multiple', serialize(['yellow', 'green']), 'select_multiple');
+        $this->createAcfField($post, 'fake_checkbox', serialize(['blue', 'yellow']), 'checkbox');
+        $this->createAcfField($post, 'fake_radio_button', 'green', 'radio_button');
+        $this->createAcfField($post, 'fake_true_false', '1', 'true_false');
 
         return $post;
     }
@@ -85,7 +87,7 @@ class TestCase extends OrchestraTestCase
     /**
      * Create a acf field for a post with a field name and a value
      */
-    protected function createAcfField(Post $post, $fieldName, $value, $type = 'text', $override = [])
+    protected function createAcfField(Post $post, $fieldName, $value, $states = [], $override = [])
     {
         $internal = 'field_' . str_random(13);
 
@@ -101,9 +103,8 @@ class TestCase extends OrchestraTestCase
         ]);
 
         $override['post_name'] = $internal;
-        $override['post_excerpt'] = $type;
 
-        $acffield = factory(AcfField::class)->create($override);
+        $acffield = factory(AcfField::class)->states($states)->create($override);
         return $acffield;
     }
 }

@@ -175,7 +175,6 @@ class OptionPageTest extends TestCase
         $image = $gallery->get(6);
         $this->assertEquals(1920, $image->width);
         $this->assertEquals(1080, $image->height);
-
     }
 
     public function testBoolean()
@@ -213,7 +212,6 @@ class OptionPageTest extends TestCase
         $user = $page->user('fake_user');
         $this->assertInstanceOf(CorcelUser::class, $user);
         $this->assertEquals('admin', $user->user_login);
-
     }
 
     public function testDatetime()
@@ -223,5 +221,4 @@ class OptionPageTest extends TestCase
         $this->assertInstanceOf(\Carbon\Carbon::class, $datetime);
         $this->assertEquals('05:06:08/19-10:2016', $datetime->format('s:i:H/d-m:Y'));
     }
-
 }

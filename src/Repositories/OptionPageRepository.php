@@ -10,6 +10,7 @@ use Corcel\Acf\Field\Text;
 use Corcel\Model\Post;
 use Corcel\Acf\OptionPage;
 use Corcel\Acf\Models\AcfField;
+use Corcel\Acf\Exception\MissingFieldException;
 
 class OptionPageRepository extends Repository
 {
@@ -45,7 +46,11 @@ class OptionPageRepository extends Repository
     public function fetchValue($field)
     {
         $prefixed = $this->getPrefixedField($field);
-        return $this->optionPage->options->get($prefixed)->option_value;
+        $option = $this->optionPage->options->get($prefixed);
+        if (!$option) {
+            throw new MissingFieldException('Field does not exist in option page: ' . $field);
+        }
+        return $option->option_value;
     }
 
     public function getConnectionName()

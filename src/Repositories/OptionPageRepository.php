@@ -30,6 +30,14 @@ class OptionPageRepository extends Repository
     }
 
     /**
+     * @return Model
+     */
+    public function getPost($fieldName)
+    {
+        return $this->optionPage->getAcfField($fieldName);
+    }
+
+    /**
      * Get the value of a field from wp_options.
      *
      * @return string

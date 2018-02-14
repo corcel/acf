@@ -54,11 +54,17 @@ class Image extends BasicField implements FieldInterface
      */
     protected $loadFromPost = false;
 
+    /*
+     * @var string
+     */
+    protected $name;
+
     /**
      * @param string $field
      */
     public function process($field)
     {
+        $this->name = $field;
         $attachmentId = $this->fetchValue($field);
 
         $connection = $this->repository->getConnectionName();
@@ -114,7 +120,7 @@ class Image extends BasicField implements FieldInterface
      */
     protected function fillThumbnailFields(array $data)
     {
-        $size = new static($this->repository->getPost());
+        $size = new static($this->repository->getPost($this->name));
         $size->filename = $data['file'];
         $size->width = $data['width'];
         $size->height = $data['height'];

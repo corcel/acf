@@ -11,9 +11,14 @@ class AcfField extends Post
      */
     protected $postType = 'acf-field';
 
+    public function getContentAttribute()
+    {
+        return unserialize($this->post_content);
+    }
+
     public function getTypeAttribute()
     {
-        $fieldData = unserialize($this->post_content);
+        $fieldData = $this->content;
         return isset($fieldData['type']) ? $fieldData['type'] : 'text';
     }
 }

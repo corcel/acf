@@ -101,6 +101,9 @@ class LayoutFieldsTest extends TestCase
         $flex->process('fake_flexible_content');
         $layout = $flex->get();
 
+        // FIXME this test has be changed to work with the new & fixed flexible
+        // content
+
         $this->assertEquals(3, $layout->count());
 
         $this->assertEquals('normal_text', $layout[0]->type);

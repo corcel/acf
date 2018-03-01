@@ -13,6 +13,7 @@ use Corcel\Acf\FieldFactory;
 use Corcel\Acf\Field\Repeater;
 use Corcel\Acf\Field\FlexibleContent;
 use Corcel\Acf\Field\Text;
+use Corcel\Acf\Models\AcfField;
 
 class PostRepository extends Repository
 {
@@ -206,31 +207,58 @@ class PostRepository extends Repository
     {
         $fieldName = $fc->name;
 
-        $fields = [];
+        // get the possible layouts for this type of flexible content
+        $acfFieldName = $this->post->meta->where('meta_key', '_' . $fieldName)->first()->meta_value;
+
+        // this is the acf field entry in wp_posts for the flexible content field
+        $acfField = AcfField::where('post_name', $acfFieldName)->first();
+
+        // all available layout blocks e.g. ["5898b06bd55ed" => "infobox"]
+        $availableLayouts = collect($acfField->content['layouts'])->pluck('name', 'key');
+
+        // the fields in the layout blocks are all children of the root fc field
+        $layouts = AcfField::where('post_parent', $acfField->ID)->get()
+            // They are associated with a layout block via parent_layout
+            // ("5898b06bd55ed"). So lets group them by their layout block
+            ->groupBy('content.parent_layout')
+            // and now change the keys from the internal id ("5898b06bd55ed") to
+            // the internal block name ("infobox")
+            ->keyBy(function($item, $key) use ($availableLayouts) {
+                return $availableLayouts->get($key);
+            });
+
+        // now layouts is a collection "infobox" => Collection(blockField1,
+        // blockField2, ...), "layoutblock2" => Collection(blockField)
+
+        // get the actual layout blocks
         $blocks  = $this->fetchValue($fieldName, $this->post);
 
-        $builder = $this->postMeta->where($this->getKeyName(), $this->post->getKey());
-        $builder->where('meta_key', 'like', "{$fieldName}_%");
+        $fields = [];
 
-        foreach ($builder->get() as $meta) {
-            $id = $this->retrieveIdFromFieldName($meta->meta_key, $fieldName);
+        // loop through the blocks and fetch the respective values
+        foreach ($blocks as $i => $block) {
+            $field = new \stdClass;
+            $field->type = $block;
+            $field->fields = new \stdClass;
 
-            $name = $this->retrieveFieldName($meta->meta_key, $fieldName, $id);
+            $layoutFields = $layouts->get($block);
 
-            $post = $this->post->ID != $meta->post_id ? $this->post->find($meta->post_id) : $this->post;
-            $field = FieldFactory::make($meta->meta_key, $post);
+            // loop through the layout fields and instantiate them via
+            // FieldFactory
+            foreach ($layoutFields as $layoutField) {
+                $layoutFieldName = $layoutField->post_excerpt;
+                $internalName = sprintf('%s_%d_%s', $fieldName, $i, $layoutFieldName);
 
-            if ($field === null || !array_key_exists($id, $blocks)) {
-                continue;
+                // fields like "info" have an empty post_excerpt => skip them
+                if (empty($layoutFieldName)) {
+                    continue;
+                }
+
+                $tmp = FieldFactory::makeField($internalName, $this, $layoutField->type)->get();
+                $field->fields->$layoutFieldName = $tmp;
             }
 
-            if (empty($fields[$id])) {
-                $fields[$id] = new \stdClass;
-                $fields[$id]->type = $blocks[$id];
-                $fields[$id]->fields =  new \stdClass;
-            }
-
-            $fields[$id]->fields->$name = $field->get();
+            $fields[] = $field;
         }
 
         ksort($fields);
@@ -240,7 +268,6 @@ class PostRepository extends Repository
 
     public function getFieldType($name)
     {
-        $fakeText = new Text($this);
         $key = $this->fetchFieldKey($name);
 
         if ($key === null) { // Field does not exist

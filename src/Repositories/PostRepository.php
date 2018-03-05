@@ -237,9 +237,9 @@ class PostRepository extends Repository
 
         // loop through the blocks and fetch the respective values
         foreach ($blocks as $i => $block) {
-            $field = new \stdClass;
-            $field->type = $block;
-            $field->fields = new \stdClass;
+            $fieldData = new \stdClass;
+            $fieldData->type = $block;
+            $fieldData->fields = new \stdClass;
 
             $layoutFields = $layouts->get($block);
 
@@ -254,11 +254,17 @@ class PostRepository extends Repository
                     continue;
                 }
 
-                $tmp = FieldFactory::makeField($internalName, $this, $layoutField->type)->get();
-                $field->fields->$layoutFieldName = $tmp;
+                $field = FieldFactory::makeField($internalName, $this, $layoutField->type);
+
+                if (!$field) {
+                    trigger_error('Could not create field for ' . $internalName . ' with type ' . $layoutField->type, E_USER_NOTICE);
+                    continue;
+                }
+
+                $fieldData->fields->$layoutFieldName = $field->get();
             }
 
-            $fields[] = $field;
+            $fields[] = $fieldData;
         }
 
         ksort($fields);

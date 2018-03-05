@@ -60,10 +60,40 @@ class LayoutFieldsTest extends TestCase
         // flexible content
         $post2 = factory(Post::class)->create();
         $posts = factory(Post::class, 2)->create();
-        $this->createAcfField($post, 'fake_flexible_content', 'a:3:{i:0;s:11:"normal_text";i:1;s:12:"related_post";i:2;s:14:"multiple_posts";}', 'flexible_content');
-        $this->createAcfField($post, 'fake_flexible_content_0_text', 'Lorem ipsum');
-        $this->createAcfField($post, 'fake_flexible_content_1_post', $post2->ID, 'post_object');
-        $this->createAcfField($post, 'fake_flexible_content_2_post', serialize($posts->pluck('ID')->toArray()), 'post_object');
+        $rootAcf = $this->createAcfField($post, 'fake_flexible_content', 'a:3:{i:0;s:11:"normal_text";i:1;s:12:"related_post";i:2;s:14:"multiple_posts";}', 'flexible_content');
+        $this->createAcfField(
+            $post,
+            'fake_flexible_content_0_text',
+            'Lorem ipsum',
+            [],
+            [
+                'post_parent' => $rootAcf->ID,
+                'post_content' => 'a:11:{s:4:"type";s:4:"text";s:12:"instructions";s:0:"";s:8:"required";i:0;s:17:"conditional_logic";i:0;s:7:"wrapper";a:3:{s:5:"width";s:0:"";s:5:"class";s:0:"";s:2:"id";s:0:"";}s:13:"parent_layout";s:13:"589c18bcf10da";s:13:"default_value";s:0:"";s:11:"placeholder";s:0:"";s:7:"prepend";s:0:"";s:6:"append";s:0:"";s:9:"maxlength";s:0:"";}',
+                'post_excerpt' => 'text',
+            ]
+        );
+        $this->createAcfField(
+            $post,
+            'fake_flexible_content_1_post',
+            $post2->ID,
+            'post_object',
+            [
+                'post_parent' => $rootAcf->ID,
+                'post_content' => 'a:12:{s:4:"type";s:11:"post_object";s:12:"instructions";s:0:"";s:8:"required";i:0;s:17:"conditional_logic";i:0;s:7:"wrapper";a:3:{s:5:"width";s:0:"";s:5:"class";s:0:"";s:2:"id";s:0:"";}s:13:"parent_layout";s:13:"589c18dfc9b28";s:9:"post_type";a:0:{}s:8:"taxonomy";a:0:{}s:10:"allow_null";i:0;s:8:"multiple";i:0;s:13:"return_format";s:6:"object";s:2:"ui";i:1;}',
+                'post_excerpt' => 'post',
+            ]
+        );
+        $this->createAcfField(
+            $post,
+            'fake_flexible_content_2_post',
+            serialize($posts->pluck('ID')->toArray()),
+            'post_object',
+            [
+                'post_parent' => $rootAcf->ID,
+                'post_content' => 'a:12:{s:4:"type";s:11:"post_object";s:12:"instructions";s:0:"";s:8:"required";i:0;s:17:"conditional_logic";i:0;s:7:"wrapper";a:3:{s:5:"width";s:0:"";s:5:"class";s:0:"";s:2:"id";s:0:"";}s:13:"parent_layout";s:13:"589c1ee35ec27";s:9:"post_type";a:0:{}s:8:"taxonomy";a:0:{}s:10:"allow_null";i:0;s:8:"multiple";i:1;s:13:"return_format";s:6:"object";s:2:"ui";i:1;}',
+                'post_excerpt' => 'post',
+            ]
+        );
 
 
         return $post;
@@ -100,9 +130,6 @@ class LayoutFieldsTest extends TestCase
         $flex = new FlexibleContent($this->post);
         $flex->process('fake_flexible_content');
         $layout = $flex->get();
-
-        // FIXME this test has be changed to work with the new & fixed flexible
-        // content
 
         $this->assertEquals(3, $layout->count());
 

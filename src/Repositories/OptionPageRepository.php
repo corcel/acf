@@ -39,6 +39,17 @@ class OptionPageRepository extends Repository
     }
 
     /**
+     * Convert a field name to its internal acf field name, e.g.
+     * "modules_1_text" => "field_588e076c2de43"
+     *
+     * @return string
+     */
+    public function getAcfFieldName(string $fieldName)
+    {
+        return $this->optionPage->options->get('_' . $fieldName);
+    }
+
+    /**
      * Get the value of a field from wp_options.
      *
      * @return string

@@ -207,17 +207,16 @@ class PostRepository extends Repository
     {
         $fieldName = $fc->name;
 
-        // get the possible layouts for this type of flexible content
-        $acfFieldName = $this->post->meta->where('meta_key', '_' . $fieldName)->first()->meta_value;
-
-        // this is the acf field entry in wp_posts for the flexible content field
-        $acfField = AcfField::where('post_name', $acfFieldName)->first();
+        // this is the acf field entry in wp_posts for the flexible content
+        // field, which holds the possible layouts for this type of flexible
+        // content
+        $acfField = $this->getAcfField($fieldName);
 
         // all available layout blocks e.g. ["5898b06bd55ed" => "infobox"]
         $availableLayouts = collect($acfField->content['layouts'])->pluck('name', 'key');
 
         // the fields in the layout blocks are all children of the root fc field
-        $layouts = AcfField::where('post_parent', $acfField->ID)->get()
+        $layouts = $acfField->children
             // They are associated with a layout block via parent_layout
             // ("5898b06bd55ed"). So lets group them by their layout block
             ->groupBy('content.parent_layout')
@@ -227,7 +226,7 @@ class PostRepository extends Repository
                 return $availableLayouts->get($key);
             });
 
-        // now layouts is a collection "infobox" => Collection(blockField1,
+        // now $layouts is a collection "infobox" => Collection(blockField1,
         // blockField2, ...), "layoutblock2" => Collection(blockField)
 
         // get the actual layout blocks
@@ -281,5 +280,16 @@ class PostRepository extends Repository
         }
 
         return $this->fetchFieldType($key);
+    }
+
+    /**
+     * Convert a field name to its internal acf field name, e.g.
+     * "my_image" => "field_588e076c2de43"
+     *
+     * @return string
+     */
+    public function getAcfFieldName(string $fieldName)
+    {
+        return $this->post->getMeta('_' . $fieldName);
     }
 }

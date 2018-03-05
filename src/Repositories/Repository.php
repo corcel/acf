@@ -20,6 +20,19 @@ abstract class Repository
     abstract public function repeaterFetchFields(Repeater $repeater);
     abstract public function flexibleContentFetchFields(FlexibleContent $fc);
 
+    abstract public function getAcfFieldName(string $fieldName);
+
+    /**
+     * Get a AcfField for a certain field name
+     *
+     * @return AcfField
+     */
+    public function getAcfField(string $fieldName)
+    {
+        $acfFieldName = $this->getAcfFieldName($fieldName);
+        return AcfField::where('post_name', $acfFieldName)->first();
+    }
+
     /**
      * @param string $fieldKey
      *

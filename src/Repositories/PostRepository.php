@@ -222,7 +222,7 @@ class PostRepository extends Repository
             ->groupBy('content.parent_layout')
             // and now change the keys from the internal id ("5898b06bd55ed") to
             // the internal block name ("infobox")
-            ->keyBy(function($item, $key) use ($availableLayouts) {
+            ->keyBy(function ($item, $key) use ($availableLayouts) {
                 return $availableLayouts->get($key);
             });
 

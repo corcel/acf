@@ -31,12 +31,12 @@ class OptionPageRepository extends Repository
     }
 
     /**
-     * Convert a field name to its internal acf field name, e.g.
+     * Convert a field name to its internal acf field key, e.g.
      * "modules_1_text" => "field_588e076c2de43"
      *
      * @return string
      */
-    public function getAcfFieldName(string $fieldName)
+    public function getFieldKey(string $fieldName)
     {
         return $this->optionPage->options->get('_' . $this->optionPage->prefix . $fieldName)->value;
     }

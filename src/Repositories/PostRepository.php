@@ -104,25 +104,13 @@ class PostRepository extends Repository
     }
 
     /**
-     * @param string $fieldName
+     * @deprecated in favor of getFieldKey
      *
      * @return string
      */
     public function fetchFieldKey($fieldName)
     {
-        $this->name = $fieldName;
-
-        $postMeta = $this->postMeta->where($this->getKeyName(), $this->post->getKey())
-            ->where('meta_key', '_' . $fieldName)
-            ->first();
-
-        if (!$postMeta) {
-            return null;
-        }
-
-        $this->key = $postMeta->meta_value;
-
-        return $this->key;
+        return $this->getFieldKey($fieldName);
     }
 
     /**
@@ -265,7 +253,7 @@ class PostRepository extends Repository
 
     public function getFieldType($name)
     {
-        $key = $this->fetchFieldKey($name);
+        $key = $this->getFieldKey($name);
 
         if ($key === null) { // Field does not exist
             return null;
@@ -275,12 +263,12 @@ class PostRepository extends Repository
     }
 
     /**
-     * Convert a field name to its internal acf field name, e.g.
+     * Convert a field name to its internal acf field key, e.g.
      * "my_image" => "field_588e076c2de43"
      *
      * @return string
      */
-    public function getAcfFieldName(string $fieldName)
+    public function getFieldKey(string $fieldName)
     {
         return $this->post->getMeta('_' . $fieldName);
     }

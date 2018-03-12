@@ -93,8 +93,8 @@ abstract class BasicField
             trigger_error('Can not get an acf field for an unknown field name.');
         }
         if (!$this->acfField) {
-            $acfFieldName = $this->repository->getAcfFieldName($this->fieldName);
-            $this->acfField = AcfField::where('post_name', $acfFieldName)->first();
+            $fieldKey = $this->repository->getFieldKey($this->fieldName);
+            $this->acfField = AcfField::where('post_name', $fieldKey)->first();
         }
         return $this->acfField;
     }

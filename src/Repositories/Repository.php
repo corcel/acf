@@ -20,7 +20,7 @@ abstract class Repository
     abstract public function repeaterFetchFields(Repeater $repeater);
     abstract public function flexibleContentFetchFields(FlexibleContent $fc);
 
-    abstract public function getAcfFieldName(string $fieldName);
+    abstract public function getFieldKey(string $fieldName);
 
     /**
      * @param string $fieldKey

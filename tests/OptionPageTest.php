@@ -89,7 +89,7 @@ class OptionPageTest extends TestCase
 
         $page = new OptionPage('test', 'test-prefix');
         $page->loadOptions();
-        $this->assertEquals(10, $page->options->count());
+        $this->assertEquals(20, $page->options->count());
     }
 
     public function testMissingField()

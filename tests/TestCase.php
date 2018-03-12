@@ -66,9 +66,11 @@ class TestCase extends OrchestraTestCase
     /**
      * Create a acf field for a post with a field name and a value
      */
-    protected function createAcfField(Post $post, $fieldName, $value, $states = [], $override = [])
+    protected function createAcfField(Post $post, $fieldName, $value, $states = [], $override = [], $internal = null)
     {
-        $internal = 'field_' . str_random(13);
+        if (!$internal) {
+            $internal = 'field_' . str_random(13);
+        }
 
         $postmeta1 = factory(PostMeta::class)->create([
             'post_id' => $post->ID,
@@ -90,13 +92,19 @@ class TestCase extends OrchestraTestCase
     /**
      * Create an acf field for use in an option page
      */
-    protected function createOptionAcfField(AcfFieldGroup $fieldGroup, $prefix, $fieldName, $value, $states = [], $override = [])
+    protected function createOptionAcfField(AcfFieldGroup $fieldGroup, $prefix, $fieldName, $value, $states = [], $override = [], $internal = null)
     {
-        $internal = 'field_' . str_random(13);
+        if (!$internal) {
+            $internal = 'field_' . str_random(13);
+        }
 
         factory(Option::class)->create([
             'option_name' => $prefix . $fieldName,
             'option_value' => $value,
+        ]);
+        factory(Option::class)->create([
+            'option_name' => '_' . $prefix . $fieldName,
+            'option_value' => $internal,
         ]);
 
         $override['post_name'] = $internal;

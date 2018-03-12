@@ -77,14 +77,6 @@ class PostRepository extends Repository
     }
 
     /**
-     * @return Model
-     */
-    public function getPost()
-    {
-        return $this->post;
-    }
-
-    /**
      * Get the value of a field according it's post ID.
      *
      * @param string $field

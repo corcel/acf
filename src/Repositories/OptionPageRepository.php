@@ -31,14 +31,6 @@ class OptionPageRepository extends Repository
     }
 
     /**
-     * @return Model
-     */
-    public function getPost($fieldName)
-    {
-        return $this->optionPage->getAcfField($fieldName);
-    }
-
-    /**
      * Convert a field name to its internal acf field name, e.g.
      * "modules_1_text" => "field_588e076c2de43"
      *

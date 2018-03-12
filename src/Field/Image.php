@@ -120,7 +120,7 @@ class Image extends BasicField implements FieldInterface
      */
     protected function fillThumbnailFields(array $data)
     {
-        $size = new static($this->repository->getPost($this->name));
+        $size = new Image($this->repository);
         $size->filename = $data['file'];
         $size->width = $data['width'];
         $size->height = $data['height'];

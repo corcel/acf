@@ -85,25 +85,11 @@ class OptionPageTest extends TestCase
 
     public function testPrefix()
     {
-        $post = $this->createAcfPost('Test', 'test-prefix');
+        $post = $this->createAcfPost('test', 'test-prefix');
 
         $page = new OptionPage('test', 'test-prefix');
         $page->loadOptions();
-        // $this->assertEquals(2, $page->options->count());
-
-        $pageInvalid = new OptionPage('test', $post);
-        $pageInvalid->loadOptions();
-        $this->assertEquals(0, $pageInvalid->options->count());
-    }
-
-    public function testAcfField()
-    {
-        $page = $this->createOptionPage();
-
-        $field = $page->getAcfField('fake_email');
-
-        $this->assertInstanceOf(Post::class, $field);
-        $this->assertEquals('acf-field', $field->post_type);
+        $this->assertEquals(10, $page->options->count());
     }
 
     public function testMissingField()

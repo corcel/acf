@@ -197,12 +197,12 @@ class PostRepository extends Repository
      */
     public function flexibleContentFetchFields(FlexibleContent $fc)
     {
-        $fieldName = $fc->name;
+        $fieldName = $fc->getFieldName();
 
         // this is the acf field entry in wp_posts for the flexible content
         // field, which holds the possible layouts for this type of flexible
         // content
-        $acfField = $this->getAcfField($fieldName);
+        $acfField = $fc->getAcfField();
 
         // all available layout blocks e.g. ["5898b06bd55ed" => "infobox"]
         $availableLayouts = collect($acfField->content['layouts'])->pluck('name', 'key');

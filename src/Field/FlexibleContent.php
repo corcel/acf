@@ -23,9 +23,9 @@ class FlexibleContent extends BasicField implements FieldInterface
     /**
      * @param string $fieldName
      */
-    public function process($fieldName)
+    public function process(string $fieldName)
     {
-        $this->name = $fieldName;
+        parent::process($fieldName);
 
         $fields = $this->repository->flexibleContentFetchFields($this);
 

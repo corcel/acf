@@ -14,7 +14,7 @@ interface FieldInterface
     /**
      * @param string $fieldName
      */
-    public function process($fieldName);
+    public function process(string $fieldName);
 
     /**
      * @return mixed

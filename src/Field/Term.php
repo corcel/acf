@@ -36,8 +36,9 @@ class Term extends BasicField implements FieldInterface
     /**
      * @param string $fieldName
      */
-    public function process($fieldName)
+    public function process(string $fieldName)
     {
+        parent::process($fieldName);
         $value = $this->fetchValue($fieldName);
 
         if ($unserialized = @unserialize($value)) {

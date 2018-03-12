@@ -38,7 +38,7 @@ class OptionPageRepository extends Repository
      */
     public function getAcfFieldName(string $fieldName)
     {
-        return $this->optionPage->options->get('_' . $fieldName);
+        return $this->optionPage->options->get('_' . $this->optionPage->prefix . $fieldName)->value;
     }
 
     /**
@@ -73,9 +73,8 @@ class OptionPageRepository extends Repository
         });
 
         $types = [];
-        $repeater = $this->optionPage->getAcfField($fieldName);
 
-        $acfFields = AcfField::where('post_parent', $repeater->ID)->get();
+        $acfFields = $repeater->getAcfField()->children;
         foreach ($acfFields as $acfField) {
             $types[$acfField->post_excerpt] = $acfField->type;
         }
@@ -104,7 +103,7 @@ class OptionPageRepository extends Repository
 
     public function flexibleContentFetchFields(FlexibleContent $fc)
     {
-        $fieldName = $fc->name;
+        $fieldName = $fc->getFieldName();
         $prefixedField = $this->getPrefixedField($fieldName);
 
         $fields = [];
@@ -115,7 +114,7 @@ class OptionPageRepository extends Repository
         });
 
         $types = [];
-        $repeater = $this->optionPage->getAcfField($fieldName);
+        $repeater = $fc->getAcfField();
 
         $acfFields = AcfField::where('post_parent', $repeater->ID)->get();
         foreach ($acfFields as $acfField) {

@@ -11,6 +11,7 @@ use Corcel\Model\User;
 use Corcel\Model\Meta\UserMeta;
 use Corcel\Acf\Repositories\Repository;
 use Corcel\Acf\Repositories\PostRepository;
+use Corcel\Acf\Models\AcfField;
 
 /**
  * Class BasicField.
@@ -23,6 +24,16 @@ abstract class BasicField
      * @var Repository
      */
     protected $repository;
+
+    /**
+     * @var string
+     */
+    protected $fieldName;
+
+    /**
+     * @var AcfField
+     */
+    protected $acfField;
 
     /**
      * Constructor method.
@@ -53,5 +64,38 @@ abstract class BasicField
     public function __toString()
     {
         return $this->get();
+    }
+
+    /**
+     * Process the field's content, e.g. get it from the db through the repository
+     */
+    public function process(string $fieldName)
+    {
+        $this->fieldName = $fieldName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFieldName()
+    {
+        return $this->fieldName;
+    }
+
+    /**
+     * Get the related acf field
+     *
+     * @return AcfField
+     */
+    public function getAcfField()
+    {
+        if (!$this->fieldName) {
+            trigger_error('Can not get an acf field for an unknown field name.');
+        }
+        if (!$this->acfField) {
+            $acfFieldName = $this->repository->getAcfFieldName($this->fieldName);
+            $this->acfField = AcfField::where('post_name', $acfFieldName)->first();
+        }
+        return $this->acfField;
     }
 }

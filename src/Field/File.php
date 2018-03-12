@@ -50,8 +50,9 @@ class File extends BasicField implements FieldInterface
     /**
      * @param string $field
      */
-    public function process($field)
+    public function process(string $field)
     {
+        parent::process($field);
         $value = $this->fetchValue($field);
 
         $connection = $this->repository->getConnectionName();

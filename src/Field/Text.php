@@ -20,8 +20,9 @@ class Text extends BasicField implements FieldInterface
     /**
      * @param string $field
      */
-    public function process($field)
+    public function process(string $field)
     {
+        parent::process($field);
         $this->value = $this->fetchValue($field);
     }
 

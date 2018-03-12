@@ -39,6 +39,10 @@ class OptionPage extends Model
         $this->prefix = $prefix;
         $this->page = AcfFieldGroup::where('post_title', $groupName)->first();
 
+        if (!$this->page) {
+            trigger_error('Could not instantiate option page called ' . $groupName);
+        }
+
         $this->loadOptions();
     }
 
@@ -47,7 +51,7 @@ class OptionPage extends Model
      */
     public function loadOptions()
     {
-        $builder = Option::where('option_name', 'like', $this->prefix . '%');
+        $builder = Option::where('option_name', 'like', $this->prefix . '%')->orWhere('option_name', 'like', '_' . $this->prefix . '%');
         $this->options = $builder->get()->keyBy('option_name');
     }
 
@@ -70,10 +74,5 @@ class OptionPage extends Model
         $field = FieldFactory::makeOptionField($arguments[0], $this, snake_case($name));
 
         return $field ? $field->get() : null;
-    }
-
-    public function getAcfField($fieldName)
-    {
-        return $this->page->children->where('post_excerpt', $fieldName)->first();
     }
 }

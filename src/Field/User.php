@@ -35,8 +35,9 @@ class User extends BasicField implements FieldInterface
     /**
      * @param string $fieldName
      */
-    public function process($fieldName)
+    public function process(string $fieldName)
     {
+        parent::process($fieldName);
         $userId = $this->fetchValue($fieldName);
         $this->value = $this->user->find($userId);
     }

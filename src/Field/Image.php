@@ -54,17 +54,12 @@ class Image extends BasicField implements FieldInterface
      */
     protected $loadFromPost = false;
 
-    /*
-     * @var string
-     */
-    protected $name;
-
     /**
      * @param string $field
      */
-    public function process($field)
+    public function process(string $field)
     {
-        $this->name = $field;
+        parent::process($field);
         $attachmentId = $this->fetchValue($field);
 
         $connection = $this->repository->getConnectionName();

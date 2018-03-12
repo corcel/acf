@@ -26,8 +26,9 @@ class Gallery extends Image implements FieldInterface
     /**
      * @param $field
      */
-    public function process($field)
+    public function process(string $field)
     {
+        parent::process($field);
         $value = $this->fetchValue($field);
         $ids = is_array($value) ? $value : @unserialize($value);
 

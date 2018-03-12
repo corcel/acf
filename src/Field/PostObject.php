@@ -20,8 +20,9 @@ class PostObject extends BasicField implements FieldInterface
     /**
      * @param string $fieldName
      */
-    public function process($fieldName)
+    public function process(string $fieldName)
     {
+        parent::process($fieldName);
         $postId = $this->fetchValue($fieldName);
         $connection = $this->repository->getConnectionName();
         

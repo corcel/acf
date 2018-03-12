@@ -22,14 +22,15 @@ abstract class Repository
 
     abstract public function getFieldKey(string $fieldName);
 
-    /**
-     * @param string $fieldKey
-     *
-     * @return string|null
-     */
-    public function fetchFieldType($fieldKey)
+    public function getFieldType($fieldName)
     {
-        $field = AcfField::where('post_name', $fieldKey)->first();
+        $key = $this->getFieldKey($fieldName);
+
+        if ($key === null) { // Field does not exist
+            return null;
+        }
+
+        $field = AcfField::where('post_name', $key)->first();
 
         if (!$field) {
             return null;

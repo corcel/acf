@@ -251,17 +251,6 @@ class PostRepository extends Repository
         return $fields;
     }
 
-    public function getFieldType($name)
-    {
-        $key = $this->getFieldKey($name);
-
-        if ($key === null) { // Field does not exist
-            return null;
-        }
-
-        return $this->fetchFieldType($key);
-    }
-
     /**
      * Convert a field name to its internal acf field key, e.g.
      * "my_image" => "field_588e076c2de43"

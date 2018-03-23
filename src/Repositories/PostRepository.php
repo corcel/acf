@@ -85,22 +85,23 @@ class PostRepository extends Repository
      */
     public function fetchValue($field)
     {
-        $postMeta = $this->postMeta->where(
-           $this->getKeyName(), $this->post->getKey()
-        )->where('meta_key', $field)->first();
+        $value = $this->post->getMeta($field);
 
-        if (isset($postMeta->meta_value) and ! is_null($postMeta->meta_value)) {
-            $value = $postMeta->meta_value;
-            if ($array = @unserialize($value) and is_array($array)) {
-                $this->value = $array;
-
-                return $array;
-            } else {
-                $this->value = $value;
-
-                return $value;
-            }
+        // to stay backwards-compatible, return an empty string for unknown meta
+        // fields
+        if (is_null($value)) {
+            return '';
         }
+
+        if ($array = @unserialize($value) and is_array($array)) {
+            $this->value = $array;
+
+            return $array;
+        }
+
+
+        $this->value = $value;
+        return $value;
     }
 
     /**

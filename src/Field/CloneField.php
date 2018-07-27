@@ -34,8 +34,8 @@ class CloneField extends BasicField implements FieldInterface
         $acfField = AcfField::where('post_name', $search)->first();
 
         if (!$acfField) {
-            // dd($this->fieldName);
-            trigger_error('Could not find acf field for ' . $search . ' / ' . $fieldKey . ' / ' . $field);
+            // this happens when the post has not been saved yet 
+            return null;
         }
 
         $this->originalField = FieldFactory::makeField($field, $this->repository, $acfField->type);
@@ -46,6 +46,9 @@ class CloneField extends BasicField implements FieldInterface
      */
     public function get()
     {
+        if (!$this->originalField) {
+            return null;
+        }
         return $this->originalField->get();
     }
 }

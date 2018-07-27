@@ -15,6 +15,7 @@ use Corcel\Acf\Field\Select;
 use Corcel\Acf\Field\Term;
 use Corcel\Acf\Field\Text;
 use Corcel\Acf\Field\User;
+use Corcel\Acf\Field\CloneField;
 use Corcel\Model;
 use Illuminate\Support\Collection;
 use Corcel\Acf\Repositories\Repository;
@@ -140,6 +141,9 @@ class FieldFactory
                 break;
             case 'flexible_content':
                 $field = new FlexibleContent($repository);
+                break;
+            case 'clone':
+                $field = new CloneField($repository);
                 break;
             default: return null;
         }

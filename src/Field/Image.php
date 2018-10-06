@@ -3,7 +3,6 @@
 namespace Corcel\Acf\Field;
 
 use Corcel\Model\Post;
-use Corcel\Model\Meta\PostMeta;
 use Corcel\Acf\FieldInterface;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -133,9 +132,10 @@ class Image extends BasicField implements FieldInterface
      */
     protected function fetchMetadataValue(Post $attachment)
     {
-        $meta = PostMeta::where('post_id', $attachment->ID)
-                        ->where('meta_key', '_wp_attachment_metadata')
-                        ->first();
+        $meta = $this->postMeta
+            ->where('post_id', $attachment->ID)
+            ->where('meta_key', '_wp_attachment_metadata')
+            ->first();
 
         return unserialize($meta->meta_value);
     }
@@ -150,10 +150,11 @@ class Image extends BasicField implements FieldInterface
         $ids = $attachments->pluck('ID')->toArray();
         $metadataValues = [];
 
-        $metaRows = PostMeta::whereIn("post_id", $ids)
+        $metaRows = $this->postMeta
+            ->whereIn("post_id", $ids)
             ->where('meta_key', '_wp_attachment_metadata')
             ->get();
-            
+
         foreach ($metaRows as $meta) {
             $metadataValues[$meta->post_id] = unserialize($meta->meta_value);
         }

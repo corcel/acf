@@ -80,17 +80,17 @@ class PostRepository extends Repository
      * Get the value of a field according it's post ID.
      *
      * @param string $field
+     * @param mixed $defaultValue returned if the actual value is null, default
+     * to an empty string for backwards-compatibility
      *
      * @return array|string
      */
-    public function fetchValue($field)
+    public function fetchValue($field, $defaultValue = '')
     {
         $value = $this->post->getMeta($field);
 
-        // to stay backwards-compatible, return an empty string for unknown meta
-        // fields
         if (is_null($value)) {
-            return '';
+            return $defaultValue;
         }
 
         if ($array = @unserialize($value) and is_array($array)) {
@@ -211,7 +211,7 @@ class PostRepository extends Repository
         // blockField2, ...), "layoutblock2" => Collection(blockField)
 
         // get the actual layout blocks
-        $blocks  = $this->fetchValue($fieldName, $this->post);
+        $blocks  = $this->fetchValue($fieldName, []);
 
         $fields = [];
 

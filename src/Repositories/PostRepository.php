@@ -193,6 +193,12 @@ class PostRepository extends Repository
         // content
         $acfField = $fc->getAcfField();
 
+        // if acf field is empty, it means there is no content. Directly return
+        // an empty array
+        if (empty($acfField)) {
+            return [];
+        }
+
         // all available layout blocks e.g. ["5898b06bd55ed" => "infobox"]
         $availableLayouts = collect($acfField->content['layouts'])->pluck('name', 'key');
 

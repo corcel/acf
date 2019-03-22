@@ -23,4 +23,4 @@ before_script:
   - composer install
 script:
   - mkdir -p build/logs
-  - phpunit
+  - ./vendor/bin/phpunit

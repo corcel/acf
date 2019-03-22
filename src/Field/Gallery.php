@@ -30,15 +30,21 @@ class Gallery extends Image implements FieldInterface
     {
         if ($ids = $this->fetchValue($field)) {
             $connection = $this->post->getConnectionName();
-            $attachments = Post::on($connection)->whereIn('ID', $ids)->get();
+
+            $ids_ordered = implode(',', $ids);
+
+            $attachments = Post::on($connection)->whereIn('ID', $ids)
+                ->orderByRaw("FIELD(ID, $ids_ordered)")->get();
 
             $metaDataValues = $this->fetchMultipleMetadataValues($attachments);
 
             foreach ($attachments as $attachment) {
-                $image = new Image($this->post);
-                $image->fillFields($attachment);
-                $image->fillMetadataFields($metaDataValues[$attachment->ID]);
-                $this->images[] = $image;
+                if (array_key_exists($attachment->ID, $metaDataValues)) {
+                    $image = new Image($this->post);
+                    $image->fillFields($attachment);
+                    $image->fillMetadataFields($metaDataValues[$attachment->ID]);
+                    $this->images[] = $image;
+                }
             }
         }
     }

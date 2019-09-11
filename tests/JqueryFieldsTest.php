@@ -4,14 +4,14 @@ use Corcel\Acf\Field\DateTime;
 use Corcel\Acf\Field\Text;
 use Corcel\Model\Post;
 
-class JqueryFieldsTests extends PHPUnit_Framework_TestCase
+class JqueryFieldsTests extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Post
      */
     protected $post;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->post = Post::find(65);
     }

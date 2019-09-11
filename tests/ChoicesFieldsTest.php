@@ -9,14 +9,14 @@ use Corcel\Model\Post;
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */
-class ChoicesFieldsTest extends PHPUnit_Framework_TestCase
+class ChoicesFieldsTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Post
      */
     protected $post;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->post = Post::find(44);
     }

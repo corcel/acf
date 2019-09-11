@@ -18,7 +18,7 @@ class BasicFieldsTest extends PHPUnit\Framework\TestCase
     /**
      * Setup a base $this->post object to represent the page with the basic fields.
      */
-    public function setUp(): void
+    public function setUp()
     {
         $this->post = Post::find(11); // it' a page with the custom fields
     }

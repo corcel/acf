@@ -21,7 +21,7 @@ class ContentFieldsTest extends PHPUnit\Framework\TestCase
     /**
      * Setup a base $this->post object to represent the page with the content fields.
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->post = Post::find(21); // it' a page with the custom fields
     }

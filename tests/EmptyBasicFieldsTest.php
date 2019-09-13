@@ -19,7 +19,7 @@ class EmptyBasicFieldsTest extends PHPUnit\Framework\TestCase
     /**
      * Setup a base $this->post object to represent the page with the basic fields.
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->post = Post::find(91); // it' a page with empty custom fields
     }

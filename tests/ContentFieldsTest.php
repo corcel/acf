@@ -11,7 +11,7 @@ use Corcel\Model\Post;
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */
-class ContentFieldsTest extends PHPUnit_Framework_TestCase
+class ContentFieldsTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Post
@@ -21,7 +21,7 @@ class ContentFieldsTest extends PHPUnit_Framework_TestCase
     /**
      * Setup a base $this->post object to represent the page with the content fields.
      */
-    protected function setUp()
+    public function setUp()
     {
         $this->post = Post::find(21); // it' a page with the custom fields
     }

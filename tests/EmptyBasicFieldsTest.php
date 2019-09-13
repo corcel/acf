@@ -9,7 +9,7 @@ use Corcel\Model\Post;
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */
-class EmptyBasicFieldsTest extends PHPUnit_Framework_TestCase
+class EmptyBasicFieldsTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Post
@@ -19,7 +19,7 @@ class EmptyBasicFieldsTest extends PHPUnit_Framework_TestCase
     /**
      * Setup a base $this->post object to represent the page with the basic fields.
      */
-    protected function setUp()
+    public function setUp()
     {
         $this->post = Post::find(91); // it' a page with empty custom fields
     }

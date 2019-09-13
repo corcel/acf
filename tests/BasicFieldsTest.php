@@ -8,7 +8,7 @@ use Corcel\Model\Post;
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */
-class BasicFieldsTest extends PHPUnit_Framework_TestCase
+class BasicFieldsTest extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Post
@@ -18,7 +18,7 @@ class BasicFieldsTest extends PHPUnit_Framework_TestCase
     /**
      * Setup a base $this->post object to represent the page with the basic fields.
      */
-    protected function setUp()
+    public function setUp()
     {
         $this->post = Post::find(11); // it' a page with the custom fields
     }

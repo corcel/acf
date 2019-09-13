@@ -11,7 +11,7 @@ use Corcel\Model\Post;
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */
-class RelationalFieldsTests extends PHPUnit_Framework_TestCase
+class RelationalFieldsTests extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Post

@@ -9,7 +9,7 @@ use Corcel\Model\Post;
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */
-class LayoutFieldsTest extends PHPUnit_Framework_TestCase
+class LayoutFieldsTest extends PHPUnit\Framework\TestCase
 {
     public function testRepeaterField()
     {

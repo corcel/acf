@@ -7,7 +7,7 @@ use Corcel\Model\Post;
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */
-class CorcelIntegrationTest extends PHPUnit_Framework_TestCase
+class CorcelIntegrationTest extends PHPUnit\Framework\TestCase
 {
     public function testIfCorcelIntegrationIsWorking()
     {

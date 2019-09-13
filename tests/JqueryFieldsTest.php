@@ -11,14 +11,14 @@ class JqueryFieldsTests extends PHPUnit\Framework\TestCase
      */
     protected $post;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->post = Post::find(65);
     }
 
     public function testGoogleMapField()
     {
-        // Google Map field is not working at this moment
+        $this->markTestSkipped('Google Map field i s not working at the moment');
     }
 
     public function testDatePickerField()

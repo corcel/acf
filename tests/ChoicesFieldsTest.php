@@ -16,7 +16,7 @@ class ChoicesFieldsTest extends PHPUnit\Framework\TestCase
      */
     protected $post;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->post = Post::find(44);
     }

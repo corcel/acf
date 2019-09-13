@@ -11,14 +11,14 @@ use Corcel\Model\Post;
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */
-class RelationalFieldsTests extends PHPUnit_Framework_TestCase
+class RelationalFieldsTests extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Post
      */
     protected $post;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->post = Post::find(56);
     }

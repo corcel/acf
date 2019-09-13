@@ -8,7 +8,7 @@ use Corcel\Model\Post;
  *
  * @author Junior Grossi <juniorgro@gmail.com>
  */
-class FieldFactoryTest extends PHPUnit_Framework_TestCase
+class FieldFactoryTest extends PHPUnit\Framework\TestCase
 {
     public function testInvalidFieldName()
     {

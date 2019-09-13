@@ -4,21 +4,21 @@ use Corcel\Acf\Field\DateTime;
 use Corcel\Acf\Field\Text;
 use Corcel\Model\Post;
 
-class JqueryFieldsTests extends PHPUnit_Framework_TestCase
+class JqueryFieldsTests extends PHPUnit\Framework\TestCase
 {
     /**
      * @var Post
      */
     protected $post;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->post = Post::find(65);
     }
 
     public function testGoogleMapField()
     {
-        // Google Map field is not working at this moment
+        $this->markTestSkipped('Google Map field i s not working at the moment');
     }
 
     public function testDatePickerField()

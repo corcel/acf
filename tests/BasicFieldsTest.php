@@ -70,4 +70,11 @@ class BasicFieldsTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals('123change', $password->get());
     }
+
+    public function testPostId()
+    {
+        $field = new Text($this->post);
+        
+        $this->assertEquals($this->post->ID, $field->getPostId());
+    }
 }

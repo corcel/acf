@@ -160,6 +160,20 @@ abstract class BasicField
         }
     }
 
+    /**
+     * Get the post item ID value
+     * 
+     * @return integer
+     */
+    public function getPostId() {
+        if ($this->post instanceof Post) {
+            return $this->post->ID;
+        } elseif ($this->post instanceof Term) {
+            return $this->post->term_id;
+        } elseif ($this->post instanceof User) {
+            return $this->post->ID;
+        }
+    }
 
     /**
      * @return mixed

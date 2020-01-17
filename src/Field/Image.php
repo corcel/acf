@@ -55,6 +55,11 @@ class Image extends BasicField implements FieldInterface
     protected $loadFromPost = false;
 
     /**
+     * @var Post
+     */
+    protected $attachment;
+
+    /**
      * @param string $field
      */
     public function process($field)
@@ -90,6 +95,7 @@ class Image extends BasicField implements FieldInterface
         $this->mime_type = $attachment->post_mime_type;
         $this->url = $attachment->guid;
         $this->description = $attachment->post_excerpt;
+        $this->attachment = $attachment;
     }
 
     /**
@@ -170,5 +176,29 @@ class Image extends BasicField implements FieldInterface
         $this->width = $imageData['width'];
         $this->height = $imageData['height'];
         $this->sizes = $imageData['sizes'];
+    }
+
+    /**
+     * @param string|array      comma seperated string or an array
+     *
+     * @return string|array     string if only one meta key was received as input, otherwise an array with the values of all meta keys received as input
+     */
+    public function fetchCustomMetadataValues($metaKeys)
+    {
+        if (!is_array($metaKeys)) {
+            $metaKeys = explode(',', $metaKeys);
+        }
+
+        $customMetaValues = [];
+
+        foreach ($metaKeys as $metaKey) {
+            $customMetaValues[] = $this->attachment->meta->{trim($metaKey)};
+        }
+
+        if (count($customMetaValues) === 1) {
+            return $customMetaValues[0];
+        }
+
+        return $customMetaValues;
     }
 }

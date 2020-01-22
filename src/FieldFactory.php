@@ -15,6 +15,7 @@ use Corcel\Acf\Field\Select;
 use Corcel\Acf\Field\Term;
 use Corcel\Acf\Field\Text;
 use Corcel\Acf\Field\User;
+use Corcel\Acf\Field\Table;
 use Corcel\Model;
 use Illuminate\Support\Collection;
 
@@ -48,7 +49,6 @@ class FieldFactory
 
             $type = $fakeText->fetchFieldType($key);
         }
-
 
         switch ($type) {
             case 'text':
@@ -107,6 +107,9 @@ class FieldFactory
                 break;
             case 'flexible_content':
                 $field = new FlexibleContent($post);
+                break;
+            case 'table':
+                $field = new Table($post);
                 break;
             default: return null;
         }

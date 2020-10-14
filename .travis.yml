@@ -30,7 +30,7 @@ before_script:
 
 before_install:
   - composer self-update
-  - composer require "corcel/corcel:${CORCEL}" --no-interaction --no-update
+  - composer require corcel/corcel:${CORCEL} --no-interaction --no-update
 
 install:
   - composer install --prefer-dist --no-interaction --no-suggest

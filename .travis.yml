@@ -1,9 +1,20 @@
 language: php
-php:
-  - '7.2'
-  - '7.3'
+
+matrix:
+  include:
+    - php: 7.2
+      env: CORCEL='^4.0'
+    - php: 7.3
+      env: CORCEL='^4.0'
+    - php: 7.3
+      env: CORCEL='^5.0'
+    - php: 7.4
+      env: CORCEL='^4.0'
+    - php: 7.4
+      env: CORCEL='^5.0'
+
 dist: trusty
-sudo: required
+
 addons:
   apt:
     packages:
@@ -11,13 +22,19 @@ addons:
     - mysql-server-5.6
     - mysql-client-core-5.6
     - mysql-client-5.6
-before_install:
+
+before_script:
   - unzip tests/config/database.sql.zip -d tests/config/
   - mysql -u root -e "create database corcel_acf;"
   - mysql -u root corcel_acf < tests/config/database.sql
-before_script:
+
+before_install:
   - composer self-update
-  - composer install
+  - composer require "corcel/corcel:${CORCEL}" --no-interaction --no-update
+
+install:
+  - composer install --prefer-dist --no-interaction --no-suggest
+
 script:
   - mkdir -p build/logs
   - ./vendor/bin/phpunit

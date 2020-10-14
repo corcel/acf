@@ -1,18 +1,17 @@
 language: php
 
-php:
-  - 7.2
-  - 7.3
-  - 7.4
-
-env:
-  - CORCEL=^4.0
-  - CORCEL=^5.0
-
 matrix:
-  exclude:
+  include:
     - php: 7.2
-      env: CORCEL=^5.0
+      env: CORCEL='^4.0'
+    - php: 7.3
+      env: CORCEL='^4.0'
+    - php: 7.3
+      env: CORCEL='^5.0'
+    - php: 7.4
+      env: CORCEL='^4.0'
+    - php: 7.4
+      env: CORCEL='^5.0'
 
 dist: trusty
 

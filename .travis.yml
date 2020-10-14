@@ -29,6 +29,7 @@ before_script:
   - mysql -u root corcel_acf < tests/config/database.sql
 
 before_install:
+  - rm composer.lock
   - composer self-update
   - composer require jgrossi/corcel:$CORCEL --no-interaction --no-update
 

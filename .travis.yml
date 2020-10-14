@@ -1,17 +1,18 @@
 language: php
 
+php:
+  - 7.2
+  - 7.3
+  - 7.4
+
+env:
+  - CORCEL=^4.0
+  - CORCEL=^5.0
+
 matrix:
-  include:
+  exclude:
     - php: 7.2
-      env: CORCEL='^4.0'
-    - php: 7.3
-      env: CORCEL='^4.0'
-    - php: 7.3
-      env: CORCEL='^5.0'
-    - php: 7.4
-      env: CORCEL='^4.0'
-    - php: 7.4
-      env: CORCEL='^5.0'
+      env: CORCEL=^5.0
 
 dist: trusty
 
@@ -30,7 +31,7 @@ before_script:
 
 before_install:
   - composer self-update
-  - composer require corcel/corcel:${CORCEL} --no-interaction --no-update
+  - composer require corcel/corcel:$CORCEL --no-interaction --no-update
 
 install:
   - composer install --prefer-dist --no-interaction --no-suggest

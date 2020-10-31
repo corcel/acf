@@ -82,7 +82,8 @@ abstract class BasicField
     public function fetchValue($field)
     {
         $postMeta = $this->postMeta->where(
-           $this->getKeyName(), $this->post->getKey()
+            $this->getKeyName(),
+            $this->post->getKey()
         )->where('meta_key', $field)->first();
 
         if (isset($postMeta->meta_value) and ! is_null($postMeta->meta_value)) {

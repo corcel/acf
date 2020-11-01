@@ -6,6 +6,7 @@ use Corcel\Acf\Field\Boolean;
 use Corcel\Acf\Field\DateTime;
 use Corcel\Acf\Field\File;
 use Corcel\Acf\Field\Gallery;
+use Corcel\Acf\Field\GoogleMap;
 use Corcel\Acf\Field\Image;
 use Corcel\Acf\Field\PageLink;
 use Corcel\Acf\Field\PostObject;
@@ -107,6 +108,9 @@ class FieldFactory
                 break;
             case 'flexible_content':
                 $field = new FlexibleContent($post);
+                break;
+            case 'google_map':
+                $field = new GoogleMap($post);
                 break;
             default: return null;
         }

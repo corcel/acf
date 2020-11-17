@@ -47,7 +47,7 @@ class Image extends BasicField implements FieldInterface
     /**
      * @var array
      */
-    protected $sizes = [];
+    public $sizes = [];
 
     /**
      * @var bool

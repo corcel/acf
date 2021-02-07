@@ -77,7 +77,7 @@ First we should create the fields classes and the test cases. After we have to s
  - Implement the `Flexible Content` field with unit tests (done!);
  - Improve performance. Currently the plugin makes one SQL query for each field. This goal is to improve that using `whereIn()` clauses.
 
- Some fields are still missing (check table below and contribute).
+
 
 ## Fields
 
@@ -103,7 +103,7 @@ First we should create the fields classes and the test cases. After we have to s
 | Relationship      | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\Post` or `Collection` of `Post` |
 | Taxonomy          | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\Term` or `Collection` of `Term` |
 | User              | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\User` |
-| Google Map        | missing   |                                       |
+| Google Map        | ok   		| [@naeemz] (http://github.com/naeemz)  | `array` |
 | Date Picker       | ok        | [@jgrossi](http://github.com/jgrossi) | `Carbon\Carbon` |
 | Date Time Picker  | ok        | [@jgrossi](http://github.com/jgrossi) | `Carbon\Carbon` |
 | Time Picker       | ok        | [@jgrossi](http://github.com/jgrossi) | `Carbon\Carbon` |

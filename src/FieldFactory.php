@@ -15,6 +15,7 @@ use Corcel\Acf\Field\Select;
 use Corcel\Acf\Field\Term;
 use Corcel\Acf\Field\Text;
 use Corcel\Acf\Field\User;
+use Corcel\Acf\Field\Group;
 use Corcel\Model;
 use Illuminate\Support\Collection;
 
@@ -107,6 +108,9 @@ class FieldFactory
                 break;
             case 'flexible_content':
                 $field = new FlexibleContent($post);
+                break;
+            case 'group' : 
+                $field = new Group($post);
                 break;
             default: return null;
         }

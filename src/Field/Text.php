@@ -21,7 +21,7 @@ class Text extends BasicField implements FieldInterface
      * @param string $field
      */
     public function process($field)
-    {
+    {   
         $this->value = $this->fetchValue($field);
     }
 

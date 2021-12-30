@@ -103,7 +103,7 @@ First we should create the fields classes and the test cases. After we have to s
 | Relationship      | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\Post` or `Collection` of `Post` |
 | Taxonomy          | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\Term` or `Collection` of `Term` |
 | User              | ok        | [@jgrossi](http://github.com/jgrossi) | `Corcel\User` |
-| Google Map        | missing   |                                       |
+| Google Map        | ok        | [@fidovdbos](https://github.com/fidovdbos)| `Corcel\Acf\Field\GoogleMap`   |
 | Date Picker       | ok        | [@jgrossi](http://github.com/jgrossi) | `Carbon\Carbon` |
 | Date Time Picker  | ok        | [@jgrossi](http://github.com/jgrossi) | `Carbon\Carbon` |
 | Time Picker       | ok        | [@jgrossi](http://github.com/jgrossi) | `Carbon\Carbon` |

@@ -9,6 +9,7 @@ use Corcel\Model\Term;
 use Corcel\Model\Meta\TermMeta;
 use Corcel\Model\User;
 use Corcel\Model\Meta\UserMeta;
+use Corcel\Concerns\Shortcodes;
 
 /**
  * Class BasicField.
@@ -16,7 +17,10 @@ use Corcel\Model\Meta\UserMeta;
  * @author Junior Grossi <juniorgro@gmail.com>
  */
 abstract class BasicField
-{
+{   
+
+    use Shortcodes;
+
     /**
      * @var Model
      */
@@ -95,7 +99,7 @@ abstract class BasicField
             } else {
                 $this->value = $value;
 
-                return $value;
+                return $this->stripShortcodes($value);
             }
         }
     }

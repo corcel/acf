@@ -12,6 +12,8 @@ matrix:
       env: CORCEL='^4.0'
     - php: 7.4
       env: CORCEL='^5.0'
+    - php: 8.0.2
+      env: CORCEL='^6.0'
 
 dist: trusty
 
